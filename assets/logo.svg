@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <defs>
+    <style>
+      .psi { font-family: Georgia, 'Times New Roman', serif; font-size: 52px; font-weight: bold; fill: #3AAFA9; }
+      .nome { font-family: 'Segoe UI', Arial, sans-serif; font-size: 22px; font-weight: 700; fill: #1B2D4F; letter-spacing: 1px; }
+      .crp  { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 400; fill: #3AAFA9; letter-spacing: 2px; }
+      .linha { stroke: #3AAFA9; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <!-- Símbolo Ψ -->
+  <text class="psi" x="8" y="62">Ψ</text>
+
+  <!-- Separador vertical -->
+  <line class="linha" x1="68" y1="10" x2="68" y2="70"/>
+
+  <!-- Nome e credencial -->
+  <text class="nome" x="80" y="36">Max Régis</text>
+  <text class="crp"  x="82" y="56">PSICÓLOGO · CRP 16/8817</text>
+</svg>
