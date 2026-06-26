@@ -3,544 +3,367 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ficha de Cadastro — Max Régis de Oliveira | Psicólogo CRP 16/8817</title>
+  <meta name="description" content="Max Regis — Psicólogo CRP 16/8817. Psicoterapia TCC, Neuropsicologia, Psicologia Cardiovascular e Neuromodulação em Colatina-ES.">
+  <meta name="keywords" content="psicólogo colatina, TCC, neuropsicologia, neuromodulação, biofeedback, psicologia cardiovascular, cardioped">
+  <meta property="og:title" content="Max Regis | Psicólogo CRP 16/8817">
+  <meta property="og:description" content="Atendimento psicológico especializado em Colatina-ES. TCC, Neuropsicologia, CARDIOPED e Neuromodulação.">
+  <meta property="og:type" content="website">
+  <title>Max Regis | Psicólogo CRP 16/8817 — Colatina-ES</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --azul:    #2C5F8A;
-      --azul2:   #3A7ABF;
-      --cinza:   #F7F9FC;
-      --borda:   #D0DCE8;
-      --texto:   #1A2A3A;
-      --muted:   #6B7F92;
-      --verde:   #2E7D54;
-      --radius:  10px;
+      --marinho:  #1B2D4F;
+      --teal:     #3AAFA9;
+      --teal2:    #2BA8A1;
+      --cinza:    #F5F7FA;
+      --borda:    #E2E8F0;
+      --texto:    #1A2A3A;
+      --muted:    #6B7F92;
+      --branco:   #FFFFFF;
+      --radius:   12px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: var(--cinza);
-      color: var(--texto);
-      line-height: 1.6;
-      padding: 24px 16px 60px;
-    }
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    header {
-      text-align: center;
-      padding: 32px 0 24px;
-    }
-    header h1 {
-      font-size: 1.5rem;
-      color: var(--azul);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    header p {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-    .progresso {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 20px 0 32px;
-    }
-    .passo {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-    .passo .num {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 2px solid var(--borda);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 600;
-      font-size: 0.8rem;
-      transition: all .3s;
-    }
-    .passo.ativo .num { background: var(--azul); border-color: var(--azul); color: #fff; }
-    .passo.feito .num  { background: var(--verde); border-color: var(--verde); color: #fff; }
-    .passo span { display: none; }
-    @media(min-width: 480px) { .passo span { display: inline; } }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--texto); background: var(--branco); }
+    a { text-decoration: none; color: inherit; }
 
-    .secao {
-      background: #fff;
-      border: 1px solid var(--borda);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      margin-bottom: 20px;
-      display: none;
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--borda);
+      padding: 0 24px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .secao.visivel { display: block; }
-    .secao h2 {
-      font-size: 1.05rem;
-      color: var(--azul);
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--cinza);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .secao h2 .icone {
-      width: 32px; height: 32px;
-      background: var(--cinza);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-    }
-    .campo {
-      margin-bottom: 18px;
-    }
-    .campo label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--texto);
-      margin-bottom: 5px;
-    }
-    .campo label .req { color: #c0392b; margin-left: 2px; }
-    .campo input, .campo select, .campo textarea {
-      width: 100%;
-      padding: 10px 13px;
-      border: 1.5px solid var(--borda);
-      border-radius: 7px;
-      font-size: 0.95rem;
-      color: var(--texto);
-      background: #fff;
-      transition: border-color .2s;
-      font-family: inherit;
-    }
-    .campo input:focus, .campo select:focus, .campo textarea:focus {
-      outline: none;
-      border-color: var(--azul2);
-      box-shadow: 0 0 0 3px rgba(58,122,191,0.12);
-    }
-    .campo textarea { resize: vertical; min-height: 90px; }
-    .campo .hint {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-    .campo.erro input, .campo.erro select, .campo.erro textarea {
-      border-color: #c0392b;
-    }
-    .campo .msg-erro {
-      font-size: 0.8rem;
-      color: #c0392b;
-      margin-top: 4px;
-      display: none;
-    }
-    .campo.erro .msg-erro { display: block; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media(max-width: 480px) { .grid-2 { grid-template-columns: 1fr; } }
+    .nav-logo img { height: 52px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: .9rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--marinho); }
+    .nav-cta { background: var(--teal); color: #fff !important; padding: 9px 22px; border-radius: 8px; font-weight: 600 !important; font-size: .88rem !important; }
+    .nav-cta:hover { background: var(--teal2) !important; }
+    .nav-menu-btn { display: none; background: none; border: none; cursor: pointer; }
+    @media(max-width:768px){ .nav-links{display:none;} .nav-menu-btn{display:block;} }
 
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 24px;
-      gap: 12px;
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--marinho) 0%, #25436E 60%, #1B3A5C 100%);
+      display: flex; align-items: center;
+      padding: 100px 24px 60px; position: relative; overflow: hidden;
     }
-    .btn {
-      padding: 11px 28px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all .2s;
+    .hero::before {
+      content:''; position:absolute; top:-100px; right:-100px;
+      width:600px; height:600px;
+      background: radial-gradient(circle, rgba(58,175,169,.15) 0%, transparent 70%);
+      border-radius:50%;
     }
-    .btn-voltar {
-      background: transparent;
-      border: 1.5px solid var(--borda);
-      color: var(--texto);
-    }
-    .btn-voltar:hover { background: var(--cinza); }
-    .btn-avancar {
-      background: var(--azul);
-      color: #fff;
-      margin-left: auto;
-    }
-    .btn-avancar:hover { background: var(--azul2); transform: translateY(-1px); }
-    .btn-enviar {
-      background: var(--verde);
-      color: #fff;
-      margin-left: auto;
-    }
-    .btn-enviar:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .hero-badge { display:inline-block; background:rgba(58,175,169,.2); color:var(--teal); padding:6px 16px; border-radius:20px; font-size:.82rem; font-weight:600; margin-bottom:20px; border:1px solid rgba(58,175,169,.3); }
+    .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,4vw,3.2rem); color:#fff; line-height:1.2; margin-bottom:20px; }
+    .hero h1 span { color:var(--teal); }
+    .hero p { color:rgba(255,255,255,.75); font-size:1.05rem; line-height:1.7; margin-bottom:36px; max-width:480px; }
+    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+    .btn-primary { background:var(--teal); color:#fff; padding:14px 30px; border-radius:10px; font-weight:600; font-size:.95rem; transition:all .2s; display:inline-flex; align-items:center; gap:8px; }
+    .btn-primary:hover { background:var(--teal2); transform:translateY(-2px); box-shadow:0 8px 24px rgba(58,175,169,.3); }
+    .btn-outline { background:transparent; color:#fff; padding:14px 30px; border-radius:10px; font-weight:600; font-size:.95rem; border:1.5px solid rgba(255,255,255,.35); transition:all .2s; }
+    .btn-outline:hover { border-color:#fff; background:rgba(255,255,255,.08); }
+    .hero-foto { display:flex; justify-content:center; align-items:center; }
+    .hero-foto-placeholder { width:360px; height:440px; background:linear-gradient(160deg,rgba(58,175,169,.2),rgba(255,255,255,.05)); border-radius:20px; border:1px solid rgba(58,175,169,.2); display:flex; flex-direction:column; align-items:center; justify-content:center; color:rgba(255,255,255,.3); font-size:.85rem; text-align:center; padding:24px; }
+    .hero-foto-placeholder .psi { font-size:5rem; margin-bottom:16px; color:var(--teal); opacity:.4; }
+    .hero-stats { display:flex; gap:32px; margin-top:40px; padding-top:32px; border-top:1px solid rgba(255,255,255,.1); }
+    .hero-stat h3 { font-size:1.8rem; font-weight:700; color:var(--teal); font-family:'Playfair Display',serif; }
+    .hero-stat p { font-size:.82rem; color:rgba(255,255,255,.55); margin-top:2px; }
+    @media(max-width:768px){ .hero-inner{grid-template-columns:1fr;} .hero-foto{display:none;} .hero-stats{gap:20px;} }
 
-    .aviso-privacidade {
-      background: #EEF4FB;
-      border: 1px solid #B8D0EA;
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 20px;
-      display: flex;
-      gap: 10px;
-    }
-    .aviso-privacidade .lock { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    section { padding:80px 24px; }
+    .container { max-width:1100px; margin:0 auto; }
+    .section-label { font-size:.8rem; font-weight:700; letter-spacing:1.5px; color:var(--teal); text-transform:uppercase; margin-bottom:10px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.4rem); color:var(--marinho); line-height:1.25; margin-bottom:16px; }
+    .section-sub { color:var(--muted); font-size:1rem; line-height:1.7; max-width:560px; }
 
-    .sucesso-msg {
-      text-align: center;
-      padding: 40px 20px;
-      display: none;
-    }
-    .sucesso-msg.visivel { display: block; }
-    .sucesso-msg .check {
-      font-size: 3rem;
-      margin-bottom: 16px;
-    }
-    .sucesso-msg h2 {
-      color: var(--verde);
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-    .sucesso-msg p {
-      color: var(--muted);
-      max-width: 380px;
-      margin: 0 auto;
-    }
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      color: var(--muted);
-    }
-    .loading.visivel { display: block; }
+    .sobre { background:var(--cinza); }
+    .sobre-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:60px; align-items:start; margin-top:48px; }
+    .sobre-foto-box { background:linear-gradient(135deg,var(--marinho),#25436E); border-radius:20px; padding:40px; display:flex; flex-direction:column; align-items:center; text-align:center; color:#fff; }
+    .sobre-foto-box img { width:140px; margin-bottom:24px; }
+    .sobre-foto-box h3 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:6px; }
+    .sobre-foto-box p { opacity:.7; font-size:.9rem; }
+    .sobre-crp { display:inline-block; background:rgba(58,175,169,.2); color:var(--teal); padding:4px 12px; border-radius:20px; font-size:.8rem; font-weight:600; margin-top:12px; }
+    .sobre-texto p { color:var(--texto); line-height:1.8; margin-bottom:16px; font-size:.97rem; }
+    .sobre-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .tag { background:var(--branco); border:1.5px solid var(--borda); padding:6px 14px; border-radius:20px; font-size:.82rem; font-weight:500; color:var(--marinho); }
+    @media(max-width:768px){ .sobre-grid{grid-template-columns:1fr;} }
+
+    .servicos-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; margin-top:48px; }
+    .card-servico { background:var(--branco); border:1.5px solid var(--borda); border-radius:var(--radius); padding:32px 28px; transition:all .3s; }
+    .card-servico:hover { border-color:var(--teal); box-shadow:0 8px 32px rgba(58,175,169,.12); transform:translateY(-4px); }
+    .card-icone { width:52px; height:52px; background:linear-gradient(135deg,var(--teal),var(--teal2)); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:20px; }
+    .card-servico h3 { font-size:1.05rem; font-weight:700; color:var(--marinho); margin-bottom:10px; }
+    .card-servico p { font-size:.88rem; color:var(--muted); line-height:1.7; }
+    .card-tag { display:inline-block; background:var(--cinza); padding:3px 10px; border-radius:12px; font-size:.75rem; font-weight:600; color:var(--teal); margin-top:14px; }
+
+    .abordagem { background:var(--marinho); }
+    .abordagem .section-title { color:#fff; }
+    .abordagem .section-sub { color:rgba(255,255,255,.6); }
+    .abordagem .section-label { color:var(--teal); }
+    .pilares { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin-top:48px; }
+    .pilar { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:28px 24px; }
+    .pilar .num { font-size:2rem; font-weight:700; color:var(--teal); opacity:.5; font-family:'Playfair Display',serif; }
+    .pilar h4 { color:#fff; font-size:1rem; font-weight:600; margin:8px 0; }
+    .pilar p { color:rgba(255,255,255,.55); font-size:.85rem; line-height:1.6; }
+
+    .contato { background:var(--cinza); }
+    .contato-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:60px; margin-top:48px; }
+    .contato-info h3 { font-size:1.1rem; font-weight:700; color:var(--marinho); margin-bottom:24px; }
+    .info-item { display:flex; gap:14px; margin-bottom:20px; align-items:flex-start; }
+    .info-icon { width:44px; height:44px; background:var(--teal); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem; }
+    .info-item div strong { display:block; font-size:.9rem; color:var(--marinho); font-weight:600; }
+    .info-item div span { font-size:.85rem; color:var(--muted); line-height:1.5; }
+    .btn-wpp { display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff; padding:14px 28px; border-radius:10px; font-weight:700; font-size:.95rem; margin-top:8px; transition:all .2s; }
+    .btn-wpp:hover { background:#1ebe5a; transform:translateY(-2px); }
+    .form-contato { background:var(--branco); border-radius:var(--radius); padding:36px 32px; border:1px solid var(--borda); }
+    .form-contato h3 { font-size:1.1rem; font-weight:700; color:var(--marinho); margin-bottom:24px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .form-campo { margin-bottom:16px; }
+    .form-campo label { display:block; font-size:.82rem; font-weight:600; color:var(--texto); margin-bottom:5px; }
+    .form-campo input,.form-campo select,.form-campo textarea { width:100%; padding:10px 13px; border:1.5px solid var(--borda); border-radius:8px; font-size:.93rem; color:var(--texto); font-family:inherit; transition:border-color .2s; }
+    .form-campo input:focus,.form-campo select:focus,.form-campo textarea:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(58,175,169,.12); }
+    .form-campo textarea { resize:vertical; min-height:80px; }
+    .btn-form { width:100%; padding:13px; background:var(--marinho); color:#fff; border:none; border-radius:8px; font-size:.95rem; font-weight:600; cursor:pointer; transition:background .2s; }
+    .btn-form:hover { background:#25436E; }
+    @media(max-width:768px){ .contato-grid{grid-template-columns:1fr;} .form-row{grid-template-columns:1fr;} }
+
+    .mapa-wrapper { border-radius:var(--radius); overflow:hidden; border:1px solid var(--borda); margin-top:28px; }
+    .mapa-wrapper iframe { display:block; width:100%; height:240px; border:none; }
+
+    footer { background:var(--marinho); color:rgba(255,255,255,.6); padding:40px 24px; text-align:center; }
+    footer img { height:50px; margin-bottom:16px; opacity:.8; }
+    footer p { font-size:.82rem; line-height:1.8; }
+    footer a { color:var(--teal); }
+    .footer-links { display:flex; gap:24px; justify-content:center; margin:16px 0; flex-wrap:wrap; }
+    .footer-links a { font-size:.85rem; color:rgba(255,255,255,.5); transition:color .2s; }
+    .footer-links a:hover { color:var(--teal); }
+
+    .wpp-float { position:fixed; bottom:28px; right:28px; z-index:200; width:58px; height:58px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,.4); font-size:1.6rem; transition:transform .2s; }
+    .wpp-float:hover { transform:scale(1.1); }
   </style>
 </head>
 <body>
-<div class="container">
 
-  <header>
-    <h1>Ficha de Cadastro</h1>
-    <p>Max Régis de Oliveira &nbsp;·&nbsp; Psicólogo CRP 16/8817</p>
-  </header>
-
-  <div class="progresso">
-    <div class="passo ativo" id="prog1"><div class="num">1</div><span>Dados pessoais</span></div>
-    <div class="passo" id="prog2"><div class="num">2</div><span>Contato</span></div>
-    <div class="passo" id="prog3"><div class="num">3</div><span>Saúde</span></div>
-    <div class="passo" id="prog4"><div class="num">4</div><span>Motivo</span></div>
+<nav>
+  <a href="#inicio" class="nav-logo"><img src="assets/logo.png" alt="Max Regis Psicólogo"></a>
+  <div class="nav-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+    <a href="cadastro/" class="nav-cta">Agendar consulta</a>
   </div>
+  <button class="nav-menu-btn" aria-label="Menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B2D4F" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</nav>
 
-  <form id="formCadastro" novalidate>
-
-    <!-- SEÇÃO 1 — Dados Pessoais -->
-    <div class="secao visivel" id="sec1">
-      <h2><span class="icone">👤</span> Dados Pessoais</h2>
-
-      <div class="campo">
-        <label>Nome completo <span class="req">*</span></label>
-        <input type="text" name="nome_completo" placeholder="Como consta no seu documento oficial" autocomplete="name">
-        <div class="msg-erro">Por favor, informe o nome completo.</div>
+<section class="hero" id="inicio">
+  <div class="hero-inner container">
+    <div>
+      <div class="hero-badge">CRP 16/8817 · Colatina-ES</div>
+      <h1>Cuide da sua <span>saúde mental</span> com quem entende</h1>
+      <p>Atendimento psicológico especializado em psicoterapia TCC, neuropsicologia, psicologia cardiovascular e neuromodulação não-invasiva.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/5527992463839?text=Olá%2C+gostaria+de+agendar+uma+consulta." class="btn-primary">📱 Agendar pelo WhatsApp</a>
+        <a href="#servicos" class="btn-outline">Ver especialidades</a>
       </div>
-
-      <div class="grid-2">
-        <div class="campo">
-          <label>Data de nascimento <span class="req">*</span></label>
-          <input type="date" name="data_nascimento">
-          <div class="msg-erro">Informe a data de nascimento.</div>
-        </div>
-        <div class="campo">
-          <label>Sexo <span class="req">*</span></label>
-          <select name="sexo">
-            <option value="">Selecione</option>
-            <option value="M">Masculino</option>
-            <option value="F">Feminino</option>
-            <option value="Outro">Outro</option>
-            <option value="Prefiro não informar">Prefiro não informar</option>
-          </select>
-          <div class="msg-erro">Selecione uma opção.</div>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="campo">
-          <label>Estado civil</label>
-          <select name="estado_civil">
-            <option value="">Selecione</option>
-            <option value="Solteiro(a)">Solteiro(a)</option>
-            <option value="Casado(a)">Casado(a)</option>
-            <option value="União estável">União estável</option>
-            <option value="Divorciado(a)">Divorciado(a)</option>
-            <option value="Viúvo(a)">Viúvo(a)</option>
-            <option value="Separado(a)">Separado(a)</option>
-          </select>
-        </div>
-        <div class="campo">
-          <label>Escolaridade</label>
-          <select name="escolaridade">
-            <option value="">Selecione</option>
-            <option value="Fundamental incompleto">Fund. incompleto</option>
-            <option value="Fundamental completo">Fund. completo</option>
-            <option value="Médio incompleto">Médio incompleto</option>
-            <option value="Médio completo">Médio completo</option>
-            <option value="Superior incompleto">Superior incompleto</option>
-            <option value="Superior completo">Superior completo</option>
-            <option value="Pós-graduação">Pós-graduação</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="campo">
-        <label>Profissão / Ocupação</label>
-        <input type="text" name="profissao" placeholder="Ex: Professor, Estudante, Empresário...">
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-avancar" onclick="avancar(1)">Próximo →</button>
+      <div class="hero-stats">
+        <div class="hero-stat"><h3>+8</h3><p>Anos de<br>experiência</p></div>
+        <div class="hero-stat"><h3>+200</h3><p>Pacientes<br>atendidos</p></div>
+        <div class="hero-stat"><h3>4</h3><p>Especialidades<br>clínicas</p></div>
       </div>
     </div>
-
-    <!-- SEÇÃO 2 — Contato -->
-    <div class="secao" id="sec2">
-      <h2><span class="icone">📱</span> Contato</h2>
-
-      <div class="campo">
-        <label>WhatsApp <span class="req">*</span></label>
-        <input type="tel" name="telefone_whatsapp" placeholder="(27) 99999-9999" autocomplete="tel">
-        <div class="msg-erro">Informe seu WhatsApp.</div>
-      </div>
-
-      <div class="campo">
-        <label>E-mail</label>
-        <input type="email" name="email" placeholder="seu@email.com" autocomplete="email">
-        <div class="msg-erro">E-mail inválido.</div>
-      </div>
-
-      <div class="campo">
-        <label>Endereço (cidade e bairro)</label>
-        <input type="text" name="endereco" placeholder="Ex: Linhares-ES, Bairro Centro">
-      </div>
-
-      <div class="campo">
-        <label>Responsável / Acompanhante <small style="font-weight:400;color:var(--muted)">(se menor ou sob cuidados)</small></label>
-        <input type="text" name="contato_responsavel" placeholder="Nome completo do responsável">
-      </div>
-
-      <div class="campo">
-        <label>Parentesco com o responsável</label>
-        <select name="parentesco_responsavel">
-          <option value="">Não se aplica</option>
-          <option value="Mãe">Mãe</option>
-          <option value="Pai">Pai</option>
-          <option value="Cônjuge">Cônjuge</option>
-          <option value="Filho(a)">Filho(a)</option>
-          <option value="Irmão/Irmã">Irmão/Irmã</option>
-          <option value="Outro">Outro</option>
-        </select>
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-voltar" onclick="voltar(2)">← Voltar</button>
-        <button type="button" class="btn btn-avancar" onclick="avancar(2)">Próximo →</button>
+    <div class="hero-foto">
+      <div class="hero-foto-placeholder">
+        <div class="psi">Ψ</div>
+        <p style="color:rgba(255,255,255,.4);font-size:.85rem">Foto profissional<br><small>em breve</small></p>
       </div>
     </div>
-
-    <!-- SEÇÃO 3 — Saúde -->
-    <div class="secao" id="sec3">
-      <h2><span class="icone">🏥</span> Histórico de Saúde</h2>
-      <p style="font-size:.85rem;color:var(--muted);margin-bottom:18px;">Informações confidenciais — utilizadas exclusivamente para planejamento do atendimento.</p>
-
-      <div class="campo">
-        <label>Diagnóstico médico (se houver)</label>
-        <input type="text" name="diagnostico_medico" placeholder="Ex: Hipertensão, Diabetes, Ansiedade... (deixe em branco se não houver)">
-      </div>
-
-      <div class="campo">
-        <label>Medicamentos em uso</label>
-        <textarea name="medicamentos" placeholder="Nome e dosagem dos medicamentos atuais (deixe em branco se não usar nenhum)"></textarea>
-      </div>
-
-      <div class="campo">
-        <label>Outros profissionais de saúde que te acompanham</label>
-        <input type="text" name="outros_profissionais" placeholder="Ex: Psiquiatra, Neurologista, Cardiologista...">
-      </div>
-
-      <div class="campo">
-        <label>Escola / Instituição <small style="font-weight:400;color:var(--muted)">(se criança ou adolescente)</small></label>
-        <input type="text" name="escola_instituicao" placeholder="Nome da escola ou instituição">
-      </div>
-
-      <div class="campo">
-        <label>Encaminhado por</label>
-        <input type="text" name="encaminhante" placeholder="Nome do profissional ou instituição que indicou (opcional)">
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-voltar" onclick="voltar(3)">← Voltar</button>
-        <button type="button" class="btn btn-avancar" onclick="avancar(3)">Próximo →</button>
-      </div>
-    </div>
-
-    <!-- SEÇÃO 4 — Motivo -->
-    <div class="secao" id="sec4">
-      <h2><span class="icone">💬</span> Motivo da Consulta</h2>
-
-      <div class="campo">
-        <label>Queixa principal / Motivo pelo qual busca atendimento <span class="req">*</span></label>
-        <textarea name="queixa_principal" placeholder="Descreva com suas palavras o que te trouxe até aqui. Não há resposta certa ou errada."></textarea>
-        <div class="msg-erro">Por favor, descreva o motivo da consulta.</div>
-      </div>
-
-      <div class="aviso-privacidade">
-        <span class="lock">🔒</span>
-        <span>Suas informações são confidenciais e protegidas pelo sigilo profissional (Resolução CFP 001/2009). Serão utilizadas exclusivamente para fins clínicos.</span>
-      </div>
-
-      <div class="campo" style="display:flex;align-items:flex-start;gap:10px">
-        <input type="checkbox" id="aceite" name="aceite" style="width:auto;margin-top:3px;accent-color:var(--azul)">
-        <label for="aceite" style="font-size:.88rem;font-weight:400;color:var(--muted)">Concordo que as informações acima sejam armazenadas para fins de atendimento psicológico, em conformidade com a LGPD e o Código de Ética do CFP. <span class="req">*</span></label>
-      </div>
-      <div class="campo" id="campo-aceite" style="margin-top:-10px">
-        <div class="msg-erro" id="erro-aceite" style="display:none">Você precisa aceitar para continuar.</div>
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-voltar" onclick="voltar(4)">← Voltar</button>
-        <button type="submit" class="btn btn-enviar" id="btnEnviar">Enviar ficha ✓</button>
-      </div>
-    </div>
-
-  </form>
-
-  <div class="loading" id="loadingMsg">
-    <p>⏳ Enviando sua ficha...</p>
   </div>
+</section>
 
-  <div class="sucesso-msg" id="sucessoMsg">
-    <div class="check">✅</div>
-    <h2>Ficha recebida!</h2>
-    <p>Obrigado. Seus dados foram enviados com segurança. <strong>Max Régis</strong> entrará em contato em breve para confirmar seu agendamento.</p>
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="section-label">Quem sou</div>
+    <h2 class="section-title">Max Regis de Oliveira</h2>
+    <p class="section-sub">Psicólogo clínico com formação em abordagens baseadas em evidências e tecnologias de neuromodulação.</p>
+    <div class="sobre-grid">
+      <div class="sobre-foto-box">
+        <img src="assets/logo-branco.png" alt="Logo Max Regis">
+        <h3>Max Regis</h3>
+        <p>Psicólogo Clínico</p>
+        <span class="sobre-crp">CRP 16/8817</span>
+      </div>
+      <div class="sobre-texto">
+        <p>Sou psicólogo com atuação em psicoterapia cognitivo-comportamental, neuropsicologia clínica, psicologia cardiovascular integrada (CARDIOPED) e neuromodulação não-invasiva (tDCS, taVNS, neurofeedback).</p>
+        <p>Meu trabalho une ciência e humanização. Acredito que cada paciente merece um cuidado individualizado, baseado em evidências, que respeite sua história e seus objetivos terapêuticos.</p>
+        <p>Atendo presencialmente na Clínica CARDIOPED em Colatina-ES e online para todo o Brasil.</p>
+        <div class="sobre-tags">
+          <span class="tag">Psicoterapia TCC</span>
+          <span class="tag">Neuropsicologia</span>
+          <span class="tag">Neuromodulação</span>
+          <span class="tag">Biofeedback</span>
+          <span class="tag">Neurofeedback</span>
+          <span class="tag">Psicologia Cardiovascular</span>
+          <span class="tag">Atendimento Online</span>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-</div>
+<section id="servicos">
+  <div class="container">
+    <div class="section-label">Especialidades</div>
+    <h2 class="section-title">Como posso te ajudar</h2>
+    <p class="section-sub">Atendimento especializado para diferentes necessidades, sempre com base científica e acolhimento.</p>
+    <div class="servicos-grid">
+      <div class="card-servico">
+        <div class="card-icone">🧠</div>
+        <h3>Psicoterapia TCC</h3>
+        <p>Terapia Cognitivo-Comportamental para ansiedade, depressão, fobias, transtornos de humor e desenvolvimento pessoal.</p>
+        <span class="card-tag">Adultos · Adolescentes · Online</span>
+      </div>
+      <div class="card-servico">
+        <div class="card-icone">📋</div>
+        <h3>Neuropsicologia</h3>
+        <p>Avaliação neuropsicológica completa — atenção, memória, funções executivas e linguagem — com laudo técnico detalhado.</p>
+        <span class="card-tag">Avaliação · Laudo · Reabilitação</span>
+      </div>
+      <div class="card-servico">
+        <div class="card-icone">❤️</div>
+        <h3>Psicologia Cardiovascular</h3>
+        <p>Suporte psicológico integrado a pacientes cardíacos, com foco em adesão ao tratamento e qualidade de vida. Parceria com a Clínica CARDIOPED.</p>
+        <span class="card-tag">CARDIOPED · Equipe Multiprofissional</span>
+      </div>
+      <div class="card-servico">
+        <div class="card-icone">⚡</div>
+        <h3>Neuromodulação</h3>
+        <p>Intervenções não-invasivas: tDCS, taVNS, TMS e neurofeedback para potencialização cognitiva e tratamento complementar.</p>
+        <span class="card-tag">tDCS · taVNS · Neurofeedback</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="abordagem">
+  <div class="container">
+    <div class="section-label">Minha abordagem</div>
+    <h2 class="section-title">Cuidado com base científica</h2>
+    <p class="section-sub">Cada atendimento é planejado com rigor técnico, ética e respeito à individualidade do paciente.</p>
+    <div class="pilares">
+      <div class="pilar"><div class="num">01</div><h4>Evidência científica</h4><p>Protocolos validados pela literatura científica atualizada.</p></div>
+      <div class="pilar"><div class="num">02</div><h4>Escuta ativa</h4><p>Ambiente seguro, sem julgamentos, para que você possa se expressar livremente.</p></div>
+      <div class="pilar"><div class="num">03</div><h4>Tecnologia e inovação</h4><p>Uso de neuromodulação e biofeedback como recursos terapêuticos complementares.</p></div>
+      <div class="pilar"><div class="num">04</div><h4>Ética e sigilo</h4><p>Atuação dentro das normas do CFP com total confidencialidade.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <div class="container">
+    <div class="section-label">Vamos conversar</div>
+    <h2 class="section-title">Entre em contato</h2>
+    <p class="section-sub">Pronto para dar o primeiro passo? Fale pelo WhatsApp ou envie uma mensagem.</p>
+    <div class="contato-grid">
+      <div class="contato-info">
+        <h3>Informações</h3>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <strong>Endereço</strong>
+            <span>Rua Ovídio Vitaly, 68 — Ed. MaristaMed, 2° andar<br>Fazenda Vitali · Colatina-ES · CEP 29707-035</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📱</div>
+          <div>
+            <strong>WhatsApp</strong>
+            <span>(27) 99246-3839</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div>
+            <strong>Horário</strong>
+            <span>Segunda à Sexta · 07:00 às 20:00</span>
+          </div>
+        </div>
+        <a href="https://wa.me/5527992463839?text=Olá%2C+gostaria+de+agendar+uma+consulta+com+o+psicólogo+Max+Regis." class="btn-wpp">💬 Chamar no WhatsApp</a>
+        <div class="mapa-wrapper">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.9743824050244!2d-40.632063!3d-19.539427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb6f07c5e8e8e8e8%3A0x0!2sRua+Ov%C3%ADdio+Vitaly%2C+68+-+Colatina%2C+ES!5e0!3m2!1spt-BR!2sbr!4v1" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="form-contato">
+        <h3>Envie uma mensagem</h3>
+        <form name="contato" netlify netlify-honeypot="bot-field" action="/obrigado.html">
+          <input type="hidden" name="form-name" value="contato">
+          <p hidden><label>Não preencha: <input name="bot-field"></label></p>
+          <div class="form-row">
+            <div class="form-campo">
+              <label>Nome *</label>
+              <input type="text" name="nome" required placeholder="Seu nome">
+            </div>
+            <div class="form-campo">
+              <label>WhatsApp *</label>
+              <input type="tel" name="whatsapp" required placeholder="(27) 99999-9999">
+            </div>
+          </div>
+          <div class="form-campo">
+            <label>Assunto</label>
+            <select name="assunto">
+              <option value="">Selecione o motivo</option>
+              <option>Consulta de psicoterapia (TCC)</option>
+              <option>Avaliação neuropsicológica</option>
+              <option>Psicologia cardiovascular</option>
+              <option>Neuromodulação / biofeedback</option>
+              <option>Dúvidas gerais</option>
+            </select>
+          </div>
+          <div class="form-campo">
+            <label>Mensagem</label>
+            <textarea name="mensagem" placeholder="Como posso ajudar?"></textarea>
+          </div>
+          <button type="submit" class="btn-form">Enviar mensagem →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="assets/logo-branco.png" alt="Max Regis Psicólogo">
+  <div class="footer-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="cadastro/">Cadastro de paciente</a>
+    <a href="https://www.instagram.com/max.regis/" target="_blank">Instagram @max.regis</a>
+  </div>
+  <p>
+    Max Regis de Oliveira · Psicólogo · CRP 16/8817<br>
+    Rua Ovídio Vitaly, 68 — Ed. MaristaMed · Colatina-ES<br>
+    <small>© 2026 · Todos os direitos reservados</small>
+  </p>
+</footer>
+
+<a href="https://wa.me/5527992463839?text=Olá%2C+gostaria+de+agendar+uma+consulta." class="wpp-float" target="_blank" title="WhatsApp">💬</a>
 
 <script>
-  const TOTAL = 4;
-  let secaoAtual = 1;
-
-  function atualizarProgresso() {
-    for (let i = 1; i <= TOTAL; i++) {
-      const el = document.getElementById('prog' + i);
-      el.className = 'passo';
-      if (i < secaoAtual) el.classList.add('feito');
-      else if (i === secaoAtual) el.classList.add('ativo');
-    }
-  }
-
-  function validarSecao(n) {
-    const sec = document.getElementById('sec' + n);
-    const obrigatorios = sec.querySelectorAll('[name]:not([type=checkbox])');
-    let ok = true;
-
-    const reqs = {
-      1: ['nome_completo','data_nascimento','sexo'],
-      2: ['telefone_whatsapp'],
-      3: [],
-      4: ['queixa_principal'],
-    };
-
-    obrigatorios.forEach(el => {
-      const campo = el.closest('.campo');
-      if (!campo) return;
-      campo.classList.remove('erro');
-    });
-
-    (reqs[n] || []).forEach(nome => {
-      const el = sec.querySelector(`[name=${nome}]`);
-      if (!el) return;
-      const val = el.value.trim();
-      if (!val) {
-        el.closest('.campo')?.classList.add('erro');
-        ok = false;
-      }
-    });
-
-    // Validar email se preenchido
-    if (n === 2) {
-      const emailEl = sec.querySelector('[name=email]');
-      if (emailEl && emailEl.value.trim()) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!re.test(emailEl.value.trim())) {
-          emailEl.closest('.campo')?.classList.add('erro');
-          ok = false;
-        }
-      }
-    }
-
-    return ok;
-  }
-
-  function avancar(n) {
-    if (!validarSecao(n)) return;
-    document.getElementById('sec' + n).classList.remove('visivel');
-    secaoAtual = n + 1;
-    document.getElementById('sec' + secaoAtual).classList.add('visivel');
-    atualizarProgresso();
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-
-  function voltar(n) {
-    document.getElementById('sec' + n).classList.remove('visivel');
-    secaoAtual = n - 1;
-    document.getElementById('sec' + secaoAtual).classList.add('visivel');
-    atualizarProgresso();
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-
-  document.getElementById('formCadastro').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    if (!validarSecao(4)) return;
-
-    const aceite = document.getElementById('aceite');
-    if (!aceite.checked) {
-      document.getElementById('erro-aceite').style.display = 'block';
-      return;
-    }
-    document.getElementById('erro-aceite').style.display = 'none';
-
-    const dados = {};
-    new FormData(this).forEach((v, k) => { dados[k] = v; });
-    dados['data_envio'] = new Date().toISOString();
-    dados['origem'] = 'maxregis.com.br/cadastro';
-
-    document.getElementById('sec4').classList.remove('visivel');
-    document.getElementById('loadingMsg').classList.add('visivel');
-
-    try {
-      const resp = await fetch('processa_cadastro.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(dados)
-      });
-
-      const resultado = await resp.json();
-      document.getElementById('loadingMsg').classList.remove('visivel');
-
-      if (resultado.ok) {
-        document.getElementById('sucessoMsg').classList.add('visivel');
-      } else {
-        alert('Erro ao enviar. Por favor, tente novamente.');
-        document.getElementById('sec4').classList.add('visivel');
-      }
-    } catch (err) {
-      document.getElementById('loadingMsg').classList.remove('visivel');
-      alert('Erro de conexão. Por favor, tente novamente.');
-      document.getElementById('sec4').classList.add('visivel');
+  document.querySelector('.nav-menu-btn').addEventListener('click', function() {
+    var links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      Object.assign(links.style, { display:'flex', flexDirection:'column', position:'fixed', top:'72px', left:'0', right:'0', background:'#fff', padding:'20px 24px 28px', borderBottom:'1px solid #E2E8F0', zIndex:'99' });
     }
   });
-
-  atualizarProgresso();
 </script>
 </body>
 </html>
