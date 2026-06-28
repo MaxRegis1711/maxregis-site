@@ -44,7 +44,11 @@
       transition: box-shadow .3s;
     }
     nav.scrolled { box-shadow: 0 4px 24px rgba(28,43,34,.1); }
-    .nav-logo img { height: 52px; }
+    .nav-logo { display:flex; align-items:center; gap:12px; }
+    .nav-psi { font-size:2rem; color:var(--teal); font-family:'Playfair Display',serif; line-height:1; }
+    .nav-brand { display:flex; flex-direction:column; }
+    .nav-nome { font-family:'Playfair Display',serif; font-size:1.18rem; font-weight:700; color:var(--marinho); line-height:1.15; }
+    .nav-sub { font-size:.67rem; font-weight:600; color:var(--teal); letter-spacing:.9px; text-transform:uppercase; }
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a { font-size: .9rem; font-weight: 500; color: var(--muted); transition: color .2s; }
     .nav-links a:hover { color: var(--marinho); }
@@ -76,8 +80,17 @@
     .btn-outline { background:transparent; color:#fff; padding:14px 30px; border-radius:10px; font-weight:600; font-size:.95rem; border:1.5px solid rgba(255,255,255,.35); transition:all .2s; }
     .btn-outline:hover { border-color:#fff; background:rgba(255,255,255,.08); }
     .hero-foto { display:flex; justify-content:center; align-items:center; }
-    .hero-foto-placeholder { width:360px; height:440px; background:linear-gradient(160deg,rgba(58,175,169,.2),rgba(255,255,255,.05)); border-radius:20px; border:1px solid rgba(58,175,169,.2); display:flex; flex-direction:column; align-items:center; justify-content:center; color:rgba(255,255,255,.3); font-size:.85rem; text-align:center; padding:24px; }
-    .hero-foto-placeholder .psi { font-size:5rem; margin-bottom:16px; color:var(--teal); opacity:.4; }
+    /* Carousel */
+    .hero-carousel { position:relative; width:380px; height:470px; border-radius:20px; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,.45); flex-shrink:0; }
+    .c-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top; opacity:0; transition:opacity .9s ease; }
+    .c-slide.active { opacity:1; }
+    .carousel-dots { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:10; }
+    .c-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.45); border:none; cursor:pointer; transition:all .3s; padding:0; }
+    .c-dot.active { background:#fff; width:24px; border-radius:4px; }
+    .c-arr { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.28); color:#fff; border:none; width:38px; height:38px; border-radius:50%; font-size:1.5rem; cursor:pointer; z-index:10; transition:background .2s; display:flex; align-items:center; justify-content:center; line-height:1; }
+    .c-arr.prev { left:10px; }
+    .c-arr.next { right:10px; }
+    .c-arr:hover { background:rgba(0,0,0,.5); }
     .hero-stats { display:flex; gap:40px; margin-top:44px; padding-top:36px; border-top:1px solid rgba(255,255,255,.12); }
     .hero-stat h3 { font-size:2.8rem; font-weight:700; color:var(--teal); font-family:'Playfair Display',serif; line-height:1; }
     .hero-stat:nth-child(2) h3 { color: #E8B84B; }
@@ -86,13 +99,13 @@
 
     section { padding:110px 24px; }
 
-    /* Animações de scroll */
-    .fade-in { opacity:0; transform:translateY(32px); transition:opacity .7s ease, transform .7s ease; }
-    .fade-in.visible { opacity:1; transform:translateY(0); }
-    .fade-in-left { opacity:0; transform:translateX(-32px); transition:opacity .7s ease, transform .7s ease; }
-    .fade-in-left.visible { opacity:1; transform:translateX(0); }
-    .fade-in-right { opacity:0; transform:translateX(32px); transition:opacity .7s ease, transform .7s ease; }
-    .fade-in-right.visible { opacity:1; transform:translateX(0); }
+    /* Animações de scroll — só ativa se JS suportar IntersectionObserver */
+    .js-animate .fade-in { opacity:0; transform:translateY(32px); transition:opacity .7s ease, transform .7s ease; }
+    .js-animate .fade-in.visible { opacity:1; transform:translateY(0); }
+    .js-animate .fade-in-left { opacity:0; transform:translateX(-32px); transition:opacity .7s ease, transform .7s ease; }
+    .js-animate .fade-in-left.visible { opacity:1; transform:translateX(0); }
+    .js-animate .fade-in-right { opacity:0; transform:translateX(32px); transition:opacity .7s ease, transform .7s ease; }
+    .js-animate .fade-in-right.visible { opacity:1; transform:translateX(0); }
     .delay-1 { transition-delay:.1s; }
     .delay-2 { transition-delay:.2s; }
     .delay-3 { transition-delay:.3s; }
@@ -229,7 +242,13 @@
 <body>
 
 <nav>
-  <a href="#inicio" class="nav-logo"><img src="assets/logo.svg" alt="Max Regis Psicólogo"></a>
+  <a href="#inicio" class="nav-logo">
+    <span class="nav-psi">Ψ</span>
+    <div class="nav-brand">
+      <span class="nav-nome">Max Régis</span>
+      <span class="nav-sub">Psicólogo · CRP 16/8817</span>
+    </div>
+  </a>
   <div class="nav-links">
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
@@ -262,8 +281,22 @@
       </div>
     </div>
     <div class="hero-foto">
-      <img src="assets/foto-blazer-cadeira.jpg" alt="Max Régis — Psicólogo"
-           style="width:360px;height:440px;object-fit:cover;object-position:center top;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.4);">
+      <div class="hero-carousel" id="hero-carousel">
+        <img src="assets/foto-blazer-cadeira.jpg"    class="c-slide active" alt="Max Régis Psicólogo">
+        <img src="assets/foto-verde-sentado2.jpg"    class="c-slide"        alt="Max Régis Psicólogo">
+        <img src="assets/foto-blazer-pe.jpg"         class="c-slide"        alt="Max Régis Psicólogo">
+        <img src="assets/foto-escritorio-selfie.jpg" class="c-slide"        alt="Max Régis Psicólogo">
+        <img src="assets/foto-12a.jpg"               class="c-slide"        alt="Max Régis Psicólogo">
+        <button class="c-arr prev" id="c-prev" aria-label="Anterior">&#8249;</button>
+        <button class="c-arr next" id="c-next" aria-label="Próxima">&#8250;</button>
+        <div class="carousel-dots" id="carousel-dots">
+          <button class="c-dot active" data-i="0"></button>
+          <button class="c-dot" data-i="1"></button>
+          <button class="c-dot" data-i="2"></button>
+          <button class="c-dot" data-i="3"></button>
+          <button class="c-dot" data-i="4"></button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -666,6 +699,7 @@
 
 <script>
   /* ── Scroll animations ── */
+  document.documentElement.classList.add('js-animate');
   var observer = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
@@ -755,6 +789,25 @@
     document.getElementById('gad7-perguntas').style.display = 'block';
     document.getElementById('gad7-resultado').style.display = 'none';
   }
+
+  /* ── Carrossel hero ── */
+  (function(){
+    var slides = document.querySelectorAll('.c-slide');
+    var dots   = document.querySelectorAll('.c-dot');
+    var cur    = 0;
+    function goTo(n){
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur = (n + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+    }
+    var timer = setInterval(function(){ goTo(cur+1); }, 4500);
+    function reset(){ clearInterval(timer); timer = setInterval(function(){ goTo(cur+1); }, 4500); }
+    document.getElementById('c-next').addEventListener('click', function(){ goTo(cur+1); reset(); });
+    document.getElementById('c-prev').addEventListener('click', function(){ goTo(cur-1); reset(); });
+    dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(parseInt(d.dataset.i)); reset(); }); });
+  })();
 
   /* ── Formulário contato → WhatsApp ── */
   document.getElementById('form-contato').addEventListener('submit', function(e) {
