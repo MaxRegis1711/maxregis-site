@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Max Regis — Psicólogo CRP 16/8817. Psicoterapia TCC, Neuropsicologia, Psicologia Cardiovascular e Neuromodulação em Colatina-ES.">
-  <meta name="keywords" content="psicólogo colatina, TCC, neuropsicologia, neuromodulação, biofeedback, psicologia cardiovascular, cardioped">
-  <meta property="og:title" content="Max Regis | Psicólogo CRP 16/8817">
-  <meta property="og:description" content="Atendimento psicológico especializado em Colatina-ES. TCC, Neuropsicologia, CARDIOPED e Neuromodulação.">
+  <meta name="description" content="Ansiedade, burnout e estresse têm tratamento. Psicólogo Max Regis — TCC baseada em ciência para profissionais e universitários. CRP 16/8817 · Atendimento online para todo o Brasil.">
+  <meta name="keywords" content="psicólogo ansiedade, terapia cognitivo-comportamental, TCC online, tratamento ansiedade, burnout, psicólogo colatina, neuropsicologia, neuromodulação">
+  <meta property="og:title" content="Max Regis | Psicólogo — Ansiedade & TCC">
+  <meta property="og:description" content="Funcionar não é o bastante. Tratamento psicológico especializado para quem carrega tudo sozinho. CRP 16/8817 · Online para todo o Brasil.">
   <meta property="og:type" content="website">
-  <title>Max Regis | Psicólogo CRP 16/8817 — Colatina-ES</title>
+  <title>Max Regis | Psicólogo — Ansiedade & TCC · CRP 16/8817</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -145,6 +145,59 @@
 
     .wpp-float { position:fixed; bottom:28px; right:28px; z-index:200; width:58px; height:58px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,.4); font-size:1.6rem; transition:transform .2s; }
     .wpp-float:hover { transform:scale(1.1); }
+
+    /* Como funciona */
+    .como-funciona { background:var(--cinza); }
+    .passos { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:48px; }
+    .passo { display:flex; gap:18px; align-items:flex-start; padding:28px; background:var(--branco); border:1.5px solid var(--borda); border-radius:var(--radius); transition:all .3s; }
+    .passo:hover { border-color:var(--teal); box-shadow:0 8px 28px rgba(58,175,169,.1); }
+    .passo-num { width:46px; height:46px; min-width:46px; background:linear-gradient(135deg,var(--teal),var(--teal2)); border-radius:12px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:1.1rem; }
+    .passo h4 { font-size:.97rem; font-weight:700; color:var(--marinho); margin-bottom:6px; }
+    .passo p { font-size:.87rem; color:var(--muted); line-height:1.7; }
+
+    /* Ciência comprovada */
+    .ciencia { background:var(--branco); }
+    .ciencia-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:20px; margin-top:48px; }
+    .ciencia-item { text-align:center; padding:32px 20px; background:var(--cinza); border-radius:var(--radius); border:1px solid var(--borda); }
+    .ciencia-num { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:var(--teal); line-height:1; }
+    .ciencia-desc { font-size:.85rem; color:var(--muted); margin-top:8px; line-height:1.5; }
+    .ciencia-fonte { font-size:.72rem; color:#c0ccd8; margin-top:10px; font-style:italic; }
+
+    /* GAD-7 */
+    .gad7 { background:var(--marinho); }
+    .gad7 .section-title { color:#fff; }
+    .gad7 .section-sub { color:rgba(255,255,255,.65); }
+    .gad7-aviso { background:rgba(58,175,169,.12); border:1px solid rgba(58,175,169,.3); border-radius:10px; padding:12px 16px; color:rgba(255,255,255,.75); font-size:.83rem; margin-bottom:32px; max-width:680px; line-height:1.5; }
+    .gad7-quiz { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:36px 32px; max-width:700px; }
+    @media(max-width:600px){ .gad7-quiz{padding:24px 16px;} }
+    .gad7-pergunta { margin-bottom:28px; }
+    .gad7-pergunta p { color:#fff; font-size:.93rem; font-weight:500; margin-bottom:12px; }
+    .gad7-opcoes { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+    @media(max-width:560px){ .gad7-opcoes{grid-template-columns:1fr;} }
+    .gad7-opcao { background:rgba(255,255,255,.07); border:1.5px solid rgba(255,255,255,.14); color:rgba(255,255,255,.8); padding:10px 13px; border-radius:8px; cursor:pointer; font-size:.84rem; transition:all .2s; text-align:left; font-family:inherit; width:100%; }
+    .gad7-opcao:hover { background:rgba(58,175,169,.2); border-color:var(--teal); color:#fff; }
+    .gad7-opcao.selected { background:rgba(58,175,169,.28); border-color:var(--teal); color:#fff; font-weight:600; }
+    .btn-calcular { background:var(--teal); color:#fff; padding:13px 32px; border-radius:10px; font-weight:600; border:none; cursor:pointer; font-size:.93rem; transition:all .2s; margin-top:24px; font-family:inherit; }
+    .btn-calcular:hover { background:var(--teal2); transform:translateY(-1px); }
+    .gad7-resultado { display:none; background:rgba(255,255,255,.07); border-radius:var(--radius); padding:32px; text-align:center; margin-top:28px; border:1px solid rgba(255,255,255,.1); }
+    .gad7-score-label { font-size:.82rem; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:1px; }
+    .gad7-score { font-family:'Playfair Display',serif; font-size:3.2rem; font-weight:700; color:var(--teal); line-height:1; margin:8px 0; }
+    .gad7-nivel { font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:12px; }
+    .gad7-msg { color:rgba(255,255,255,.7); font-size:.88rem; line-height:1.7; margin-bottom:24px; }
+    .btn-gad7-wpp { display:inline-flex; align-items:center; gap:8px; background:#25D366; color:#fff; padding:12px 26px; border-radius:10px; font-weight:700; font-size:.93rem; transition:all .2s; border:none; cursor:pointer; font-family:inherit; margin:4px; }
+    .btn-gad7-wpp:hover { background:#1ebe5a; }
+    .btn-refazer { background:transparent; color:rgba(255,255,255,.5); border:1px solid rgba(255,255,255,.18); padding:10px 22px; border-radius:8px; cursor:pointer; font-size:.83rem; font-family:inherit; transition:all .2s; margin:4px; }
+    .btn-refazer:hover { color:#fff; border-color:rgba(255,255,255,.4); }
+
+    /* FAQ */
+    .faq-lista { margin-top:44px; max-width:760px; }
+    .faq-item { border-bottom:1px solid var(--borda); }
+    .faq-pergunta { display:flex; justify-content:space-between; align-items:center; padding:18px 0; cursor:pointer; gap:14px; }
+    .faq-pergunta h4 { font-size:.95rem; font-weight:600; color:var(--marinho); line-height:1.4; }
+    .faq-icone { color:var(--teal); font-size:1.4rem; flex-shrink:0; transition:transform .3s; font-weight:300; }
+    .faq-item.open .faq-icone { transform:rotate(45deg); }
+    .faq-resposta { display:none; padding-bottom:18px; color:var(--muted); font-size:.88rem; line-height:1.8; }
+    .faq-item.open .faq-resposta { display:block; }
   </style>
 </head>
 <body>
@@ -154,6 +207,8 @@
   <div class="nav-links">
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
+    <a href="#triagem">Triagem</a>
+    <a href="blog/">Blog</a>
     <a href="#contato">Contato</a>
     <a href="cadastro/" class="nav-cta">Agendar consulta</a>
   </div>
@@ -167,17 +222,17 @@
 <section class="hero" id="inicio">
   <div class="hero-inner container">
     <div>
-      <div class="hero-badge">CRP 16/8817 · Colatina-ES</div>
-      <h1>Cuide da sua <span>saúde mental</span> com quem entende</h1>
-      <p>Atendimento psicológico especializado em psicoterapia TCC, neuropsicologia, psicologia cardiovascular e neuromodulação não-invasiva.</p>
+      <div class="hero-badge">CRP 16/8817 · Colatina-ES · Online Brasil</div>
+      <h1>Funcionar não é o bastante. <span>Você não precisa resolver sozinho.</span></h1>
+      <p>Ansiedade constante, exaustão e a sensação de que pedir ajuda é fraqueza — tudo isso tem tratamento. Psicoterapia TCC com protocolo científico para profissionais sobrecarregados e universitários.</p>
       <div class="hero-btns">
-        <a href="https://wa.me/5527992463839?text=Olá%2C+gostaria+de+agendar+uma+consulta." class="btn-primary">📱 Agendar pelo WhatsApp</a>
-        <a href="#servicos" class="btn-outline">Ver especialidades</a>
+        <a href="https://wa.me/5527992463839?text=Olá%2C+vi+o+seu+site+e+gostaria+de+conversar+sobre+um+atendimento." class="btn-primary">📱 Conversar pelo WhatsApp</a>
+        <a href="#sobre" class="btn-outline">Conhecer a abordagem</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><h3>+8</h3><p>Anos de<br>experiência</p></div>
         <div class="hero-stat"><h3>+200</h3><p>Pacientes<br>atendidos</p></div>
-        <div class="hero-stat"><h3>4</h3><p>Especialidades<br>clínicas</p></div>
+        <div class="hero-stat"><h3>100%</h3><p>Online para<br>todo o Brasil</p></div>
       </div>
     </div>
     <div class="hero-foto">
@@ -187,30 +242,90 @@
   </div>
 </section>
 
+<section class="como-funciona" id="como-funciona">
+  <div class="container">
+    <div class="section-label">Processo</div>
+    <h2 class="section-title">Como funciona o atendimento</h2>
+    <p class="section-sub">Sem burocracia. Do primeiro contato à primeira sessão em menos de 48 horas.</p>
+    <div class="passos">
+      <div class="passo">
+        <div class="passo-num">1</div>
+        <div>
+          <h4>Primeiro contato</h4>
+          <p>Me manda uma mensagem no WhatsApp. Você conta brevemente o que está vivendo — sem julgamento e sem compromisso. Respondo em até 24 horas.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">2</div>
+        <div>
+          <h4>Sessão inicial</h4>
+          <p>Conversamos sobre sua situação, seus objetivos e como funciona o processo terapêutico. Você decide com calma, sem pressão.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">3</div>
+        <div>
+          <h4>Processo terapêutico</h4>
+          <p>Sessões semanais com foco em resultados concretos. Você sai de cada sessão com ferramentas reais para aplicar no dia a dia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ciencia" id="ciencia">
+  <div class="container">
+    <div class="section-label">Eficácia comprovada</div>
+    <h2 class="section-title">O que a ciência mostra sobre TCC</h2>
+    <p class="section-sub">A Terapia Cognitivo-Comportamental é a intervenção psicológica mais estudada do mundo para transtornos de ansiedade.</p>
+    <div class="ciencia-grid">
+      <div class="ciencia-item">
+        <div class="ciencia-num">+1.000</div>
+        <div class="ciencia-desc">estudos clínicos controlados validam a eficácia da TCC para ansiedade</div>
+        <div class="ciencia-fonte">APA Division 12 · Treatments That Work</div>
+      </div>
+      <div class="ciencia-item">
+        <div class="ciencia-num">8–16</div>
+        <div class="ciencia-desc">sessões em média para resultados significativos e mensuráveis</div>
+        <div class="ciencia-fonte">Beck Institute · Protocolos TCC</div>
+      </div>
+      <div class="ciencia-item">
+        <div class="ciencia-num">1ª linha</div>
+        <div class="ciencia-desc">de tratamento para ansiedade, burnout e estresse pela OMS e APA</div>
+        <div class="ciencia-fonte">WHO Mental Health Action Plan</div>
+      </div>
+      <div class="ciencia-item">
+        <div class="ciencia-num">Online</div>
+        <div class="ciencia-desc">com mesma eficácia comprovada do presencial para a maioria dos quadros</div>
+        <div class="ciencia-fonte">Lancet Psychiatry · 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sobre" id="sobre">
   <div class="container">
     <div class="section-label">Quem sou</div>
-    <h2 class="section-title">Max Regis de Oliveira</h2>
-    <p class="section-sub">Psicólogo clínico com formação em abordagens baseadas em evidências e tecnologias de neuromodulação.</p>
+    <h2 class="section-title">Max Régis de Oliveira</h2>
+    <p class="section-sub">Psicólogo clínico com especialização em TCC, neuropsicologia e neuromodulação. Mais de 8 anos ajudando pessoas a recuperar qualidade de vida.</p>
     <div class="sobre-grid">
       <div class="sobre-foto-box">
-        <img src="assets/foto-consultorio.jpg" alt="Max Régis Psicólogo"
+        <img src="assets/foto-verde-sentado2.jpg" alt="Max Régis Psicólogo"
              style="width:180px;height:180px;object-fit:cover;object-position:top;border-radius:50%;border:3px solid rgba(58,175,169,.4);margin-bottom:16px;">
-        <h3>Max Regis</h3>
+        <h3>Max Régis</h3>
         <p>Psicólogo Clínico</p>
         <span class="sobre-crp">CRP 16/8817</span>
       </div>
       <div class="sobre-texto">
-        <p>Sou psicólogo com atuação em psicoterapia cognitivo-comportamental, neuropsicologia clínica, psicologia cardiovascular integrada (CARDIOPED) e neuromodulação não-invasiva (tDCS, taVNS, neurofeedback).</p>
-        <p>Meu trabalho une ciência e humanização. Acredito que cada paciente merece um cuidado individualizado, baseado em evidências, que respeite sua história e seus objetivos terapêuticos.</p>
-        <p>Atendo presencialmente na Clínica CARDIOPED em Colatina-ES e online para todo o Brasil.</p>
+        <p>Sou psicólogo especializado em ansiedade, estresse e burnout com abordagem Cognitivo-Comportamental (TCC) — uma das terapias com maior suporte científico no mundo para esses quadros.</p>
+        <p>Meu trabalho une protocolo técnico e escuta real. Aqui você não vai ouvir frases genéricas: vamos entender o que está acontecendo com você e construir juntos um caminho concreto de mudança.</p>
+        <p>Atendo presencialmente em Colatina-ES e online para todo o Brasil.</p>
         <div class="sobre-tags">
+          <span class="tag">Ansiedade</span>
+          <span class="tag">Burnout</span>
           <span class="tag">Psicoterapia TCC</span>
-          <span class="tag">Neuropsicologia</span>
           <span class="tag">Neuromodulação</span>
-          <span class="tag">Biofeedback</span>
-          <span class="tag">Neurofeedback</span>
-          <span class="tag">Psicologia Cardiovascular</span>
+          <span class="tag">Neuropsicologia</span>
           <span class="tag">Atendimento Online</span>
         </div>
       </div>
@@ -222,31 +337,25 @@
   <div class="container">
     <div class="section-label">Especialidades</div>
     <h2 class="section-title">Como posso te ajudar</h2>
-    <p class="section-sub">Atendimento especializado para diferentes necessidades, sempre com base científica e acolhimento.</p>
+    <p class="section-sub">Cada atendimento é construído a partir do que você está vivendo — sem fórmulas prontas, com ciência e presença real.</p>
     <div class="servicos-grid">
       <div class="card-servico">
         <div class="card-icone">🧠</div>
-        <h3>Psicoterapia TCC</h3>
-        <p>Terapia Cognitivo-Comportamental para ansiedade, depressão, fobias, transtornos de humor e desenvolvimento pessoal.</p>
-        <span class="card-tag">Adultos · Adolescentes · Online</span>
+        <h3>Ansiedade & TCC</h3>
+        <p>Tratamento especializado para ansiedade generalizada, síndrome do pânico, fobia social, burnout e estresse crônico. Protocolo TCC com base em evidências.</p>
+        <span class="card-tag">Adultos · Profissionais · Universitários · Online</span>
       </div>
       <div class="card-servico">
         <div class="card-icone">📋</div>
-        <h3>Neuropsicologia</h3>
-        <p>Avaliação neuropsicológica completa — atenção, memória, funções executivas e linguagem — com laudo técnico detalhado.</p>
-        <span class="card-tag">Avaliação · Laudo · Reabilitação</span>
-      </div>
-      <div class="card-servico">
-        <div class="card-icone">❤️</div>
-        <h3>Psicologia Cardiovascular</h3>
-        <p>Suporte psicológico integrado a pacientes cardíacos, com foco em adesão ao tratamento e qualidade de vida. Parceria com a Clínica CARDIOPED.</p>
-        <span class="card-tag">CARDIOPED · Equipe Multiprofissional</span>
+        <h3>Avaliação Neuropsicológica</h3>
+        <p>Avaliação completa de atenção, memória, funções executivas e linguagem com laudo técnico detalhado — para diagnóstico e reabilitação cognitiva.</p>
+        <span class="card-tag">Laudo · TDAH · Memória · Funções Executivas</span>
       </div>
       <div class="card-servico">
         <div class="card-icone">⚡</div>
         <h3>Neuromodulação</h3>
-        <p>Intervenções não-invasivas: tDCS, taVNS, TMS e neurofeedback para potencialização cognitiva e tratamento complementar.</p>
-        <span class="card-tag">tDCS · taVNS · Neurofeedback</span>
+        <p>tDCS, taVNS e neurofeedback como recursos terapêuticos complementares para ansiedade, cognição e regulação emocional.</p>
+        <span class="card-tag">tDCS · taVNS · Neurofeedback · Biofeedback</span>
       </div>
     </div>
   </div>
@@ -255,30 +364,200 @@
 <section class="abordagem">
   <div class="container">
     <div class="section-label">Minha abordagem</div>
-    <h2 class="section-title">Cuidado com base científica</h2>
-    <p class="section-sub">Cada atendimento é planejado com rigor técnico, ética e respeito à individualidade do paciente.</p>
+    <h2 class="section-title">Ciência aplicada à sua realidade</h2>
+    <p class="section-sub">TCC não é conversa vaga. É um processo estruturado com técnicas específicas, metas claras e resultados mensuráveis.</p>
     <div class="pilares">
-      <div class="pilar"><div class="num">01</div><h4>Evidência científica</h4><p>Protocolos validados pela literatura científica atualizada.</p></div>
-      <div class="pilar"><div class="num">02</div><h4>Escuta ativa</h4><p>Ambiente seguro, sem julgamentos, para que você possa se expressar livremente.</p></div>
-      <div class="pilar"><div class="num">03</div><h4>Tecnologia e inovação</h4><p>Uso de neuromodulação e biofeedback como recursos terapêuticos complementares.</p></div>
-      <div class="pilar"><div class="num">04</div><h4>Ética e sigilo</h4><p>Atuação dentro das normas do CFP com total confidencialidade.</p></div>
+      <div class="pilar"><div class="num">01</div><h4>Protocolo baseado em evidências</h4><p>Intervenções validadas pelos principais estudos em psicologia clínica, sem achismo ou improvisação.</p></div>
+      <div class="pilar"><div class="num">02</div><h4>Escuta sem julgamento</h4><p>Espaço seguro para você trazer o que não consegue falar em mais lugar nenhum — com total sigilo profissional.</p></div>
+      <div class="pilar"><div class="num">03</div><h4>Progresso concreto</h4><p>Cada sessão tem objetivo. Você sai com ferramentas reais para aplicar na sua vida, não só com desabafo.</p></div>
+      <div class="pilar"><div class="num">04</div><h4>Tecnologia e neurociência</h4><p>Quando indicado, recursos como neuromodulação e neurofeedback potencializam os resultados da psicoterapia.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="gad7" id="triagem">
+  <div class="container">
+    <div class="section-label">Autoconhecimento</div>
+    <h2 class="section-title">Como está sua ansiedade?</h2>
+    <p class="section-sub">Responda as 7 perguntas abaixo e receba uma estimativa do seu nível de ansiedade nas últimas 2 semanas.</p>
+    <div class="gad7-aviso">⚠ Esta triagem utiliza o instrumento GAD-7, validado internacionalmente. <strong>Não substitui avaliação clínica profissional</strong> — é um recurso informativo de autoconhecimento. Em caso de sofrimento intenso, procure ajuda imediatamente.</div>
+    <div class="gad7-quiz" id="gad7-quiz">
+      <div id="gad7-perguntas">
+        <div class="gad7-pergunta" data-q="0">
+          <p><strong>1.</strong> Sentir-se nervoso(a), ansioso(a) ou no limite</p>
+          <div class="gad7-opcoes">
+            <button class="gad7-opcao" data-val="0">Nunca</button>
+            <button class="gad7-opcao" data-val="1">Alguns dias</button>
+            <button class="gad7-opcao" data-val="2">Mais da metade dos dias</button>
+            <button class="gad7-opcao" data-val="3">Quase todos os dias</button>
+          </div>
+        </div>
+        <div class="gad7-pergunta" data-q="1">
+          <p><strong>2.</strong> Não conseguir parar ou controlar as preocupações</p>
+          <div class="gad7-opcoes">
+            <button class="gad7-opcao" data-val="0">Nunca</button>
+            <button class="gad7-opcao" data-val="1">Alguns dias</button>
+            <button class="gad7-opcao" data-val="2">Mais da metade dos dias</button>
+            <button class="gad7-opcao" data-val="3">Quase todos os dias</button>
+          </div>
+        </div>
+        <div class="gad7-pergunta" data-q="2">
+          <p><strong>3.</strong> Preocupar-se demais com situações diferentes</p>
+          <div class="gad7-opcoes">
+            <button class="gad7-opcao" data-val="0">Nunca</button>
+            <button class="gad7-opcao" data-val="1">Alguns dias</button>
+            <button class="gad7-opcao" data-val="2">Mais da metade dos dias</button>
+            <button class="gad7-opcao" data-val="3">Quase todos os dias</button>
+          </div>
+        </div>
+        <div class="gad7-pergunta" data-q="3">
+          <p><strong>4.</strong> Dificuldade para relaxar</p>
+          <div class="gad7-opcoes">
+            <button class="gad7-opcao" data-val="0">Nunca</button>
+            <button class="gad7-opcao" data-val="1">Alguns dias</button>
+            <button class="gad7-opcao" data-val="2">Mais da metade dos dias</button>
+            <button class="gad7-opcao" data-val="3">Quase todos os dias</button>
+          </div>
+        </div>
+        <div class="gad7-pergunta" data-q="4">
+          <p><strong>5.</strong> Ficar tão agitado(a) que é difícil ficar quieto(a)</p>
+          <div class="gad7-opcoes">
+            <button class="gad7-opcao" data-val="0">Nunca</button>
+            <button class="gad7-opcao" data-val="1">Alguns dias</button>
+            <button class="gad7-opcao" data-val="2">Mais da metade dos dias</button>
+            <button class="gad7-opcao" data-val="3">Quase todos os dias</button>
+          </div>
+        </div>
+        <div class="gad7-pergunta" data-q="5">
+          <p><strong>6.</strong> Ficar facilmente irritado(a) ou aborrecido(a)</p>
+          <div class="gad7-opcoes">
+            <button class="gad7-opcao" data-val="0">Nunca</button>
+            <button class="gad7-opcao" data-val="1">Alguns dias</button>
+            <button class="gad7-opcao" data-val="2">Mais da metade dos dias</button>
+            <button class="gad7-opcao" data-val="3">Quase todos os dias</button>
+          </div>
+        </div>
+        <div class="gad7-pergunta" data-q="6">
+          <p><strong>7.</strong> Sentir medo como se algo terrível fosse acontecer</p>
+          <div class="gad7-opcoes">
+            <button class="gad7-opcao" data-val="0">Nunca</button>
+            <button class="gad7-opcao" data-val="1">Alguns dias</button>
+            <button class="gad7-opcao" data-val="2">Mais da metade dos dias</button>
+            <button class="gad7-opcao" data-val="3">Quase todos os dias</button>
+          </div>
+        </div>
+        <button class="btn-calcular" onclick="calcularGAD7()">Ver resultado →</button>
+      </div>
+      <div class="gad7-resultado" id="gad7-resultado">
+        <div class="gad7-score-label">Sua pontuação</div>
+        <div class="gad7-score" id="gad7-score-num">—</div>
+        <div class="gad7-nivel" id="gad7-nivel">—</div>
+        <div class="gad7-msg" id="gad7-msg">—</div>
+        <div>
+          <a id="gad7-wpp-link" href="#" class="btn-gad7-wpp" target="_blank">💬 Conversar com o psicólogo</a>
+          <button class="btn-refazer" onclick="refazerGAD7()">Refazer triagem</button>
+        </div>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:20px;">Instrumento GAD-7 — Spitzer et al., 2006. Validado em pt-BR (Moreno et al., 2016).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-label">Dúvidas frequentes</div>
+    <h2 class="section-title">Perguntas que as pessoas fazem antes de começar</h2>
+    <p class="section-sub">É normal ter dúvidas. Aqui estão as respostas para as mais comuns.</p>
+    <div class="faq-lista">
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>Como é a primeira sessão? O que acontece?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">A primeira sessão é uma conversa — sem testes, sem julgamento. Você conta o que está vivendo, o que te trouxe até aqui, e eu explico como funciona o processo. Não há nenhum compromisso de continuar. É um espaço para você avaliar se faz sentido trabalharmos juntos.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>Quantas sessões vou precisar?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">A TCC é uma abordagem com foco e tempo definidos. Para ansiedade e estresse, protocolos baseados em evidências costumam trabalhar entre 8 e 16 sessões. A duração real depende da sua situação específica — avaliamos juntos ao longo do processo.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>Você atende convênio?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">No momento não trabalho com convênios. Atendo de forma particular, com valores que podem ser consultados diretamente pelo WhatsApp. Caso você tenha plano de saúde, pode solicitar reembolso diretamente à operadora — forneço recibo.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>A terapia online funciona tão bem quanto a presencial?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">Sim. Estudos publicados em periódicos como Lancet Psychiatry e Journal of Anxiety Disorders confirmam que a TCC online tem eficácia equivalente ao presencial para ansiedade, burnout e estresse. A sessão acontece por videochamada em plataforma segura e sigilosa.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>Qual a diferença entre psicólogo e psiquiatra?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">O psiquiatra é médico e pode prescrever medicamentos. O psicólogo trabalha com psicoterapia — técnicas e intervenções baseadas em ciência para compreender e modificar pensamentos, emoções e comportamentos. Em muitos casos, as duas abordagens podem ser complementares.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>O que é TCC e como ela funciona na prática?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">A Terapia Cognitivo-Comportamental parte da ideia de que nossos pensamentos influenciam diretamente nossas emoções e comportamentos. Na prática, trabalhamos para identificar padrões de pensamento que geram sofrimento e construímos juntos formas mais funcionais de interpretar e reagir às situações da vida.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>Quando devo buscar ajuda psicológica?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">Quando algo estiver atrapalhando sua qualidade de vida, seus relacionamentos ou seu trabalho — mesmo que pareça pequeno. Não é preciso estar em crise para buscar ajuda. Ao contrário: quanto mais cedo, mais rápido e eficaz é o processo.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta">
+          <h4>Minhas informações são sigilosas?</h4>
+          <span class="faq-icone">+</span>
+        </div>
+        <div class="faq-resposta">Sim, integralmente. O sigilo profissional é um dever ético e legal do psicólogo (Código de Ética CFP, Art. 9º). Nada do que você compartilhar nas sessões será divulgado sem sua autorização expressa — exceto nas situações legalmente previstas de risco grave e iminente à vida.</div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <section class="contato" id="contato">
   <div class="container">
-    <div class="section-label">Vamos conversar</div>
-    <h2 class="section-title">Entre em contato</h2>
-    <p class="section-sub">Pronto para dar o primeiro passo? Fale pelo WhatsApp ou envie uma mensagem.</p>
+    <div class="section-label">Primeiro passo</div>
+    <h2 class="section-title">Vamos conversar?</h2>
+    <p class="section-sub">Sem compromisso. Você conta o que está vivendo e a gente vê juntos como posso ajudar.</p>
     <div class="contato-grid">
       <div class="contato-info">
-        <h3>Informações</h3>
+        <h3>Como me encontrar</h3>
         <div class="info-item">
           <div class="info-icon">📍</div>
           <div>
-            <strong>Endereço</strong>
-            <span>Rua Ovídio Vitaly, 68 — Ed. MaristaMed, 2° andar<br>Fazenda Vitali · Colatina-ES · CEP 29707-035</span>
+            <strong>Presencial — Colatina-ES</strong>
+            <span>Rua Ovídio Vitaly, 68 — Ed. MaristaMed<br>Fazenda Vitali · CEP 29707-035</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">💻</div>
+          <div>
+            <strong>Online — Todo o Brasil</strong>
+            <span>Videochamada com plataforma segura e sigilosa</span>
           </div>
         </div>
         <div class="info-item">
@@ -292,45 +571,48 @@
           <div class="info-icon">🕐</div>
           <div>
             <strong>Horário</strong>
-            <span>Segunda à Sexta · 07:00 às 20:00</span>
+            <span>Seg, Qui e Sex: 08h–20h · Ter: 18h–20h</span>
           </div>
         </div>
-        <a href="https://wa.me/5527992463839?text=Olá%2C+gostaria+de+agendar+uma+consulta+com+o+psicólogo+Max+Regis." class="btn-wpp">💬 Chamar no WhatsApp</a>
+        <a href="https://wa.me/5527992463839?text=Olá%2C+vi+o+seu+site+e+gostaria+de+agendar+uma+consulta." class="btn-wpp">💬 Agendar pelo WhatsApp</a>
         <div class="mapa-wrapper">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.9743824050244!2d-40.632063!3d-19.539427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb6f07c5e8e8e8e8%3A0x0!2sRua+Ov%C3%ADdio+Vitaly%2C+68+-+Colatina%2C+ES!5e0!3m2!1spt-BR!2sbr!4v1" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
       <div class="form-contato">
-        <h3>Envie uma mensagem</h3>
-        <form name="contato" netlify netlify-honeypot="bot-field" action="/obrigado.html">
+        <h3>Me conta o que você está vivendo</h3>
+        <form id="form-contato" name="contato" netlify data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contato">
-          <p hidden><label>Não preencha: <input name="bot-field"></label></p>
+          <p style="display:none"><input name="bot-field"></p>
           <div class="form-row">
             <div class="form-campo">
               <label>Nome *</label>
-              <input type="text" name="nome" required placeholder="Seu nome">
+              <input type="text" id="fc-nome" required placeholder="Seu nome">
             </div>
             <div class="form-campo">
               <label>WhatsApp *</label>
-              <input type="tel" name="whatsapp" required placeholder="(27) 99999-9999">
+              <input type="tel" id="fc-wpp" required placeholder="(27) 99999-9999">
             </div>
           </div>
           <div class="form-campo">
-            <label>Assunto</label>
-            <select name="assunto">
-              <option value="">Selecione o motivo</option>
-              <option>Consulta de psicoterapia (TCC)</option>
+            <label>O que você está enfrentando?</label>
+            <select id="fc-assunto">
+              <option value="">Selecione</option>
+              <option>Ansiedade e preocupação constante</option>
+              <option>Esgotamento / burnout profissional</option>
+              <option>Ansiedade universitária / acadêmica</option>
+              <option>Síndrome do pânico ou fobia</option>
+              <option>Dificuldades de atenção e memória</option>
               <option>Avaliação neuropsicológica</option>
-              <option>Psicologia cardiovascular</option>
               <option>Neuromodulação / biofeedback</option>
-              <option>Dúvidas gerais</option>
+              <option>Outra questão</option>
             </select>
           </div>
           <div class="form-campo">
-            <label>Mensagem</label>
-            <textarea name="mensagem" placeholder="Como posso ajudar?"></textarea>
+            <label>Mensagem (opcional)</label>
+            <textarea id="fc-msg" placeholder="Conte um pouco mais sobre o que está vivendo..."></textarea>
           </div>
-          <button type="submit" class="btn-form">Enviar mensagem →</button>
+          <button type="submit" class="btn-form">Enviar pelo WhatsApp →</button>
         </form>
       </div>
     </div>
@@ -342,6 +624,8 @@
   <div class="footer-links">
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
+    <a href="#triagem">Triagem de Ansiedade</a>
+    <a href="blog/">Blog</a>
     <a href="cadastro/">Cadastro de paciente</a>
     <a href="https://www.instagram.com/max.regis/" target="_blank">Instagram @max.regis</a>
   </div>
@@ -352,16 +636,98 @@
   </p>
 </footer>
 
-<a href="https://wa.me/5527992463839?text=Olá%2C+gostaria+de+agendar+uma+consulta." class="wpp-float" target="_blank" title="WhatsApp">💬</a>
+<a href="https://wa.me/5527992463839?text=Olá%2C+vi+o+seu+site+e+gostaria+de+conversar+sobre+um+atendimento." class="wpp-float" target="_blank" title="Falar no WhatsApp">💬</a>
 
 <script>
+  /* ── Mobile nav ── */
+  var navLinks = document.querySelector('.nav-links');
   document.querySelector('.nav-menu-btn').addEventListener('click', function() {
-    var links = document.querySelector('.nav-links');
-    if (links.style.display === 'flex') {
-      links.style.display = 'none';
+    var open = navLinks.classList.contains('nav-open');
+    if (open) {
+      navLinks.classList.remove('nav-open');
+      Object.assign(navLinks.style, { display:'none' });
     } else {
-      Object.assign(links.style, { display:'flex', flexDirection:'column', position:'fixed', top:'72px', left:'0', right:'0', background:'#fff', padding:'20px 24px 28px', borderBottom:'1px solid #E2E8F0', zIndex:'99' });
+      navLinks.classList.add('nav-open');
+      Object.assign(navLinks.style, { display:'flex', flexDirection:'column', position:'fixed', top:'72px', left:'0', right:'0', background:'#fff', padding:'20px 24px 28px', borderBottom:'1px solid #E2E8F0', zIndex:'99', gap:'16px' });
     }
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.style.display='none'; navLinks.classList.remove('nav-open'); });
+  });
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-pergunta').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ── GAD-7 ── */
+  document.querySelectorAll('.gad7-opcao').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var group = btn.closest('.gad7-pergunta').querySelectorAll('.gad7-opcao');
+      group.forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+    });
+  });
+
+  function calcularGAD7() {
+    var perguntas = document.querySelectorAll('.gad7-pergunta');
+    var total = 0; var respondidas = 0;
+    perguntas.forEach(function(p){
+      var sel = p.querySelector('.gad7-opcao.selected');
+      if (sel) { total += parseInt(sel.dataset.val); respondidas++; }
+    });
+    if (respondidas < 7) {
+      alert('Por favor, responda todas as 7 perguntas antes de calcular.');
+      return;
+    }
+    var nivel, msg, cor;
+    if (total <= 4) {
+      nivel = 'Ansiedade mínima'; cor = '#3AAFA9';
+      msg = 'Seus sintomas estão em nível baixo. Ainda assim, fique atento ao seu bem-estar emocional. Estratégias preventivas de TCC podem ajudar a manter esse equilíbrio.';
+    } else if (total <= 9) {
+      nivel = 'Ansiedade leve'; cor = '#F0A500';
+      msg = 'Você apresenta alguns sintomas de ansiedade. Em nível leve, intervenções psicoeducativas e técnicas de regulação emocional costumam ser muito eficazes.';
+    } else if (total <= 14) {
+      nivel = 'Ansiedade moderada'; cor = '#E07B00';
+      msg = 'Seus sintomas indicam ansiedade moderada, que pode estar impactando seu dia a dia. É recomendável buscar avaliação profissional para um acompanhamento adequado.';
+    } else {
+      nivel = 'Ansiedade intensa'; cor = '#C0392B';
+      msg = 'Seus sintomas estão em nível elevado. É importante buscar apoio profissional. Você não precisa lidar com isso sozinho(a) — o tratamento especializado faz diferença real.';
+    }
+    document.getElementById('gad7-score-num').textContent = total + '/21';
+    document.getElementById('gad7-score-num').style.color = cor;
+    document.getElementById('gad7-nivel').textContent = nivel;
+    document.getElementById('gad7-msg').textContent = msg;
+    var txt = 'Olá! Fiz a triagem de ansiedade no seu site e obtive pontuação ' + total + '/21 (' + nivel + '). Gostaria de conversar sobre acompanhamento psicológico.';
+    document.getElementById('gad7-wpp-link').href = 'https://wa.me/5527992463839?text=' + encodeURIComponent(txt);
+    document.getElementById('gad7-perguntas').style.display = 'none';
+    document.getElementById('gad7-resultado').style.display = 'block';
+  }
+
+  function refazerGAD7() {
+    document.querySelectorAll('.gad7-opcao').forEach(function(b){ b.classList.remove('selected'); });
+    document.getElementById('gad7-perguntas').style.display = 'block';
+    document.getElementById('gad7-resultado').style.display = 'none';
+  }
+
+  /* ── Formulário contato → WhatsApp ── */
+  document.getElementById('form-contato').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nome    = document.getElementById('fc-nome').value.trim();
+    var wpp     = document.getElementById('fc-wpp').value.trim();
+    var assunto = document.getElementById('fc-assunto').value;
+    var msg     = document.getElementById('fc-msg').value.trim();
+    if (!nome || !wpp) { alert('Por favor, preencha nome e WhatsApp.'); return; }
+    var texto = 'Olá! Vi seu site e gostaria de agendar uma consulta.\n';
+    texto += 'Nome: ' + nome + '\n';
+    if (assunto) texto += 'Assunto: ' + assunto + '\n';
+    if (msg)     texto += 'Mensagem: ' + msg;
+    window.open('https://wa.me/5527992463839?text=' + encodeURIComponent(texto), '_blank');
   });
 </script>
 </body>
