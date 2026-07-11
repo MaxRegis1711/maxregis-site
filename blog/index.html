@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Artigos sobre ansiedade, TCC e saúde emocional escritos por Max Regis, psicólogo CRP 16/8817.">
+  <title>Blog | Max Regis Psicólogo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --marinho:  #1B2D4F;
+      --teal:     #2A9D8F;
+      --teal2:    #238B7E;
+      --cinza2:   #F2ECE4;
+      --branco:   #FFFFFF;
+      --texto:    #2B2B2B;
+      --muted:    #6B6B6B;
+      --radius:   14px;
+      --shadow-sm: 0 2px 16px rgba(28,43,34,.07);
+      --shadow-md: 0 8px 30px rgba(28,43,34,.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family:'Inter',sans-serif; color:var(--texto); background:var(--branco); line-height:1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+    nav { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; box-shadow:var(--shadow-sm); position:sticky; top:0; background:#fff; z-index:10; }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .nav-psi { font-size:1.7rem; color:var(--teal); font-family:'Playfair Display',serif; }
+    .nav-nome { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--marinho); display:block; line-height:1.15; }
+    .nav-sub { font-size:.65rem; font-weight:600; color:var(--teal); letter-spacing:.8px; text-transform:uppercase; }
+    .nav-cta { background:var(--teal); color:#fff !important; padding:9px 20px; border-radius:8px; font-weight:600; font-size:.85rem; text-decoration:none; }
+    .nav-cta:hover { background:var(--teal2); }
+
+    header.hero { padding:56px 0 24px; text-align:center; }
+    header.hero h1 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.4rem); color:var(--marinho); margin-bottom:10px; }
+    header.hero p { color:var(--muted); }
+
+    .lista { padding: 20px 0 60px; display:grid; gap:24px; }
+    .post-card { display:block; text-decoration:none; background:var(--cinza2); border-radius:var(--radius); padding:28px 30px; box-shadow:var(--shadow-sm); transition:box-shadow .2s, transform .2s; }
+    .post-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+    .post-kicker { color:var(--teal2); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.7px; margin-bottom:8px; }
+    .post-card h2 { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--marinho); margin-bottom:8px; }
+    .post-card p { color:var(--texto); font-size:.95rem; }
+    .post-meta { color:var(--muted); font-size:.82rem; margin-top:12px; }
+
+    footer { text-align:center; padding:32px 20px; font-size:.82rem; color:var(--muted); border-top:1px solid #eee; }
+    footer a { color:var(--teal); text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-psi">Ψ</span>
+    <div>
+      <span class="nav-nome">Max Régis</span>
+      <span class="nav-sub">Psicólogo · CRP 16/8817</span>
+    </div>
+  </a>
+  <a href="/cadastro/" class="nav-cta">Cadastro</a>
+</nav>
+
+<div class="container">
+  <header class="hero">
+    <h1>Blog</h1>
+    <p>Textos sobre ansiedade, TCC e saúde emocional — com linguagem acessível e base em evidência.</p>
+  </header>
+
+  <div class="lista">
+    <a class="post-card" href="ansiedade-quando-procurar-ajuda/">
+      <div class="post-kicker">Ansiedade</div>
+      <h2>Ansiedade: quando ela é normal e quando é hora de procurar ajuda</h2>
+      <p>Entenda a diferença entre ansiedade normal e ansiedade que atrapalha a vida, os principais sinais e quando procurar um psicólogo.</p>
+      <div class="post-meta">Por Max Régis de Oliveira · CRP 16/8817</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  Max Regis de Oliveira · Psicólogo · CRP 16/8817 · Colatina-ES<br>
+  <a href="/">Voltar ao site</a>
+</footer>
+
+</body>
+</html>
