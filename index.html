@@ -228,6 +228,24 @@
     .btn-refazer { background:transparent; color:rgba(255,255,255,.5); border:1px solid rgba(255,255,255,.18); padding:10px 22px; border-radius:8px; cursor:pointer; font-size:.83rem; font-family:inherit; transition:all .2s; margin:4px; }
     .btn-refazer:hover { color:#fff; border-color:rgba(255,255,255,.4); }
 
+    /* Conteúdo (galeria + vídeos) */
+    .conteudo { background:var(--branco); }
+    .conteudo-tabs { display:flex; gap:10px; margin-top:44px; margin-bottom:36px; flex-wrap:wrap; }
+    .conteudo-tab { background:var(--cinza); border:1.5px solid var(--borda); color:var(--muted); padding:9px 20px; border-radius:20px; font-size:.87rem; font-weight:600; cursor:pointer; transition:all .2s; font-family:inherit; }
+    .conteudo-tab.active, .conteudo-tab:hover { background:var(--teal); border-color:var(--teal); color:#fff; }
+    .conteudo-painel { display:none; }
+    .conteudo-painel.active { display:block; }
+    .galeria-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px; }
+    .galeria-item { border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); aspect-ratio:4/5; }
+    .galeria-item img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+    .galeria-item:hover img { transform:scale(1.06); }
+    .video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+    .video-card { border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); background:var(--cinza); }
+    .video-card iframe { width:100%; aspect-ratio:9/16; border:none; display:block; }
+    .conteudo-vazio { text-align:center; padding:50px 24px; background:var(--cinza); border-radius:var(--radius); color:var(--muted); font-size:.92rem; }
+    .btn-instagram { display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF); color:#fff; padding:13px 28px; border-radius:10px; font-weight:700; font-size:.93rem; margin-top:28px; transition:all .2s; }
+    .btn-instagram:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(221,42,123,.35); }
+
     /* FAQ */
     .faq-lista { margin-top:44px; max-width:760px; }
     .faq-item { border-bottom:1px solid var(--borda); }
@@ -253,6 +271,7 @@
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
     <a href="#triagem">Triagem</a>
+    <a href="#conteudo">Conteúdo</a>
     <a href="blog/">Blog</a>
     <a href="#contato">Contato</a>
     <a href="cadastro/" class="nav-cta">Agendar consulta</a>
@@ -522,6 +541,45 @@
   </div>
 </section>
 
+<section class="conteudo" id="conteudo">
+  <div class="container">
+    <div class="section-label">Acompanhe</div>
+    <h2 class="section-title">Fotos e vídeos</h2>
+    <p class="section-sub">Um pouco do consultório, do dia a dia e de conteúdo educativo sobre saúde mental.</p>
+
+    <div class="conteudo-tabs">
+      <button class="conteudo-tab active" data-tab="fotos">📷 Fotos</button>
+      <button class="conteudo-tab" data-tab="videos">🎬 Vídeos</button>
+    </div>
+
+    <div class="conteudo-painel active" id="painel-fotos">
+      <div class="galeria-grid">
+        <div class="galeria-item"><img src="assets/foto-blazer-cadeira.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-verde-sentado2.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-blazer-pe.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-blazer-pe2.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-consultorio.jpg" alt="Consultório" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-escritorio-selfie.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-12a.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-12b.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="conteudo-painel" id="painel-videos">
+      <div class="video-grid" id="video-grid">
+        <!-- INSTAGRAM_EMBEDS: cole aqui os blockquotes gerados a partir dos links do Instagram -->
+      </div>
+      <div class="conteudo-vazio" id="videos-vazio">
+        Em breve, reels e vídeos por aqui. Enquanto isso, confira no Instagram.
+      </div>
+    </div>
+
+    <div style="text-align:center">
+      <a href="https://www.instagram.com/max.regis/" target="_blank" class="btn-instagram">📸 Ver mais no Instagram @max.regis</a>
+    </div>
+  </div>
+</section>
+
 <section id="faq">
   <div class="container">
     <div class="section-label">Dúvidas frequentes</div>
@@ -684,6 +742,7 @@
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
     <a href="#triagem">Triagem de Ansiedade</a>
+    <a href="#conteudo">Conteúdo</a>
     <a href="blog/">Blog</a>
     <a href="cadastro/">Cadastro de paciente</a>
     <a href="https://www.instagram.com/max.regis/" target="_blank">Instagram @max.regis</a>
@@ -809,6 +868,22 @@
     dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(parseInt(d.dataset.i)); reset(); }); });
   })();
 
+  /* ── Tabs Conteúdo (Fotos/Vídeos) ── */
+  document.querySelectorAll('.conteudo-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.conteudo-tab').forEach(function(t){ t.classList.remove('active'); });
+      document.querySelectorAll('.conteudo-painel').forEach(function(p){ p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById('painel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  /* ── Mostra/esconde aviso "em breve" conforme houver embeds do Instagram ── */
+  var videoGrid = document.getElementById('video-grid');
+  if (videoGrid && videoGrid.children.length > 0) {
+    document.getElementById('videos-vazio').style.display = 'none';
+  }
+
   /* ── Formulário contato → WhatsApp ── */
   document.getElementById('form-contato').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -824,5 +899,6 @@
     window.open('https://wa.me/5527992463839?text=' + encodeURIComponent(texto), '_blank');
   });
 </script>
+<script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
