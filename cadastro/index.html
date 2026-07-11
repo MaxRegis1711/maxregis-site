@@ -231,7 +231,9 @@
     <div class="passo" id="prog4"><div class="num">4</div><span>Motivo</span></div>
   </div>
 
-  <form id="formCadastro" novalidate>
+  <form id="formCadastro" name="cadastro-pacientes" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="cadastro-pacientes">
+    <p style="display:none"><input name="bot-field"></p>
 
     <!-- SEÇÃO 1 — Dados Pessoais -->
     <div class="secao visivel" id="sec1">
@@ -517,17 +519,20 @@
     document.getElementById('sec4').classList.remove('visivel');
     document.getElementById('loadingMsg').classList.add('visivel');
 
+    const codificar = (data) => Object.keys(data)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+      .join('&');
+
     try {
-      const resp = await fetch('processa_cadastro.php', {
+      const resp = await fetch('/cadastro/', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(dados)
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: codificar(dados)
       });
 
-      const resultado = await resp.json();
       document.getElementById('loadingMsg').classList.remove('visivel');
 
-      if (resultado.ok) {
+      if (resp.ok) {
         document.getElementById('sucessoMsg').classList.add('visivel');
       } else {
         alert('Erro ao enviar. Por favor, tente novamente.');
