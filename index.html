@@ -243,6 +243,12 @@
     .video-card { border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); background:var(--cinza); }
     .video-card iframe { width:100%; aspect-ratio:9/16; border:none; display:block; }
     .conteudo-vazio { text-align:center; padding:50px 24px; background:var(--cinza); border-radius:var(--radius); color:var(--muted); font-size:.92rem; }
+    .imprensa-lista { display:flex; flex-direction:column; gap:16px; }
+    .imprensa-item { display:block; background:var(--cinza); border:1.5px solid var(--borda); border-radius:var(--radius); padding:24px; transition:all .2s; }
+    .imprensa-item:hover { border-color:var(--teal); box-shadow:var(--shadow-sm); transform:translateY(-2px); }
+    .imprensa-fonte { font-size:.78rem; font-weight:700; color:var(--teal); text-transform:uppercase; letter-spacing:.04em; margin-bottom:8px; }
+    .imprensa-titulo { font-size:1rem; font-weight:600; color:var(--marinho); line-height:1.4; margin-bottom:10px; }
+    .imprensa-link { font-size:.85rem; color:var(--muted); font-weight:500; }
     .btn-instagram { display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF); color:#fff; padding:13px 28px; border-radius:10px; font-weight:700; font-size:.93rem; margin-top:28px; transition:all .2s; }
     .btn-instagram:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(221,42,123,.35); }
 
@@ -551,6 +557,7 @@
       <button class="conteudo-tab active" data-tab="fotos">📷 Fotos</button>
       <button class="conteudo-tab" data-tab="videos">🎬 Instagram</button>
       <button class="conteudo-tab" data-tab="youtube">▶️ YouTube</button>
+      <button class="conteudo-tab" data-tab="imprensa">📰 Imprensa</button>
     </div>
 
     <div class="conteudo-painel active" id="painel-fotos">
@@ -603,6 +610,16 @@
         <div class="video-card">
           <iframe src="https://www.youtube.com/embed/D4uIZPfELlk" style="aspect-ratio:16/9;" title="Vídeo YouTube" allowfullscreen></iframe>
         </div>
+      </div>
+    </div>
+
+    <div class="conteudo-painel" id="painel-imprensa">
+      <div class="imprensa-lista">
+        <a href="https://www.esfala.com.br/2025/07/18/psicologo-de-colatina-max-regis-alerta-depressao-afeta-homens-mulheres-e-ate-criancas-e-muitas-vezes-passa-despercebida/" target="_blank" rel="noopener" class="imprensa-item">
+          <div class="imprensa-fonte">esfala.com.br</div>
+          <div class="imprensa-titulo">Psicólogo de Colatina, Max Régis, alerta: depressão afeta homens, mulheres e até crianças e muitas vezes passa despercebida</div>
+          <div class="imprensa-link">Ler matéria completa →</div>
+        </a>
       </div>
     </div>
 
