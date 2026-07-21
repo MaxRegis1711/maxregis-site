@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anamnese | Max Régis de Oliveira | Psicólogo CRP 16/8817</title>
+  <style>
+    :root {
+      --azul:    #2C5F8A;
+      --azul2:   #3A7ABF;
+      --cinza:   #F7F9FC;
+      --borda:   #D0DCE8;
+      --texto:   #1A2A3A;
+      --muted:   #6B7F92;
+      --verde:   #2E7D54;
+      --radius:  10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--cinza);
+      color: var(--texto);
+      line-height: 1.6;
+      padding: 24px 16px 60px;
+    }
+    .container { max-width: 680px; margin: 0 auto; }
+    header { text-align: center; padding: 32px 0 24px; }
+    header h1 { font-size: 1.5rem; color: var(--azul); font-weight: 700; margin-bottom: 4px; }
+    header p { color: var(--muted); font-size: 0.92rem; }
+    .progresso { display: flex; justify-content: center; gap: 8px; margin: 20px 0 32px; }
+    .passo { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--muted); }
+    .passo .num {
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--borda);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.8rem; transition: all .3s;
+    }
+    .passo.ativo .num { background: var(--azul); border-color: var(--azul); color: #fff; }
+    .passo.feito .num  { background: var(--verde); border-color: var(--verde); color: #fff; }
+    .passo span { display: none; }
+    @media(min-width: 480px) { .passo span { display: inline; } }
+
+    .secao {
+      background: #fff; border: 1px solid var(--borda); border-radius: var(--radius);
+      padding: 28px 24px; margin-bottom: 20px; display: none;
+    }
+    .secao.visivel { display: block; }
+    .secao h2 {
+      font-size: 1.05rem; color: var(--azul); margin-bottom: 20px;
+      padding-bottom: 10px; border-bottom: 2px solid var(--cinza);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .secao h2 .icone {
+      width: 32px; height: 32px; background: var(--cinza); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .campo { margin-bottom: 18px; }
+    .campo label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--texto); margin-bottom: 5px; }
+    .campo label .req { color: #c0392b; margin-left: 2px; }
+    .campo input, .campo select, .campo textarea {
+      width: 100%; padding: 10px 13px; border: 1.5px solid var(--borda); border-radius: 7px;
+      font-size: 0.95rem; color: var(--texto); background: #fff; transition: border-color .2s;
+      font-family: inherit;
+    }
+    .campo input:focus, .campo select:focus, .campo textarea:focus {
+      outline: none; border-color: var(--azul2); box-shadow: 0 0 0 3px rgba(58,122,191,0.12);
+    }
+    .campo textarea { resize: vertical; min-height: 90px; }
+    .campo .hint { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .campo.erro input, .campo.erro select, .campo.erro textarea { border-color: #c0392b; }
+    .campo .msg-erro { font-size: 0.8rem; color: #c0392b; margin-top: 4px; display: none; }
+    .campo.erro .msg-erro { display: block; }
+
+    .nav { display: flex; justify-content: space-between; margin-top: 24px; gap: 12px; }
+    .btn { padding: 11px 28px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border: none; transition: all .2s; }
+    .btn-voltar { background: transparent; border: 1.5px solid var(--borda); color: var(--texto); }
+    .btn-voltar:hover { background: var(--cinza); }
+    .btn-avancar { background: var(--azul); color: #fff; margin-left: auto; }
+    .btn-avancar:hover { background: var(--azul2); transform: translateY(-1px); }
+    .btn-enviar { background: var(--verde); color: #fff; margin-left: auto; }
+    .btn-enviar:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    .aviso-privacidade {
+      background: #EEF4FB; border: 1px solid #B8D0EA; border-radius: 8px;
+      padding: 14px 16px; font-size: 0.82rem; color: var(--muted); margin-bottom: 20px;
+      display: flex; gap: 10px;
+    }
+    .aviso-privacidade .lock { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+    .sucesso-msg { text-align: center; padding: 40px 20px; display: none; }
+    .sucesso-msg.visivel { display: block; }
+    .sucesso-msg .check { font-size: 3rem; margin-bottom: 16px; }
+    .sucesso-msg h2 { color: var(--verde); font-size: 1.4rem; margin-bottom: 10px; }
+    .sucesso-msg p { color: var(--muted); max-width: 380px; margin: 0 auto; }
+    .loading { display: none; text-align: center; padding: 20px; color: var(--muted); }
+    .loading.visivel { display: block; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Anamnese</h1>
+    <p>Max Régis de Oliveira &nbsp;·&nbsp; Psicólogo CRP 16/8817</p>
+  </header>
+
+  <div class="progresso">
+    <div class="passo ativo" id="prog1"><div class="num">1</div><span>Identificação</span></div>
+    <div class="passo" id="prog2"><div class="num">2</div><span>Saúde</span></div>
+    <div class="passo" id="prog3"><div class="num">3</div><span>Motivo</span></div>
+  </div>
+
+  <form id="formAnamnese" name="anamnese-pacientes" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="anamnese-pacientes">
+    <p style="display:none"><input name="bot-field"></p>
+
+    <!-- SEÇÃO 1 — Identificação (referência ao cadastro já feito) -->
+    <div class="secao visivel" id="sec1">
+      <h2><span class="icone">🔗</span> Identificação</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:18px;">
+        Esta etapa é preenchida depois do cadastro de Dados Pessoais. Informe os dados abaixo para localizarmos sua ficha.
+      </p>
+
+      <div class="campo">
+        <label>Nome completo <span class="req">*</span></label>
+        <input type="text" name="nome_completo" placeholder="O mesmo nome informado no cadastro" autocomplete="name">
+        <div class="msg-erro">Informe o nome completo.</div>
+      </div>
+
+      <div class="campo">
+        <label>WhatsApp <span class="req">*</span></label>
+        <input type="tel" name="telefone_whatsapp" placeholder="(27) 99999-9999" autocomplete="tel">
+        <div class="msg-erro">Informe o WhatsApp usado no cadastro.</div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-avancar" onclick="avancar(1)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 2 — Saúde -->
+    <div class="secao" id="sec2">
+      <h2><span class="icone">🏥</span> Histórico de Saúde</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:18px;">Informações confidenciais — utilizadas exclusivamente para planejamento do atendimento.</p>
+
+      <div class="campo">
+        <label>Diagnóstico médico (se houver)</label>
+        <input type="text" name="diagnostico_medico" placeholder="Ex: Hipertensão, Diabetes, Ansiedade... (deixe em branco se não houver)">
+      </div>
+
+      <div class="campo">
+        <label>Medicamentos em uso</label>
+        <textarea name="medicamentos" placeholder="Nome e dosagem dos medicamentos atuais (deixe em branco se não usar nenhum)"></textarea>
+      </div>
+
+      <div class="campo">
+        <label>Outros profissionais de saúde que te acompanham</label>
+        <input type="text" name="outros_profissionais" placeholder="Ex: Psiquiatra, Neurologista, Cardiologista...">
+      </div>
+
+      <div class="campo">
+        <label>Escola / Instituição <small style="font-weight:400;color:var(--muted)">(se criança ou adolescente)</small></label>
+        <input type="text" name="escola_instituicao" placeholder="Nome da escola ou instituição">
+      </div>
+
+      <div class="campo">
+        <label>Encaminhado por</label>
+        <input type="text" name="encaminhante" placeholder="Nome do profissional ou instituição que indicou (opcional)">
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-voltar" onclick="voltar(2)">← Voltar</button>
+        <button type="button" class="btn btn-avancar" onclick="avancar(2)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 3 — Motivo -->
+    <div class="secao" id="sec3">
+      <h2><span class="icone">💬</span> Motivo da Consulta</h2>
+
+      <div class="campo">
+        <label>Queixa principal / Motivo pelo qual busca atendimento <span class="req">*</span></label>
+        <textarea name="queixa_principal" placeholder="Descreva com suas palavras o que te trouxe até aqui. Não há resposta certa ou errada."></textarea>
+        <div class="msg-erro">Por favor, descreva o motivo da consulta.</div>
+      </div>
+
+      <div class="aviso-privacidade">
+        <span class="lock">🔒</span>
+        <span>Suas informações são confidenciais e protegidas pelo sigilo profissional (Código de Ética Profissional do Psicólogo, Resolução CFP nº 010/2005). Serão utilizadas exclusivamente para fins clínicos.</span>
+      </div>
+
+      <div class="campo" style="display:flex;align-items:flex-start;gap:10px">
+        <input type="checkbox" id="aceiteGravacao" name="aceite_gravacao" style="width:auto;margin-top:3px;accent-color:var(--azul)">
+        <label for="aceiteGravacao" style="font-size:.88rem;font-weight:400;color:var(--muted)">Autorizo, quando aplicável, a gravação em áudio e/ou transcrição da sessão exclusivamente para fins de registro clínico e elaboração de prontuário, em conformidade com a LGPD, o sigilo profissional previsto no Código de Ética Profissional do Psicólogo (Resolução CFP nº 010/2005), o registro documental (Resolução CFP nº 001/2009) e os requisitos de consentimento para gravação de sessão (Resolução CFP nº 13/2022, Art. 11 §3). Esta autorização é opcional e pode ser revogada a qualquer momento.</label>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-voltar" onclick="voltar(3)">← Voltar</button>
+        <button type="submit" class="btn btn-enviar" id="btnEnviar">Enviar anamnese ✓</button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="loading" id="loadingMsg">
+    <p>⏳ Enviando sua anamnese...</p>
+  </div>
+
+  <div class="sucesso-msg" id="sucessoMsg">
+    <div class="check">✅</div>
+    <h2>Anamnese recebida!</h2>
+    <p>Obrigado. <strong>Max Régis</strong> vai revisar suas informações antes da primeira sessão.</p>
+  </div>
+
+</div>
+
+<script>
+  const TOTAL = 3;
+  let secaoAtual = 1;
+
+  function atualizarProgresso() {
+    for (let i = 1; i <= TOTAL; i++) {
+      const el = document.getElementById('prog' + i);
+      el.className = 'passo';
+      if (i < secaoAtual) el.classList.add('feito');
+      else if (i === secaoAtual) el.classList.add('ativo');
+    }
+  }
+
+  function validarSecao(n) {
+    const sec = document.getElementById('sec' + n);
+    let ok = true;
+
+    const reqs = {
+      1: ['nome_completo','telefone_whatsapp'],
+      2: [],
+      3: ['queixa_principal'],
+    };
+
+    sec.querySelectorAll('.campo').forEach(c => c.classList.remove('erro'));
+
+    (reqs[n] || []).forEach(nome => {
+      const el = sec.querySelector(`[name=${nome}]`);
+      if (!el) return;
+      if (!el.value.trim()) {
+        el.closest('.campo')?.classList.add('erro');
+        ok = false;
+      }
+    });
+
+    return ok;
+  }
+
+  function avancar(n) {
+    if (!validarSecao(n)) return;
+    document.getElementById('sec' + n).classList.remove('visivel');
+    secaoAtual = n + 1;
+    document.getElementById('sec' + secaoAtual).classList.add('visivel');
+    atualizarProgresso();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function voltar(n) {
+    document.getElementById('sec' + n).classList.remove('visivel');
+    secaoAtual = n - 1;
+    document.getElementById('sec' + secaoAtual).classList.add('visivel');
+    atualizarProgresso();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  document.getElementById('formAnamnese').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!validarSecao(3)) return;
+
+    const dados = {};
+    new FormData(this).forEach((v, k) => { dados[k] = v; });
+    dados['data_envio'] = new Date().toISOString();
+    dados['origem'] = 'maxregis.com.br/anamnese';
+
+    document.getElementById('sec3').classList.remove('visivel');
+    document.getElementById('loadingMsg').classList.add('visivel');
+
+    const codificar = (data) => Object.keys(data)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+      .join('&');
+
+    try {
+      const resp = await fetch('/anamnese/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: codificar(dados)
+      });
+
+      document.getElementById('loadingMsg').classList.remove('visivel');
+
+      if (resp.ok) {
+        document.getElementById('sucessoMsg').classList.add('visivel');
+      } else {
+        alert('Erro ao enviar. Por favor, tente novamente.');
+        document.getElementById('sec3').classList.add('visivel');
+      }
+    } catch (err) {
+      document.getElementById('loadingMsg').classList.remove('visivel');
+      alert('Erro de conexão. Por favor, tente novamente.');
+      document.getElementById('sec3').classList.add('visivel');
+    }
+  });
+
+  atualizarProgresso();
+</script>
+</body>
+</html>

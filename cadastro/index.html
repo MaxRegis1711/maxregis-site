@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ficha de Cadastro — Max Régis de Oliveira | Psicólogo CRP 16/8817</title>
+  <title>Ficha de Cadastro — Dados Pessoais | Max Régis de Oliveira | Psicólogo CRP 16/8817</title>
   <style>
     :root {
       --azul:    #2C5F8A;
@@ -23,45 +23,16 @@
       line-height: 1.6;
       padding: 24px 16px 60px;
     }
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    header {
-      text-align: center;
-      padding: 32px 0 24px;
-    }
-    header h1 {
-      font-size: 1.5rem;
-      color: var(--azul);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    header p {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-    .progresso {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 20px 0 32px;
-    }
-    .passo {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
+    .container { max-width: 680px; margin: 0 auto; }
+    header { text-align: center; padding: 32px 0 24px; }
+    header h1 { font-size: 1.5rem; color: var(--azul); font-weight: 700; margin-bottom: 4px; }
+    header p { color: var(--muted); font-size: 0.92rem; }
+    .progresso { display: flex; justify-content: center; gap: 8px; margin: 20px 0 32px; }
+    .passo { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--muted); }
     .passo .num {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 2px solid var(--borda);
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--borda);
       display: flex; align-items: center; justify-content: center;
-      font-weight: 600;
-      font-size: 0.8rem;
-      transition: all .3s;
+      font-weight: 600; font-size: 0.8rem; transition: all .3s;
     }
     .passo.ativo .num { background: var(--azul); border-color: var(--azul); color: #fff; }
     .passo.feito .num  { background: var(--verde); border-color: var(--verde); color: #fff; }
@@ -69,150 +40,65 @@
     @media(min-width: 480px) { .passo span { display: inline; } }
 
     .secao {
-      background: #fff;
-      border: 1px solid var(--borda);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      margin-bottom: 20px;
-      display: none;
+      background: #fff; border: 1px solid var(--borda); border-radius: var(--radius);
+      padding: 28px 24px; margin-bottom: 20px; display: none;
     }
     .secao.visivel { display: block; }
     .secao h2 {
-      font-size: 1.05rem;
-      color: var(--azul);
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--cinza);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 1.05rem; color: var(--azul); margin-bottom: 20px;
+      padding-bottom: 10px; border-bottom: 2px solid var(--cinza);
+      display: flex; align-items: center; gap: 8px;
     }
     .secao h2 .icone {
-      width: 32px; height: 32px;
-      background: var(--cinza);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
+      width: 32px; height: 32px; background: var(--cinza); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
     }
-    .campo {
-      margin-bottom: 18px;
-    }
-    .campo label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--texto);
-      margin-bottom: 5px;
-    }
+    .campo { margin-bottom: 18px; }
+    .campo label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--texto); margin-bottom: 5px; }
     .campo label .req { color: #c0392b; margin-left: 2px; }
     .campo input, .campo select, .campo textarea {
-      width: 100%;
-      padding: 10px 13px;
-      border: 1.5px solid var(--borda);
-      border-radius: 7px;
-      font-size: 0.95rem;
-      color: var(--texto);
-      background: #fff;
-      transition: border-color .2s;
+      width: 100%; padding: 10px 13px; border: 1.5px solid var(--borda); border-radius: 7px;
+      font-size: 0.95rem; color: var(--texto); background: #fff; transition: border-color .2s;
       font-family: inherit;
     }
     .campo input:focus, .campo select:focus, .campo textarea:focus {
-      outline: none;
-      border-color: var(--azul2);
-      box-shadow: 0 0 0 3px rgba(58,122,191,0.12);
+      outline: none; border-color: var(--azul2); box-shadow: 0 0 0 3px rgba(58,122,191,0.12);
     }
     .campo textarea { resize: vertical; min-height: 90px; }
-    .campo .hint {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-    .campo.erro input, .campo.erro select, .campo.erro textarea {
-      border-color: #c0392b;
-    }
-    .campo .msg-erro {
-      font-size: 0.8rem;
-      color: #c0392b;
-      margin-top: 4px;
-      display: none;
-    }
+    .campo .hint { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .campo.erro input, .campo.erro select, .campo.erro textarea { border-color: #c0392b; }
+    .campo .msg-erro { font-size: 0.8rem; color: #c0392b; margin-top: 4px; display: none; }
     .campo.erro .msg-erro { display: block; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media(max-width: 480px) { .grid-2 { grid-template-columns: 1fr; } }
 
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 24px;
-      gap: 12px;
-    }
-    .btn {
-      padding: 11px 28px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all .2s;
-    }
-    .btn-voltar {
-      background: transparent;
-      border: 1.5px solid var(--borda);
-      color: var(--texto);
-    }
+    .nav { display: flex; justify-content: space-between; margin-top: 24px; gap: 12px; }
+    .btn { padding: 11px 28px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border: none; transition: all .2s; }
+    .btn-voltar { background: transparent; border: 1.5px solid var(--borda); color: var(--texto); }
     .btn-voltar:hover { background: var(--cinza); }
-    .btn-avancar {
-      background: var(--azul);
-      color: #fff;
-      margin-left: auto;
-    }
+    .btn-avancar { background: var(--azul); color: #fff; margin-left: auto; }
     .btn-avancar:hover { background: var(--azul2); transform: translateY(-1px); }
-    .btn-enviar {
-      background: var(--verde);
-      color: #fff;
-      margin-left: auto;
-    }
+    .btn-enviar { background: var(--verde); color: #fff; margin-left: auto; }
     .btn-enviar:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
     .aviso-privacidade {
-      background: #EEF4FB;
-      border: 1px solid #B8D0EA;
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 20px;
-      display: flex;
-      gap: 10px;
+      background: #EEF4FB; border: 1px solid #B8D0EA; border-radius: 8px;
+      padding: 14px 16px; font-size: 0.82rem; color: var(--muted); margin-bottom: 20px;
+      display: flex; gap: 10px;
     }
     .aviso-privacidade .lock { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
 
-    .sucesso-msg {
-      text-align: center;
-      padding: 40px 20px;
-      display: none;
+    .aviso-proximo-passo {
+      background: #FEF6E8; border: 1px solid #F0D9A8; border-radius: 8px;
+      padding: 14px 16px; font-size: 0.82rem; color: var(--muted); margin-bottom: 20px;
     }
+
+    .sucesso-msg { text-align: center; padding: 40px 20px; display: none; }
     .sucesso-msg.visivel { display: block; }
-    .sucesso-msg .check {
-      font-size: 3rem;
-      margin-bottom: 16px;
-    }
-    .sucesso-msg h2 {
-      color: var(--verde);
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-    .sucesso-msg p {
-      color: var(--muted);
-      max-width: 380px;
-      margin: 0 auto;
-    }
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      color: var(--muted);
-    }
+    .sucesso-msg .check { font-size: 3rem; margin-bottom: 16px; }
+    .sucesso-msg h2 { color: var(--verde); font-size: 1.4rem; margin-bottom: 10px; }
+    .sucesso-msg p { color: var(--muted); max-width: 380px; margin: 0 auto; }
+    .loading { display: none; text-align: center; padding: 20px; color: var(--muted); }
     .loading.visivel { display: block; }
   </style>
 </head>
@@ -220,15 +106,13 @@
 <div class="container">
 
   <header>
-    <h1>Ficha de Cadastro</h1>
+    <h1>Ficha de Cadastro — Dados Pessoais</h1>
     <p>Max Régis de Oliveira &nbsp;·&nbsp; Psicólogo CRP 16/8817</p>
   </header>
 
   <div class="progresso">
     <div class="passo ativo" id="prog1"><div class="num">1</div><span>Dados pessoais</span></div>
     <div class="passo" id="prog2"><div class="num">2</div><span>Contato</span></div>
-    <div class="passo" id="prog3"><div class="num">3</div><span>Saúde</span></div>
-    <div class="passo" id="prog4"><div class="num">4</div><span>Motivo</span></div>
   </div>
 
   <form id="formCadastro" name="cadastro-pacientes" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
@@ -323,79 +207,42 @@
         <input type="text" name="endereco" placeholder="Ex: Linhares-ES, Bairro Centro">
       </div>
 
-      <div class="campo">
-        <label>Responsável / Acompanhante <small style="font-weight:400;color:var(--muted)">(se menor ou sob cuidados)</small></label>
-        <input type="text" name="contato_responsavel" placeholder="Nome completo do responsável">
+      <div class="campo" id="blocoResponsavel" style="display:none">
+        <div class="campo">
+          <label>Nome completo do responsável legal <span class="req">*</span></label>
+          <input type="text" name="contato_responsavel" placeholder="Nome completo do responsável">
+          <div class="msg-erro">Paciente menor de idade: informe o nome do responsável legal.</div>
+        </div>
+
+        <div class="campo">
+          <label>CPF do responsável legal <span class="req">*</span></label>
+          <input type="text" name="cpf_responsavel" placeholder="000.000.000-00">
+          <div class="msg-erro">Informe o CPF do responsável legal.</div>
+        </div>
+
+        <div class="campo">
+          <label>Parentesco com o responsável <span class="req">*</span></label>
+          <select name="parentesco_responsavel">
+            <option value="">Selecione</option>
+            <option value="Mãe">Mãe</option>
+            <option value="Pai">Pai</option>
+            <option value="Cônjuge">Cônjuge</option>
+            <option value="Filho(a)">Filho(a)</option>
+            <option value="Irmão/Irmã">Irmão/Irmã</option>
+            <option value="Outro">Outro</option>
+          </select>
+          <div class="msg-erro">Selecione o parentesco.</div>
+        </div>
       </div>
 
-      <div class="campo">
-        <label>Parentesco com o responsável</label>
-        <select name="parentesco_responsavel">
-          <option value="">Não se aplica</option>
-          <option value="Mãe">Mãe</option>
-          <option value="Pai">Pai</option>
-          <option value="Cônjuge">Cônjuge</option>
-          <option value="Filho(a)">Filho(a)</option>
-          <option value="Irmão/Irmã">Irmão/Irmã</option>
-          <option value="Outro">Outro</option>
-        </select>
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-voltar" onclick="voltar(2)">← Voltar</button>
-        <button type="button" class="btn btn-avancar" onclick="avancar(2)">Próximo →</button>
-      </div>
-    </div>
-
-    <!-- SEÇÃO 3 — Saúde -->
-    <div class="secao" id="sec3">
-      <h2><span class="icone">🏥</span> Histórico de Saúde</h2>
-      <p style="font-size:.85rem;color:var(--muted);margin-bottom:18px;">Informações confidenciais — utilizadas exclusivamente para planejamento do atendimento.</p>
-
-      <div class="campo">
-        <label>Diagnóstico médico (se houver)</label>
-        <input type="text" name="diagnostico_medico" placeholder="Ex: Hipertensão, Diabetes, Ansiedade... (deixe em branco se não houver)">
-      </div>
-
-      <div class="campo">
-        <label>Medicamentos em uso</label>
-        <textarea name="medicamentos" placeholder="Nome e dosagem dos medicamentos atuais (deixe em branco se não usar nenhum)"></textarea>
-      </div>
-
-      <div class="campo">
-        <label>Outros profissionais de saúde que te acompanham</label>
-        <input type="text" name="outros_profissionais" placeholder="Ex: Psiquiatra, Neurologista, Cardiologista...">
-      </div>
-
-      <div class="campo">
-        <label>Escola / Instituição <small style="font-weight:400;color:var(--muted)">(se criança ou adolescente)</small></label>
-        <input type="text" name="escola_instituicao" placeholder="Nome da escola ou instituição">
-      </div>
-
-      <div class="campo">
-        <label>Encaminhado por</label>
-        <input type="text" name="encaminhante" placeholder="Nome do profissional ou instituição que indicou (opcional)">
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-voltar" onclick="voltar(3)">← Voltar</button>
-        <button type="button" class="btn btn-avancar" onclick="avancar(3)">Próximo →</button>
-      </div>
-    </div>
-
-    <!-- SEÇÃO 4 — Motivo -->
-    <div class="secao" id="sec4">
-      <h2><span class="icone">💬</span> Motivo da Consulta</h2>
-
-      <div class="campo">
-        <label>Queixa principal / Motivo pelo qual busca atendimento <span class="req">*</span></label>
-        <textarea name="queixa_principal" placeholder="Descreva com suas palavras o que te trouxe até aqui. Não há resposta certa ou errada."></textarea>
-        <div class="msg-erro">Por favor, descreva o motivo da consulta.</div>
+      <div class="campo" id="blocoAcompanhante">
+        <label>Acompanhante <small style="font-weight:400;color:var(--muted)">(opcional, se paciente adulto sob cuidados)</small></label>
+        <input type="text" name="contato_responsavel_opcional" placeholder="Nome completo do acompanhante">
       </div>
 
       <div class="aviso-privacidade">
         <span class="lock">🔒</span>
-        <span>Suas informações são confidenciais e protegidas pelo sigilo profissional (Resolução CFP 001/2009). Serão utilizadas exclusivamente para fins clínicos.</span>
+        <span>Seus dados são confidenciais e protegidos pelo sigilo profissional (Código de Ética Profissional do Psicólogo, Resolução CFP nº 010/2005).</span>
       </div>
 
       <div class="campo" style="display:flex;align-items:flex-start;gap:10px">
@@ -406,13 +253,20 @@
         <div class="msg-erro" id="erro-aceite" style="display:none">Você precisa aceitar para continuar.</div>
       </div>
 
-      <div class="campo" style="display:flex;align-items:flex-start;gap:10px">
-        <input type="checkbox" id="aceiteGravacao" name="aceite_gravacao" style="width:auto;margin-top:3px;accent-color:var(--azul)">
-        <label for="aceiteGravacao" style="font-size:.88rem;font-weight:400;color:var(--muted)">Autorizo, quando aplicável, a gravação em áudio e/ou transcrição da sessão exclusivamente para fins de registro clínico e elaboração de prontuário, em conformidade com a LGPD e o sigilo profissional previsto no Código de Ética Profissional do Psicólogo (Resolução CFP 001/2009). Esta autorização é opcional e pode ser revogada a qualquer momento.</label>
+      <div class="campo" id="blocoAceiteResponsavel" style="display:none;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <input type="checkbox" id="aceiteResponsavel" name="aceite_responsavel_legal" style="width:auto;margin-top:3px;accent-color:var(--azul)">
+          <label for="aceiteResponsavel" style="font-size:.88rem;font-weight:400;color:var(--muted)">Eu, na condição de responsável legal pelo paciente menor de idade acima identificado, autorizo o atendimento psicológico e o armazenamento dos dados fornecidos nesta ficha, em conformidade com a LGPD, o Código de Ética Profissional do Psicólogo (Resolução CFP nº 010/2005) e o registro documental (Resolução CFP nº 001/2009). <span class="req">*</span></label>
+        </div>
+        <div class="msg-erro" id="erro-aceite-responsavel" style="display:none">Responsável legal precisa aceitar para continuar.</div>
+      </div>
+
+      <div class="aviso-proximo-passo">
+        ℹ️ Após o envio, você receberá orientação para preencher a <strong>Anamnese</strong> (histórico de saúde e motivo da consulta) em uma segunda etapa, separada desta.
       </div>
 
       <div class="nav">
-        <button type="button" class="btn btn-voltar" onclick="voltar(4)">← Voltar</button>
+        <button type="button" class="btn btn-voltar" onclick="voltar(2)">← Voltar</button>
         <button type="submit" class="btn btn-enviar" id="btnEnviar">Enviar ficha ✓</button>
       </div>
     </div>
@@ -425,15 +279,39 @@
 
   <div class="sucesso-msg" id="sucessoMsg">
     <div class="check">✅</div>
-    <h2>Ficha recebida!</h2>
-    <p>Obrigado. Seus dados foram enviados com segurança. <strong>Max Régis</strong> entrará em contato em breve para confirmar seu agendamento.</p>
+    <h2>Dados pessoais recebidos!</h2>
+    <p>Obrigado. <strong>Max Régis</strong> entrará em contato para o próximo passo (anamnese) e para confirmar seu agendamento.</p>
   </div>
 
 </div>
 
 <script>
-  const TOTAL = 4;
+  const TOTAL = 2;
   let secaoAtual = 1;
+
+  function calcularIdade(dataNascStr) {
+    if (!dataNascStr) return null;
+    const nasc = new Date(dataNascStr);
+    if (isNaN(nasc)) return null;
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - nasc.getFullYear();
+    const m = hoje.getMonth() - nasc.getMonth();
+    if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
+    return idade;
+  }
+
+  function ehMenorDeIdade() {
+    const dataNasc = document.querySelector('[name=data_nascimento]').value;
+    const idade = calcularIdade(dataNasc);
+    return idade !== null && idade < 18;
+  }
+
+  function atualizarBlocosResponsavel() {
+    const menor = ehMenorDeIdade();
+    document.getElementById('blocoResponsavel').style.display = menor ? 'block' : 'none';
+    document.getElementById('blocoAcompanhante').style.display = menor ? 'none' : 'block';
+    document.getElementById('blocoAceiteResponsavel').style.display = menor ? 'flex' : 'none';
+  }
 
   function atualizarProgresso() {
     for (let i = 1; i <= TOTAL; i++) {
@@ -451,9 +329,7 @@
 
     const reqs = {
       1: ['nome_completo','data_nascimento','sexo'],
-      2: ['telefone_whatsapp'],
-      3: [],
-      4: ['queixa_principal'],
+      2: ehMenorDeIdade() ? ['telefone_whatsapp','contato_responsavel','cpf_responsavel','parentesco_responsavel'] : ['telefone_whatsapp'],
     };
 
     obrigatorios.forEach(el => {
@@ -472,7 +348,6 @@
       }
     });
 
-    // Validar email se preenchido
     if (n === 2) {
       const emailEl = sec.querySelector('[name=email]');
       if (emailEl && emailEl.value.trim()) {
@@ -488,6 +363,7 @@
   }
 
   function avancar(n) {
+    if (n === 1) atualizarBlocosResponsavel();
     if (!validarSecao(n)) return;
     document.getElementById('sec' + n).classList.remove('visivel');
     secaoAtual = n + 1;
@@ -507,7 +383,7 @@
   document.getElementById('formCadastro').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    if (!validarSecao(4)) return;
+    if (!validarSecao(2)) return;
 
     const aceite = document.getElementById('aceite');
     if (!aceite.checked) {
@@ -516,12 +392,21 @@
     }
     document.getElementById('erro-aceite').style.display = 'none';
 
+    if (ehMenorDeIdade()) {
+      const aceiteResp = document.getElementById('aceiteResponsavel');
+      if (!aceiteResp.checked) {
+        document.getElementById('erro-aceite-responsavel').style.display = 'block';
+        return;
+      }
+      document.getElementById('erro-aceite-responsavel').style.display = 'none';
+    }
+
     const dados = {};
     new FormData(this).forEach((v, k) => { dados[k] = v; });
     dados['data_envio'] = new Date().toISOString();
     dados['origem'] = 'maxregis.com.br/cadastro';
 
-    document.getElementById('sec4').classList.remove('visivel');
+    document.getElementById('sec2').classList.remove('visivel');
     document.getElementById('loadingMsg').classList.add('visivel');
 
     const codificar = (data) => Object.keys(data)
@@ -541,12 +426,12 @@
         document.getElementById('sucessoMsg').classList.add('visivel');
       } else {
         alert('Erro ao enviar. Por favor, tente novamente.');
-        document.getElementById('sec4').classList.add('visivel');
+        document.getElementById('sec2').classList.add('visivel');
       }
     } catch (err) {
       document.getElementById('loadingMsg').classList.remove('visivel');
       alert('Erro de conexão. Por favor, tente novamente.');
-      document.getElementById('sec4').classList.add('visivel');
+      document.getElementById('sec2').classList.add('visivel');
     }
   });
 
