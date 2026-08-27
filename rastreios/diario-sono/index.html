@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diário de Sono e Enxaqueca | Max Régis de Oliveira | CRP 16/8817</title>
+<style>
+  :root{--accent:#2C5F8A;--ok:#2E7D54;--crit:#C0392B;--cinza:#F7F9FC;--borda:#D0DCE8;}
+  *{box-sizing:border-box;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cinza);color:#1A2A3A;margin:0;padding:24px 16px 60px;}
+  .container{max-width:640px;margin:0 auto;}
+  .nav a{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;}
+  header{text-align:center;padding:20px 0;}
+  header h1{font-size:1.3rem;color:var(--accent);margin-bottom:4px;}
+  header p{color:#6B7F92;font-size:.85rem;}
+  .card{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:22px;margin-bottom:18px;}
+  .card h2{font-size:.95rem;color:var(--accent);margin-bottom:12px;border-bottom:1px solid var(--cinza);padding-bottom:8px;}
+  .campo{margin-bottom:14px;}
+  .campo label{display:block;font-size:.82rem;font-weight:600;margin-bottom:5px;}
+  .campo input, .campo select{width:100%;padding:9px 11px;border:1.5px solid var(--borda);border-radius:7px;font-size:.92rem;font-family:inherit;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .btn{width:100%;padding:12px;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;background:var(--accent);color:#fff;margin-top:8px;}
+  .erro{color:var(--crit);font-size:.85rem;margin-top:8px;display:none;}
+  .sucesso{display:none;text-align:center;padding:24px 16px;}
+  .sucesso.visivel{display:block;} .sucesso .check{font-size:2.2rem;} .sucesso h3{color:var(--ok);margin:8px 0 6px;}
+  .historico{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:18px 20px;}
+  .historico h2{font-size:.95rem;color:var(--accent);margin-bottom:10px;}
+  .historico ul{list-style:none;padding:0;margin:0;}
+  .historico li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--cinza);font-size:.85rem;}
+  .historico .vazio{color:#888;font-style:italic;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav"><a href="/rastreios/">← Voltar aos rastreios</a></div>
+  <header><h1>Diário de Sono e Enxaqueca</h1><p>Registre 1 vez por dia, de manhã (sobre a noite anterior) — leva menos de 2 minutos</p></header>
+
+  <div class="card">
+    <form id="formDiario" name="diario-sono-enxaqueca" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="diario-sono-enxaqueca">
+      <p style="display:none"><input name="bot-field"></p>
+    <input type="hidden" name="codigo_paciente" class="campoCodigoOculto">
+    <input type="hidden" name="data_envio">
+      <div class="grid2">
+        <div class="campo"><label>Seu nome/código</label><input type="text" name="paciente" id="paciente" required></div>
+        <div class="campo"><label>Data</label><input type="date" name="data" id="data" required></div>
+      </div>
+
+      <h2>Sono (noite anterior)</h2>
+      <div class="grid2">
+        <div class="campo"><label>Hora que deitou</label><input type="time" name="hora_deitou"></div>
+        <div class="campo"><label>Hora que tentou dormir</label><input type="time" name="hora_tentou_dormir"></div>
+      </div>
+      <div class="grid2">
+        <div class="campo"><label>Tempo para dormir (min)</label><input type="number" min="0" name="latencia_min"></div>
+        <div class="campo"><label>Nº de despertares</label><input type="number" min="0" name="n_despertares"></div>
+      </div>
+      <div class="grid2">
+        <div class="campo"><label>Hora que acordou</label><input type="time" name="hora_acordou"></div>
+        <div class="campo"><label>Hora que levantou</label><input type="time" name="hora_levantou"></div>
+      </div>
+      <div class="grid2">
+        <div class="campo"><label>Qualidade do sono (1-5)</label><input type="number" min="1" max="5" name="qualidade_sono"></div>
+        <div class="campo"><label>Sensação de descanso (1-5)</label><input type="number" min="1" max="5" name="sensacao_descanso"></div>
+      </div>
+      <div class="campo"><label>Cochilo diurno?</label>
+        <select name="cochilo"><option value="">Selecione</option><option>Não</option><option>Sim</option></select>
+      </div>
+      <div class="campo"><label>Medicação para dormir</label><input type="text" name="medicacao_sono"></div>
+
+      <h2>Enxaqueca (hoje)</h2>
+      <div class="campo"><label>Teve dor de cabeça hoje?</label>
+        <select name="teve_enxaqueca" id="teveEnxaqueca" required><option value="">Selecione</option><option value="Nao">Não</option><option value="Sim">Sim</option></select>
+      </div>
+      <div id="camposEnxaqueca" style="display:none">
+        <div class="grid2">
+          <div class="campo"><label>Hora início</label><input type="time" name="enx_hora_inicio"></div>
+          <div class="campo"><label>Hora fim</label><input type="time" name="enx_hora_fim"></div>
+        </div>
+        <div class="campo"><label>Intensidade máxima (0-10)</label><input type="number" min="0" max="10" name="enx_intensidade"></div>
+        <div class="campo"><label>Localização / caráter</label><input type="text" name="enx_local_carater"></div>
+        <div class="grid2">
+          <div class="campo"><label>Aura?</label><select name="enx_aura"><option value="">Selecione</option><option>Não</option><option>Sim</option></select></div>
+          <div class="campo"><label>Náusea?</label><select name="enx_nausea"><option value="">Selecione</option><option>Não</option><option>Sim</option></select></div>
+        </div>
+        <div class="grid2">
+          <div class="campo"><label>Fotofobia?</label><select name="enx_fotofobia"><option value="">Selecione</option><option>Não</option><option>Sim</option></select></div>
+          <div class="campo"><label>Fonofobia?</label><select name="enx_fonofobia"><option value="">Selecione</option><option>Não</option><option>Sim</option></select></div>
+        </div>
+        <div class="campo"><label>Gatilho suspeito</label><input type="text" name="enx_gatilho"></div>
+        <div class="campo"><label>Medicação usada / alívio</label><input type="text" name="enx_medicacao_alivio"></div>
+        <div class="campo"><label>Impacto funcional</label><input type="text" name="enx_impacto" placeholder="sem impacto / limitou / incapacitante"></div>
+      </div>
+
+      <div class="erro" id="erroMsg">Preencha nome, data e se teve enxaqueca antes de enviar.</div>
+      <button type="submit" class="btn">Registrar hoje</button>
+    </form>
+  </div>
+
+  <div class="sucesso" id="sucesso"><div class="check">✓</div><h3>Registro enviado</h3><p>Volte amanhã para registrar o próximo dia.</p></div>
+
+  <div class="historico">
+    <h2>Seus registros neste aparelho</h2>
+    <ul id="listaHist"><li class="vazio">Nenhum registro ainda neste navegador.</li></ul>
+  </div>
+</div>
+
+<script src="/rastreios/gate.js"></script>
+<script>
+document.getElementById('data').valueAsDate = new Date();
+document.getElementById('teveEnxaqueca').addEventListener('change', function(){
+  document.getElementById('camposEnxaqueca').style.display = this.value==='Sim' ? 'block' : 'none';
+});
+const CHAVE='diario_sono_registros_v1';
+function ler(){ try{return JSON.parse(localStorage.getItem(CHAVE))||[];}catch(e){return [];} }
+function verHistorico(){
+  const regs=ler().sort((a,b)=>b.data.localeCompare(a.data));
+  const ul=document.getElementById('listaHist');
+  if(!regs.length){ ul.innerHTML='<li class="vazio">Nenhum registro ainda neste navegador.</li>'; return; }
+  ul.innerHTML=regs.map(r=>`<li><span>${r.data.split('-').reverse().join('/')}</span><span>sono ${r.qualidade||'-'}/5 · enxaqueca ${r.enxaqueca}</span></li>`).join('');
+}
+verHistorico();
+document.getElementById('formDiario').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const pac=document.getElementById('paciente').value.trim();
+  const data=document.getElementById('data').value;
+  const teve=document.getElementById('teveEnxaqueca').value;
+  if(!pac || !data || !teve){ document.getElementById('erroMsg').style.display='block'; return; }
+  document.getElementById('erroMsg').style.display='none';
+  const dados={}; new FormData(this).forEach((v,k)=>{dados[k]=v;});
+  dados['data_envio']=new Date().toISOString();
+  const codificar=(d)=>Object.keys(d).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(d[k])).join('&');
+  try{ await fetch('/rastreios/diario-sono/', {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:codificar(dados)}); }catch(err){}
+  const regs=ler();
+  regs.push({data, qualidade: dados['qualidade_sono']||'', enxaqueca: teve});
+  localStorage.setItem(CHAVE, JSON.stringify(regs));
+  this.style.display='none';
+  document.getElementById('sucesso').classList.add('visivel');
+  verHistorico();
+});
+</script>
+</body>
+</html>

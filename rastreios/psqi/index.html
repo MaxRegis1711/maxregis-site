@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSQI — Qualidade do Sono | Max Régis de Oliveira | CRP 16/8817</title>
+<style>
+  :root{--accent:#2C5F8A;--ok:#2E7D54;--warn:#B8860B;--alert:#C0622E;--crit:#C0392B;}
+  *{box-sizing:border-box;}
+  body{background:#e9ecef;color:#000;margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:1.35;padding:20px 12px 60px;}
+  .nav{max-width:950px;margin:0 auto 14px;font-family:'Segoe UI',sans-serif;}
+  .nav a{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;}
+  .folha{max-width:950px;margin:0 auto 18px;background:#fff;border:1px solid #ccc;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:24px 28px;}
+  .cabecalho{border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:12px;text-align:center;}
+  .cabecalho h1{font-size:16px;margin:0;color:var(--accent);}
+  .campos{display:flex;gap:20px;font-size:12px;margin-bottom:10px;flex-wrap:wrap;justify-content:space-between;font-family:'Segoe UI',sans-serif;}
+  .campos input{border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:12px;padding:4px 6px;}
+  .instrucao{font-size:12px;margin-bottom:10px;font-family:'Segoe UI',sans-serif;}
+  table.q14{width:100%;border-collapse:collapse;margin-bottom:10px;}
+  table.q14 td{border:1px solid #999;padding:6px 8px;font-size:12px;}
+  table.q14 td.pergunta{width:70%;} table.q14 td.resp{width:30%;}
+  table.q14 td.resp input{border:1px solid #ccc;border-radius:4px;width:100%;font-family:inherit;font-size:12px;padding:3px 5px;}
+  table.escala{width:100%;border-collapse:collapse;margin-top:6px;}
+  table.escala th{background:#d6e4f0;font-size:10px;font-weight:700;padding:6px 3px;border:1px solid #999;text-align:center;}
+  table.escala td{border:1px solid #999;padding:5px 6px;font-size:11.5px;}
+  table.escala td.op{width:56px;text-align:center;cursor:pointer;background:#eef4fa;}
+  table.escala td.op.sel{background:var(--accent);color:#fff;font-weight:700;}
+  table.escala td.op .circulo{display:inline-block;width:18px;height:18px;border-radius:50%;border:1.4px solid #000;line-height:16px;font-size:10px;}
+  table.escala td.op.sel .circulo{background:#fff;color:var(--accent);border-color:#fff;}
+  .escala4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:4px;}
+  .escala4 .op{border:1px solid #999;background:#eef4fa;text-align:center;padding:8px 4px;font-size:11px;cursor:pointer;border-radius:4px;}
+  .escala4 .op.sel{background:var(--accent);color:#fff;font-weight:700;}
+  .q6789{margin:10px 0;} .q6789 .titulo{font-weight:700;font-size:12px;margin-bottom:2px;}
+  .rodape{font-size:9.5px;color:#555;margin-top:14px;border-top:1px solid #ccc;padding-top:8px;font-family:'Segoe UI',sans-serif;}
+  .btn{display:block;width:100%;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Segoe UI',sans-serif;margin-top:16px;}
+  .erro-msg{color:var(--crit);font-size:12.5px;margin-top:8px;display:none;font-family:'Segoe UI',sans-serif;}
+  .resultado{display:none;max-width:950px;margin:0 auto;background:#fff;border:1px solid #ccc;padding:22px 26px;font-family:'Segoe UI',sans-serif;text-align:center;}
+  .resultado.visivel{display:block;}
+  .escore-num{font-size:44px;font-weight:700;color:var(--accent);}
+  .escore-faixa{display:inline-block;margin-top:6px;padding:5px 16px;border-radius:20px;font-weight:600;font-size:14px;}
+  .f-min{color:var(--ok);background:rgba(46,125,84,.1);} .f-lev{color:var(--warn);background:rgba(184,134,11,.1);}
+  .f-mod{color:var(--alert);background:rgba(192,98,46,.1);} .f-gra{color:var(--crit);background:rgba(192,57,43,.1);}
+  .aviso-envio{font-size:12px;color:#888;margin-top:12px;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="/rastreios/">← Voltar aos rastreios</a></div>
+<div class="folha">
+  <div class="cabecalho"><h1>ÍNDICE DA QUALIDADE DO SONO DE PITTSBURGH (PSQI)</h1></div>
+  <div class="campos">
+    <label>Nome <input id="campoNome" style="width:220px"></label>
+    <label>Data <input id="dataAplic" type="date"></label>
+  </div>
+  <div class="instrucao">As seguintes perguntas são relativas aos seus hábitos de sono durante <b>o último mês somente</b>.</div>
+  <form id="formPsqi" name="rastreio-psqi" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="rastreio-psqi">
+    <input type="hidden" name="nome" id="hidNome"><input type="hidden" name="data" id="hidData">
+    <p style="display:none"><input name="bot-field"></p>
+    <input type="hidden" name="codigo_paciente" class="campoCodigoOculto">
+    <input type="hidden" name="5a">
+    <input type="hidden" name="5b">
+    <input type="hidden" name="5c">
+    <input type="hidden" name="5d">
+    <input type="hidden" name="5e">
+    <input type="hidden" name="5f">
+    <input type="hidden" name="5g">
+    <input type="hidden" name="5h">
+    <input type="hidden" name="5i">
+    <input type="hidden" name="q6">
+    <input type="hidden" name="q7">
+    <input type="hidden" name="q8">
+    <input type="hidden" name="q9">
+    <input type="hidden" name="escore_total">
+    <input type="hidden" name="classificacao">
+    <input type="hidden" name="data_envio">
+
+    <table class="q14">
+      <tr><td class="pergunta">1. Durante o último mês, quando você geralmente foi para a cama a noite?</td><td class="resp">Hora usual de deitar: <input name="q1" id="q1" type="time"></td></tr>
+      <tr><td class="pergunta">2. Quanto tempo (em minutos) você geralmente levou para dormir?</td><td class="resp">Minutos: <input name="q2" id="q2" type="number" min="0"></td></tr>
+      <tr><td class="pergunta">3. Quando você geralmente levantou de manhã?</td><td class="resp">Hora usual de levantar: <input name="q3" id="q3" type="time"></td></tr>
+      <tr><td class="pergunta">4. Quantas horas de sono você teve por noite?</td><td class="resp">Horas: <input name="q4" id="q4" type="number" min="0" step="0.5"></td></tr>
+    </table>
+    <div class="instrucao"><b>5. Com que frequência você teve dificuldade para dormir porque você...</b></div>
+    <table class="escala">
+      <thead><tr><th style="text-align:left">Motivo</th><th>Nenhuma no<br>último mês</th><th>Menos de uma<br>vez/semana</th><th>Uma ou duas<br>vezes/semana</th><th>Três ou mais<br>vezes/semana</th></tr></thead>
+      <tbody id="corpoQ5"></tbody>
+    </table>
+    <div class="q6789"><div class="titulo">6. Qualidade do sono de uma maneira geral:</div><div class="escala4" id="q6"></div></div>
+    <div class="q6789"><div class="titulo">7. Frequência de uso de medicamento para dormir:</div><div class="escala4" id="q7"></div></div>
+    <div class="q6789"><div class="titulo">8. Dificuldade para ficar acordado dirigindo/comendo/em atividade social:</div><div class="escala4" id="q8"></div></div>
+    <div class="q6789"><div class="titulo">9. Quão problemático foi manter o entusiasmo/ânimo para as coisas:</div><div class="escala4" id="q9"></div></div>
+    <div class="erro-msg" id="erroMsg">Preencha todos os campos (perguntas 1 a 9) antes de enviar.</div>
+    <button type="submit" class="btn">Ver resultado e enviar</button>
+  </form>
+  <div class="rodape">Buysse DJ et al. (1989). Versão BR: Bertolazi AN et al. (2011), Sleep Med 12(1):70-5.</div>
+</div>
+<div class="resultado" id="painelResultado">
+  <div style="font-size:2.4rem">✓</div>
+  <h3 style="color:#2E7D54;margin:8px 0 6px">Respostas enviadas</h3>
+  <p style="color:#888;font-size:13px">Seu psicólogo vai receber e conversar com você sobre isso na próxima consulta.</p>
+</div>
+
+<script src="/rastreios/gate.js"></script>
+<script>
+const ITENS5=[["5a","não conseguiu adormecer em até 30 minutos"],["5b","acordou no meio da noite ou de manhã cedo"],
+ ["5c","precisou levantar para ir ao banheiro"],["5d","não conseguiu respirar confortavelmente"],
+ ["5e","tossiu ou roncou forte"],["5f","sentiu muito frio"],["5g","sentiu muito calor"],
+ ["5h","teve sonhos ruins"],["5i","teve dor"]];
+const FREQ4=["Nenhuma no<br>último mês","Menos de uma<br>vez/semana","Uma ou duas<br>vezes/semana","Três ou mais<br>vezes/semana"];
+const V={};
+const corpoQ5=document.getElementById('corpoQ5');
+ITENS5.forEach(([id,tx])=>{
+  const tr=document.createElement('tr'); let tds=`<td style="text-align:left">${tx}</td>`;
+  for(let v=0;v<=3;v++) tds+=`<td class="op" data-id="${id}" data-v="${v}" onclick="selecionar('${id}',${v})"><span class="circulo">${v}</span></td>`;
+  tr.innerHTML=tds; corpoQ5.appendChild(tr);
+});
+function montaEscala4(elId,labels,chave){
+  const el=document.getElementById(elId);
+  labels.forEach((t,v)=>{
+    const d=document.createElement('div'); d.className='op'; d.innerHTML=t;
+    d.onclick=()=>{ V[chave]=v; [...el.children].forEach((c,i)=>c.classList.toggle('sel',i===v)); };
+    el.appendChild(d);
+  });
+}
+montaEscala4('q6',["Muito boa","Boa","Ruim","Muito Ruim"],'q6');
+montaEscala4('q7',FREQ4,'q7'); montaEscala4('q8',FREQ4,'q8');
+montaEscala4('q9',["Nenhuma<br>dificuldade","Um problema<br>leve","Um problema<br>razoável","Um grande<br>problema"],'q9');
+function selecionar(id,v){ V[id]=v; document.querySelectorAll(`td.op[data-id="${id}"]`).forEach(td=>td.classList.toggle('sel', parseInt(td.dataset.v)===v)); }
+function calcComponentes(){
+  const c={};
+  c.c1=V.q6!==undefined?V.q6:null;
+  let latMin=document.getElementById('q2').value!==''?parseFloat(document.getElementById('q2').value):null;
+  let scoreLat=latMin===null?null:(latMin<=15?0:latMin<=30?1:latMin<=60?2:3);
+  let score5a=V['5a']!==undefined?V['5a']:null;
+  let somaLat=(scoreLat!==null?scoreLat:0)+(score5a!==null?score5a:0);
+  c.c2=(scoreLat===null&&score5a===null)?null:(somaLat===0?0:somaLat<=2?1:somaLat<=4?2:3);
+  let horas=document.getElementById('q4').value!==''?parseFloat(document.getElementById('q4').value):null;
+  c.c3=horas===null?null:(horas>7?0:horas>=6?1:horas>=5?2:3);
+  let ef=null; const q1=document.getElementById('q1').value, q3=document.getElementById('q3').value;
+  if(q1&&q3&&horas!==null){
+    let [h1,m1]=q1.split(':').map(Number),[h3,m3]=q3.split(':').map(Number);
+    let deitar=h1+m1/60, levantar=h3+m3/60;
+    let horasLeito=levantar>=deitar?(levantar-deitar):(24-deitar+levantar);
+    if(horasLeito>0){ let pct=(horas/horasLeito)*100; ef=pct>85?0:pct>=75?1:pct>=65?2:3; }
+  }
+  c.c4=ef;
+  const ids5=['5b','5c','5d','5e','5f','5g','5h','5i'];
+  let todos5=ids5.every(id=>V[id]!==undefined);
+  let soma5=ids5.reduce((a,id)=>a+(V[id]||0),0);
+  c.c5=todos5?(soma5===0?0:soma5<=9?1:soma5<=18?2:3):null;
+  c.c6=V.q7!==undefined?V.q7:null;
+  let soma7=(V.q8===undefined||V.q9===undefined)?null:V.q8+V.q9;
+  c.c7=soma7===null?null:(soma7===0?0:soma7<=2?1:soma7<=4?2:3);
+  return c;
+}
+function faixa(t){
+  if(t<=5) return ['Sono satisfatório','f-min'];
+  if(t<=10) return ['Baixa qualidade do sono','f-lev'];
+  if(t<=15) return ['Qualidade do sono ruim','f-mod'];
+  return ['Qualidade do sono muito ruim','f-gra'];
+}
+document.getElementById('formPsqi').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const c=calcComponentes(); const vals=Object.values(c);
+  if(vals.some(v=>v===null)){ document.getElementById('erroMsg').style.display='block'; return; }
+  document.getElementById('erroMsg').style.display='none';
+  const total=vals.reduce((a,v)=>a+v,0); const [rot,cls]=faixa(total);
+  this.style.display='none';
+  document.getElementById('painelResultado').classList.add('visivel');
+  document.getElementById('hidNome').value=document.getElementById('campoNome').value;
+  document.getElementById('hidData').value=document.getElementById('dataAplic').value;
+  const dados={}; new FormData(this).forEach((v,k)=>{dados[k]=v;});
+  dados['q1']=document.getElementById('q1').value; dados['q2']=document.getElementById('q2').value;
+  dados['q3']=document.getElementById('q3').value; dados['q4']=document.getElementById('q4').value;
+  Object.keys(V).forEach(k=>dados[k]=V[k]);
+  dados['escore_total']=total; dados['classificacao']=rot; dados['data_envio']=new Date().toISOString();
+  const codificar=(d)=>Object.keys(d).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(d[k])).join('&');
+  try{ await fetch('/rastreios/psqi/', {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:codificar(dados)}); }catch(err){}
+  window.scrollTo({top: document.getElementById('painelResultado').offsetTop - 20, behavior:'smooth'});
+});
+</script>
+</body>
+</html>

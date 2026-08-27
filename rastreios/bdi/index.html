@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BDI — Inventário de Depressão de Beck | Max Régis de Oliveira | CRP 16/8817</title>
+<style>
+  :root{--accent:#2C5F8A;--crit:#C0392B;}
+  *{box-sizing:border-box;}
+  body{background:#e9ecef;color:#000;margin:0;font-family:Georgia,'Times New Roman',serif;font-size:13.5px;line-height:1.35;padding:20px 12px 60px;}
+  .nav{max-width:850px;margin:0 auto 14px;font-family:'Segoe UI',sans-serif;}
+  .nav a{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;}
+  .aviso-critico{max-width:850px;margin:0 auto 14px;background:#FDEEEE;border:1px solid #E8B4B0;color:#8a2e24;
+    font-size:12.5px;padding:12px 16px;border-radius:8px;font-family:'Segoe UI',sans-serif;}
+  .gate{max-width:850px;margin:0 auto 20px;background:#fff;border:1px solid #ccc;border-radius:10px;padding:24px 26px;font-family:'Segoe UI',sans-serif;}
+  .gate h2{font-size:15px;color:var(--accent);margin-bottom:8px;}
+  .gate p{color:#666;font-size:13px;margin-bottom:12px;}
+  .gate input{width:100%;padding:10px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;text-transform:uppercase;margin-bottom:8px;}
+  .gate button{width:100%;padding:10px;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:var(--accent);color:#fff;}
+  #conteudo{display:none;} #conteudo.visivel{display:block;}
+  .folha{max-width:850px;margin:0 auto 18px;background:#fff;border:1px solid #ccc;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:26px 30px;}
+  .idInfo{font-family:'Segoe UI',sans-serif;font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:10px;}
+  .instrucao{font-size:12.5px;text-align:justify;margin-bottom:16px;}
+  .instrucao b{font-weight:700;}
+  .grade-itens{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;}
+  .item{margin-bottom:12px;font-size:12.5px;}
+  .item .cabeca{display:flex;gap:6px;} .item .numgrupo{font-weight:700;font-size:13px;flex:none;width:16px;} .item .afirmacoes{flex:1;}
+  .op{display:flex;align-items:flex-start;gap:6px;cursor:pointer;padding:1px 0;}
+  .op .circulo{flex:none;width:16px;height:16px;border-radius:50%;border:1.4px solid #000;display:flex;align-items:center;justify-content:center;font-size:10.5px;margin-top:1px;}
+  .op.sel .circulo{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;}
+  .rodape{font-size:9.5px;color:#555;margin-top:18px;border-top:1px solid #ccc;padding-top:8px;font-family:'Segoe UI',sans-serif;}
+  .btn{display:block;width:100%;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Segoe UI',sans-serif;margin-top:16px;}
+  .erro-msg{color:var(--crit);font-size:12.5px;margin-top:8px;display:none;font-family:'Segoe UI',sans-serif;}
+  .sucesso{display:none;max-width:850px;margin:0 auto;text-align:center;padding:30px 20px;background:#fff;border:1px solid #ccc;border-radius:10px;font-family:'Segoe UI',sans-serif;}
+  .sucesso.visivel{display:block;}
+  .sucesso .check{font-size:2.4rem;margin-bottom:10px;} .sucesso h3{color:#2E7D54;margin-bottom:6px;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="/rastreios/">← Voltar aos rastreios</a></div>
+<div class="aviso-critico">⚠️ Se você está em sofrimento intenso ou pensando em se machucar, não espere terminar este questionário: procure ajuda agora — <b>CVV: 188</b> (24h) ou <b>192/SAMU</b>.</div>
+
+<div class="gate" id="gate">
+  <h2>Acesso restrito</h2>
+  <p>Este questionário contém perguntas sobre risco pessoal. O resultado não aparece nesta tela —
+     suas respostas vão direto para o seu psicólogo. Digite o código que ele te passou.</p>
+  <input type="text" id="codigoAcesso" placeholder="CÓDIGO DE ACESSO">
+  <button onclick="RASTREIO_GATE.verificar()">Entrar</button>
+  <div class="erro-msg" id="erroCodigo">Código inválido.</div>
+</div>
+
+<div id="conteudo">
+<div class="folha">
+  <div class="idInfo" id="confirmacaoNome"></div>
+  <div class="instrucao">
+    Este questionário consiste em 21 grupos de afirmações. Faça um círculo em torno da afirmação, em
+    cada grupo, que descreve <b>melhor</b> a maneira que você tem se sentido na <b>última semana,
+    incluindo hoje</b>.
+  </div>
+  <form id="formBdi" name="rastreio-bdi" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="rastreio-bdi">
+    <input type="hidden" name="codigo_paciente" class="campoCodigoOculto">
+    <input type="hidden" name="nome_paciente" class="campoNomeOculto">
+    <p style="display:none"><input name="bot-field"></p>
+    <input type="hidden" name="data_envio">
+    <input type="hidden" name="item_1">
+    <input type="hidden" name="item_2">
+    <input type="hidden" name="item_3">
+    <input type="hidden" name="item_4">
+    <input type="hidden" name="item_5">
+    <input type="hidden" name="item_6">
+    <input type="hidden" name="item_7">
+    <input type="hidden" name="item_8">
+    <input type="hidden" name="item_9">
+    <input type="hidden" name="item_10">
+    <input type="hidden" name="item_11">
+    <input type="hidden" name="item_12">
+    <input type="hidden" name="item_13">
+    <input type="hidden" name="item_14">
+    <input type="hidden" name="item_15">
+    <input type="hidden" name="item_16">
+    <input type="hidden" name="item_17">
+    <input type="hidden" name="item_18">
+    <input type="hidden" name="item_19">
+    <input type="hidden" name="item_20">
+    <input type="hidden" name="item_21">
+
+    <div class="grade-itens" id="itens"></div>
+    <div class="erro-msg" id="erroMsg">Responda todos os 21 itens antes de enviar.</div>
+    <button type="submit" class="btn">Enviar respostas</button>
+  </form>
+  <div class="rodape">
+    "Traduzido e adaptado por permissão de The Psychological Corporation, U.S.A. Direitos reservados ©1991, a Aaron T. Beck.
+    Tradução para a língua portuguesa. Direitos reservados ©1993 a Aaron T. Beck." Tradução e adaptação brasileira, 2001, Casa do Psicólogo.
+  </div>
+</div>
+</div>
+
+<div class="sucesso" id="sucesso">
+  <div class="check">✓</div><h3>Respostas enviadas</h3>
+  <p>Seu psicólogo vai receber e conversar com você na próxima consulta.</p>
+</div>
+
+<script src="/rastreios/gate.js"></script>
+<script>
+const ITENS = [
+ {cat:"Tristeza", op:["Não me sinto triste.","Eu me sinto triste.","Estou sempre triste e não consigo sair disto.","Estou tão triste ou infeliz que não consigo suportar."]},
+ {cat:"Pessimismo", op:["Não estou especialmente desanimado quanto ao futuro.","Eu me sinto desanimado quanto ao futuro.","Acho que nada tenho a esperar.","Acho o futuro sem esperança e tenho a impressão de que as coisas não podem melhorar."]},
+ {cat:"Sentimento de fracasso", op:["Não me sinto um fracasso.","Acho que fracassei mais do que uma pessoa comum.","Quando olho para trás, na minha vida, tudo o que posso ver é um monte de fracassos.","Acho que, como pessoa, sou um completo fracasso."]},
+ {cat:"Perda de prazer", op:["Tenho tanto prazer em tudo como antes.","Não sinto mais prazer nas coisas como antes.","Não encontro um prazer real em mais nada.","Estou insatisfeito ou aborrecido com tudo."]},
+ {cat:"Sentimento de culpa", op:["Não me sinto especialmente culpado.","Eu me sinto culpado grande parte do tempo.","Eu me sinto culpado na maior parte do tempo.","Eu me sinto sempre culpado."]},
+ {cat:"Sentimento de punição", op:["Não acho que esteja sendo punido.","Acho que posso ser punido.","Creio que vou ser punido.","Acho que estou sendo punido."]},
+ {cat:"Autodesapontamento", op:["Não me sinto decepcionado comigo mesmo.","Estou decepcionado comigo mesmo.","Estou enojado de mim.","Eu me odeio."]},
+ {cat:"Autoacusação", op:["Não me sinto de qualquer modo pior que os outros.","Sou crítico em relação a mim por minhas fraquezas ou erros.","Eu me culpo sempre por minhas falhas.","Eu me culpo por tudo de mal que acontece."]},
+ {cat:"Ideias suicidas", op:["Não tenho quaisquer idéias de me matar.","Tenho idéias de me matar, mas não as executaria.","Gostaria de me matar.","Eu me mataria se tivesse oportunidade."]},
+ {cat:"Choro", op:["Não choro mais que o habitual.","Choro mais agora do que costumava.","Agora, choro o tempo todo.","Costumava ser capaz de chorar, mas agora não consigo, mesmo que o queira."]},
+ {cat:"Irritabilidade", op:["Não sou mais irritado agora do que já fui.","Fico aborrecido ou irritado mais facilmente do que costumava.","Agora, eu me sinto irritado o tempo todo.","Não me irrito mais com coisas que costumavam me irritar."]},
+ {cat:"Retraimento social", op:["Não perdi o interesse pelas outras pessoas.","Estou menos interessado pelas outras pessoas do que costumava estar.","Perdi a maior parte do meu interesse pelas outras pessoas.","Perdi todo o interesse pelas outras pessoas."]},
+ {cat:"Indecisão", op:["Tomo decisões tão bem quanto antes.","Adio as tomadas de decisões mais do que costumava.","Tenho mais dificuldades de tomar decisões do que antes.","Absolutamente não consigo mais tomar decisões."]},
+ {cat:"Mudança na imagem corporal", op:["Não acho que de qualquer modo pareço pior do que antes.","Estou preocupado em estar parecendo velho ou sem atrativo.","Acho que há mudanças permanentes na minha aparência, que me fazem parecer sem atrativo.","Acredito que pareço feio."]},
+ {cat:"Dificuldade de trabalhar", op:["Posso trabalhar tão bem quanto antes.","É preciso algum esforço extra para fazer alguma coisa.","Tenho que me esforçar muito para fazer alguma coisa.","Não consigo mais fazer qualquer trabalho."]},
+ {cat:"Alteração no sono", op:["Consigo dormir tão bem como o habitual.","Não durmo tão bem como costumava.","Acordo 1 a 2 horas mais cedo do que habitualmente e acho difícil voltar a dormir.","Acordo várias horas mais cedo do que costumava e não consigo voltar a dormir."]},
+ {cat:"Fadiga", op:["Não fico mais cansado do que o habitual.","Fico cansado mais facilmente do que costumava.","Fico cansado em fazer qualquer coisa.","Estou cansado demais para fazer qualquer coisa."]},
+ {cat:"Perda de apetite", op:["O meu apetite não está pior do que o habitual.","Meu apetite não é tão bom como costumava ser.","Meu apetite é muito pior agora.","Absolutamente não tenho mais apetite."]},
+ {cat:"Perda de peso", op:["Não tenho perdido muito peso se é que perdi algum recentemente.","Perdi mais do que 2 quilos e meio.","Perdi mais do que 5 quilos.","Perdi mais do que 7 quilos."]},
+ {cat:"Preocupação somática", op:["Não estou mais preocupado com a minha saúde do que o habitual.","Estou preocupado com problemas físicos, tais como dores, indisposição do estômago ou constipação.","Estou muito preocupado com problemas físicos e é difícil pensar em outra coisa.","Estou tão preocupado com meus problemas físicos que não consigo pensar em qualquer outra coisa."]},
+ {cat:"Perda de libido", op:["Não notei qualquer mudança recente no meu interesse por sexo.","Estou menos interessado por sexo do que costumava.","Estou muito menos interessado por sexo agora.","Perdi completamente o interesse por sexo."]}
+];
+const N=21; const R=new Array(N).fill(null);
+const cont=document.getElementById('itens');
+ITENS.forEach((it,i)=>{
+  const n=i+1, div=document.createElement('div'); div.className='item';
+  let ops=it.op.map((t,v)=>`<div class="op" data-n="${n}" data-v="${v}" onclick="selecionar(${n},${v})"><span class="circulo">${v}</span><span>${t}</span></div>`).join('');
+  div.innerHTML=`<div class="cabeca"><span class="numgrupo">${n}</span><span class="afirmacoes">${ops}</span></div>`;
+  cont.appendChild(div);
+});
+function selecionar(n,v){ R[n-1]=v; document.querySelectorAll(`.op[data-n="${n}"]`).forEach(el=>el.classList.toggle('sel', parseInt(el.dataset.v)===v)); }
+document.getElementById('formBdi').addEventListener('submit', async function(e){
+  e.preventDefault();
+  if(R.some(v=>v===null)){ document.getElementById('erroMsg').style.display='block'; return; }
+  document.getElementById('erroMsg').style.display='none';
+  const dados={}; new FormData(this).forEach((v,k)=>{dados[k]=v;});
+  R.forEach((v,i)=>{ dados['item_'+(i+1)]=v; });
+  dados['data_envio']=new Date().toISOString();
+  const codificar=(d)=>Object.keys(d).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(d[k])).join('&');
+  try{ await fetch('/rastreios/bdi/', {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:codificar(dados)}); }catch(err){}
+  document.getElementById('conteudo').style.display='none';
+  document.getElementById('sucesso').classList.add('visivel');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+</body>
+</html>

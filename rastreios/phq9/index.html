@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHQ-9 — Questionário sobre a Saúde do Paciente | Max Régis de Oliveira | CRP 16/8817</title>
+<style>
+  :root{--accent:#2C5F8A;--crit:#C0392B;}
+  *{box-sizing:border-box;}
+  body{background:#e9ecef;color:#000;margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.35;padding:20px 12px 60px;}
+  .nav{max-width:900px;margin:0 auto 14px;font-family:'Segoe UI',sans-serif;}
+  .nav a{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;}
+  .aviso-critico{max-width:900px;margin:0 auto 14px;background:#FDEEEE;border:1px solid #E8B4B0;color:#8a2e24;font-size:12.5px;padding:12px 16px;border-radius:8px;font-family:'Segoe UI',sans-serif;}
+  .gate{max-width:900px;margin:0 auto 20px;background:#fff;border:1px solid #ccc;border-radius:10px;padding:24px 26px;font-family:'Segoe UI',sans-serif;}
+  .gate h2{font-size:15px;color:var(--accent);margin-bottom:8px;} .gate p{color:#666;font-size:13px;margin-bottom:12px;}
+  .gate input{width:100%;padding:10px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;text-transform:uppercase;margin-bottom:8px;}
+  .gate button{width:100%;padding:10px;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:var(--accent);color:#fff;}
+  #conteudo{display:none;} #conteudo.visivel{display:block;}
+  .folha{max-width:900px;margin:0 auto 18px;background:#fff;border:1px solid #ccc;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:24px 28px;}
+  .idInfo{font-family:'Segoe UI',sans-serif;font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:10px;}
+  .instrucao{font-size:12px;font-weight:700;margin-bottom:2px;}
+  table.escala{width:100%;border-collapse:collapse;margin-top:6px;}
+  table.escala th{background:#d6e4f0;font-size:10.5px;font-weight:700;padding:8px 4px;border:1px solid #999;text-align:center;line-height:1.2;}
+  table.escala td{border:1px solid #999;padding:7px 8px;font-size:12px;}
+  table.escala td.op{width:64px;text-align:center;cursor:pointer;background:#eef4fa;}
+  table.escala td.op.sel{background:var(--accent);color:#fff;font-weight:700;}
+  table.escala td.op .circulo{display:inline-block;width:20px;height:20px;border-radius:50%;border:1.4px solid #000;line-height:18px;}
+  table.escala td.op.sel .circulo{background:#fff;color:var(--accent);border-color:#fff;}
+  .rodape{font-size:9.5px;color:#555;margin-top:16px;border-top:1px solid #ccc;padding-top:8px;font-family:'Segoe UI',sans-serif;}
+  .btn{display:block;width:100%;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Segoe UI',sans-serif;margin-top:16px;}
+  .erro-msg{color:var(--crit);font-size:12.5px;margin-top:8px;display:none;font-family:'Segoe UI',sans-serif;}
+  .sucesso{display:none;max-width:900px;margin:0 auto;text-align:center;padding:30px 20px;background:#fff;border:1px solid #ccc;border-radius:10px;font-family:'Segoe UI',sans-serif;}
+  .sucesso.visivel{display:block;} .sucesso .check{font-size:2.4rem;margin-bottom:10px;} .sucesso h3{color:#2E7D54;margin-bottom:6px;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="/rastreios/">← Voltar aos rastreios</a></div>
+<div class="aviso-critico">⚠️ Se você está em sofrimento intenso ou pensando em se machucar, não espere terminar este questionário: procure ajuda agora — <b>CVV: 188</b> (24h) ou <b>192/SAMU</b>.</div>
+
+<div class="gate" id="gate">
+  <h2>Acesso restrito</h2>
+  <p>Este questionário contém uma pergunta sobre risco pessoal (item 9). O resultado não aparece
+     nesta tela — suas respostas vão direto para o seu psicólogo. Digite o código que ele te passou.</p>
+  <input type="text" id="codigoAcesso" placeholder="CÓDIGO DE ACESSO">
+  <button onclick="RASTREIO_GATE.verificar()">Entrar</button>
+  <div class="erro-msg" id="erroCodigo">Código inválido.</div>
+</div>
+
+<div id="conteudo">
+<div class="folha">
+  <div class="idInfo" id="confirmacaoNome"></div>
+  <div class="instrucao">Durante as últimas 2 semanas, com que frequência você foi incomodado/a pelos problemas abaixo?</div>
+  <form id="formPhq9" name="rastreio-phq9" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="rastreio-phq9">
+    <input type="hidden" name="codigo_paciente" class="campoCodigoOculto">
+    <input type="hidden" name="nome_paciente" class="campoNomeOculto">
+    <p style="display:none"><input name="bot-field"></p>
+    <input type="hidden" name="data_envio">
+    <input type="hidden" name="item_1">
+    <input type="hidden" name="item_2">
+    <input type="hidden" name="item_3">
+    <input type="hidden" name="item_4">
+    <input type="hidden" name="item_5">
+    <input type="hidden" name="item_6">
+    <input type="hidden" name="item_7">
+    <input type="hidden" name="item_8">
+    <input type="hidden" name="item_9">
+
+    <table class="escala">
+      <thead><tr><th style="text-align:left">Problema</th><th>Nenhum<br>dia</th><th>Menos de<br>uma semana</th><th>Uma semana<br>ou mais</th><th>Quase todos<br>os dias</th></tr></thead>
+      <tbody id="corpo"></tbody>
+    </table>
+    <div class="erro-msg" id="erroMsg">Responda todos os 9 itens antes de enviar.</div>
+    <button type="submit" class="btn">Enviar respostas</button>
+  </form>
+  <div class="rodape">Instrumento de domínio público (Kroenke, Spitzer &amp; Williams, 2001; versão brasileira validada por Santos et al. 2013).</div>
+</div>
+</div>
+
+<div class="sucesso" id="sucesso">
+  <div class="check">✓</div><h3>Respostas enviadas</h3>
+  <p>Seu psicólogo vai receber e conversar com você na próxima consulta.</p>
+</div>
+
+<script src="/rastreios/gate.js"></script>
+<script>
+const ITENS = [
+ "Pouco interesse ou pouco prazer em fazer as coisas",
+ "Se sentir \"para baixo\", deprimido/a ou sem perspectiva",
+ "Dificuldade para pegar no sono ou permanecer dormindo, ou dormir mais do que de costume",
+ "Se sentir cansado/a ou com pouca energia",
+ "Falta de apetite ou comendo demais",
+ "Se sentir mal consigo mesmo/a — ou achar que você é um fracasso ou que decepcionou sua família ou a você mesmo/a",
+ "Dificuldade para se concentrar nas coisas, como ler o jornal ou ver televisão",
+ "Se mover ou falar tão devagar que outras pessoas poderiam ter notado — ou ao contrário, estar tão agitado/a ou inquieto/a que você estava se movendo mais do que de costume",
+ "Pensar em se machucar de alguma forma ou que seria melhor estar morto/a"
+];
+const N=9; const R=new Array(N).fill(null);
+const corpo=document.getElementById('corpo');
+ITENS.forEach((tx,i)=>{
+  const n=i+1, tr=document.createElement('tr'); let tds=`<td>${n}. ${tx}</td>`;
+  for(let v=0;v<=3;v++) tds+=`<td class="op" data-n="${n}" data-v="${v}" onclick="selecionar(${n},${v})"><span class="circulo"></span></td>`;
+  tr.innerHTML=tds; corpo.appendChild(tr);
+});
+function selecionar(n,v){ R[n-1]=v; document.querySelectorAll(`td.op[data-n="${n}"]`).forEach(el=>el.classList.toggle('sel', parseInt(el.dataset.v)===v)); }
+document.getElementById('formPhq9').addEventListener('submit', async function(e){
+  e.preventDefault();
+  if(R.some(v=>v===null)){ document.getElementById('erroMsg').style.display='block'; return; }
+  document.getElementById('erroMsg').style.display='none';
+  const dados={}; new FormData(this).forEach((v,k)=>{dados[k]=v;});
+  R.forEach((v,i)=>{ dados['item_'+(i+1)]=v; });
+  dados['data_envio']=new Date().toISOString();
+  const codificar=(d)=>Object.keys(d).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(d[k])).join('&');
+  try{ await fetch('/rastreios/phq9/', {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:codificar(dados)}); }catch(err){}
+  document.getElementById('conteudo').style.display='none';
+  document.getElementById('sucesso').classList.add('visivel');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+</body>
+</html>
