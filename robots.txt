@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /cadastro/
+Disallow: /anamnese/
+Disallow: /rastreios/
+
+Sitemap: https://maxregis.com.br/sitemap.xml
