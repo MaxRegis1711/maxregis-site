@@ -1,3 +1,19 @@
 [build]
   functions = "netlify/functions"
   publish = "."
+
+# Páginas de uso clínico/paciente: não indexar
+[[headers]]
+  for = "/cadastro/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/anamnese/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/rastreios/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
