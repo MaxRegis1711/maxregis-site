@@ -1,6 +1,7 @@
 User-agent: *
 Disallow: /cadastro/
 Disallow: /anamnese/
+Disallow: /anamnese-v2/
 Disallow: /rastreios/
 
 Sitemap: https://maxregis.com.br/sitemap.xml

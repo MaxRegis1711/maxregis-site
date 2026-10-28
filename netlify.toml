@@ -17,3 +17,8 @@
   for = "/rastreios/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/anamnese-v2/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
