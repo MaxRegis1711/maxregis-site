@@ -39,6 +39,12 @@
   .f-min{color:var(--ok);background:rgba(46,125,84,.1);} .f-lev{color:var(--warn);background:rgba(184,134,11,.1);}
   .f-mod{color:var(--alert);background:rgba(192,98,46,.1);} .f-gra{color:var(--crit);background:rgba(192,57,43,.1);}
   .aviso-envio{font-size:12px;color:#888;margin-top:12px;}
+  .gate{max-width:900px;margin:0 auto 20px;background:#fff;border:1px solid #ccc;border-radius:10px;padding:24px 26px;font-family:'Segoe UI',sans-serif;}
+  .gate h2{font-size:15px;color:var(--accent);margin-bottom:8px;}
+  .gate p{color:#666;font-size:13px;margin-bottom:12px;}
+  .gate input{width:100%;padding:10px 12px;border:1.5px solid #ccc;border-radius:7px;font-size:14px;text-transform:uppercase;margin-bottom:8px;}
+  .gate button{width:100%;padding:10px;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:var(--accent);color:#fff;}
+  #conteudo{display:none;} #conteudo.visivel{display:block;}
 </style>
 <style>
   .mr-legal{max-width:900px;margin:32px auto 0;padding:20px 16px 24px;text-align:center;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;line-height:1.7;color:#6B7F92;border-top:1px solid #D0DCE8;}
@@ -55,8 +61,17 @@
 
 <div class="nav"><a href="/rastreios/">← Voltar aos rastreios</a></div>
 
+<div class="gate" id="gate">
+  <h2>Acesso restrito — Instrumento Clínico</h2>
+  <p>Este instrumento é de uso exclusivo em acompanhamento psicológico (CEPP Art. 18). Suas respostas vão diretamente para o seu psicólogo. Digite o código de acesso informado por ele.</p>
+  <input type="text" id="codigoAcesso" placeholder="CÓDIGO DE ACESSO">
+  <button onclick="RASTREIO_GATE.verificar()">Entrar</button>
+  <div class="erro-msg" id="erroCodigo">Código inválido.</div>
+</div>
+
+<div id="conteudo">
 <div class="folha">
-  <div class="cabecalho"><h1>BAI</h1></div>
+  <div class="cabecalho"><h1>BAI</h1><div id="confirmacaoNome" style="font-family:'Segoe UI',sans-serif;font-size:12.5px;color:var(--accent);font-weight:600"></div></div>
   <div class="campos">
     <div class="full"><label>Nome</label><input id="campoNome" required></div>
     <div><label>Idade</label><input id="campoIdade"></div>
@@ -112,6 +127,7 @@
     Tradução para a língua portuguesa. Direitos reservados ©1993 a Aaron T. Beck. Todos os direitos reservados."<br>
     Tradução e adaptação brasileira, 2001, Casa do Psicólogo Livraria e Editora Ltda.
   </div>
+</div>
 </div>
 
 <div class="resultado" id="painelResultado">

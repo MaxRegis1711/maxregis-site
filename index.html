@@ -45,6 +45,7 @@
     }
     nav.scrolled { box-shadow: 0 4px 24px rgba(28,43,34,.1); }
     .nav-logo { display:flex; align-items:center; gap:12px; }
+    .nav-logo-img { width:40px; height:40px; border-radius:10px; object-fit:cover; border:1px solid var(--borda); background:#fff; }
     .nav-psi { font-size:2rem; color:var(--teal); font-family:'Playfair Display',serif; line-height:1; }
     .nav-brand { display:flex; flex-direction:column; }
     .nav-nome { font-family:'Playfair Display',serif; font-size:1.18rem; font-weight:700; color:var(--marinho); line-height:1.15; }
@@ -95,7 +96,7 @@
     .hero-stat h3 { font-size:2.8rem; font-weight:700; color:var(--teal); font-family:'Playfair Display',serif; line-height:1; }
     .hero-stat:nth-child(2) h3 { color: #E8B84B; }
     .hero-stat p { font-size:.8rem; color:rgba(255,255,255,.5); margin-top:6px; line-height:1.4; }
-    @media(max-width:768px){ .hero-inner{grid-template-columns:1fr;} .hero-foto{display:none;} .hero-stats{gap:20px;} }
+    @media(max-width:768px){ .hero-inner{grid-template-columns:1fr; gap:32px;} .hero-foto{display:flex; order:-1;} .hero-carousel{width:100%; max-width:340px; height:410px;} .hero-stats{gap:20px; flex-wrap:wrap;} }
 
     section { padding:110px 24px; }
 
@@ -119,12 +120,14 @@
     .section-sub { color:var(--muted); font-size:1rem; line-height:1.7; max-width:560px; }
 
     .sobre { background:var(--cinza2); }
-    .sobre-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:60px; align-items:start; margin-top:48px; }
-    .sobre-foto-box { background:linear-gradient(135deg,var(--marinho),#25436E); border-radius:20px; padding:40px; display:flex; flex-direction:column; align-items:center; text-align:center; color:#fff; }
-    .sobre-foto-box img { width:140px; margin-bottom:24px; }
-    .sobre-foto-box h3 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:6px; }
-    .sobre-foto-box p { opacity:.7; font-size:.9rem; }
-    .sobre-crp { display:inline-block; background:rgba(58,175,169,.2); color:var(--teal); padding:4px 12px; border-radius:20px; font-size:.8rem; font-weight:600; margin-top:12px; }
+    .sobre-grid { display:grid; grid-template-columns:360px 1fr; gap:56px; align-items:center; margin-top:48px; }
+    .sobre-foto-box { background:linear-gradient(145deg,var(--marinho),#162845); border-radius:22px; padding:24px; display:flex; flex-direction:column; align-items:center; text-align:center; color:#fff; box-shadow:var(--shadow-md); }
+    .sobre-foto-editorial { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center top; border-radius:14px; border:2px solid rgba(58,175,169,.38); margin-bottom:18px; }
+    .sobre-foto-box h3 { font-family:'Playfair Display',serif; font-size:1.45rem; margin-bottom:4px; }
+    .sobre-foto-box p { opacity:.78; font-size:.88rem; }
+    .sobre-crp { display:inline-block; background:rgba(58,175,169,.22); color:#6CC3B9; padding:5px 14px; border-radius:20px; font-size:.8rem; font-weight:600; margin-top:10px; border:1px solid rgba(108,195,185,.35); }
+    .sobre-credenciais { display:grid; gap:10px; margin:20px 0; padding:16px 18px; background:var(--branco); border-left:3.5px solid var(--teal); border-radius:0 12px 12px 0; box-shadow:var(--shadow-sm); }
+    .sobre-credenciais div { font-size:.9rem; color:var(--marinho); font-weight:500; }
     .sobre-texto p { color:var(--texto); line-height:1.8; margin-bottom:16px; font-size:.97rem; }
     .sobre-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
     .tag { background:var(--branco); border:1.5px solid var(--borda); padding:6px 14px; border-radius:20px; font-size:.82rem; font-weight:500; color:var(--marinho); }
@@ -264,12 +267,118 @@
     .faq-resposta { display:none; padding-bottom:18px; color:var(--muted); font-size:.88rem; line-height:1.8; }
     .faq-item.open .faq-resposta { display:block; }
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LocalBusiness",
+        "MedicalBusiness"
+      ],
+      "@id": "https://maxregis.com.br/#consultorio",
+      "name": "Max Régis de Oliveira — Psicólogo Clínico (CRP 16/8817)",
+      "url": "https://maxregis.com.br",
+      "telephone": "+55-27-99246-3839",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Ovídio Vitali, 68, Fazenda Vitali (Clínica Cardioped)",
+        "addressLocality": "Colatina",
+        "addressRegion": "ES",
+        "postalCode": "29700-280",
+        "addressCountry": "BR"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Colatina"
+        },
+        {
+          "@type": "Country",
+          "name": "Brasil"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Tuesday"
+          ],
+          "opens": "18:00",
+          "closes": "20:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/max.regis/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://maxregis.com.br/#maxregis",
+      "name": "Max Régis de Oliveira",
+      "jobTitle": "Psicólogo Clínico",
+      "identifier": "CRP 16/8817",
+      "url": "https://maxregis.com.br/sobre/",
+      "worksFor": {
+        "@id": "https://maxregis.com.br/#consultorio"
+      },
+      "knowsAbout": [
+        "Terapia Cognitivo-Comportamental (TCC)",
+        "Ansiedade e Estresse",
+        "Neuropsicologia",
+        "Biofeedback e Neuromodulação Não Invasiva"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://maxregis.com.br/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Como é a primeira sessão? O que acontece?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A primeira sessão é uma conversa acolhedora e estruturada. Você conta o que está vivendo no seu ritmo, e o psicólogo explica como funciona o processo terapêutico, frequência e sigilo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A terapia online funciona como a presencial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Estudos publicados em periódicos científicos indicam que a TCC online pode apresentar resultados comparáveis ao formato presencial para diversos quadros. A sessão acontece por videochamada com sigilo profissional (Res. CFP 09/2024)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Você atende convênio ou emite recibo para reembolso?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O atendimento é particular (e presencialmente na Clínica Cardioped em Colatina-ES). É fornecido recibo regulamentado para solicitação de reembolso junto ao seu plano de saúde."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
 <nav>
   <a href="#inicio" class="nav-logo">
-    <span class="nav-psi">Ψ</span>
+    <img src="assets/logo.png" alt="Logo Max Régis Psicólogo" class="nav-logo-img">
     <div class="nav-brand">
       <span class="nav-nome">Max Régis</span>
       <span class="nav-sub">Psicólogo · CRP 16/8817</span>
@@ -278,11 +387,12 @@
   <div class="nav-links">
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
+    <a href="/psicologo-colatina/">Colatina</a>
+    <a href="/terapia-online/">Online</a>
     <a href="/neuromodulacao/">Neuromodulação</a>
-    <a href="#conteudo">Conteúdo</a>
     <a href="blog/">Blog</a>
     <a href="#contato">Contato</a>
-    <a href="https://wa.me/5527992463839" class="nav-cta" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://wa.me/5527992463839?text=Ol%C3%A1%2C%20Max%21%20Vim%20pelo%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20atendimento." class="nav-cta" target="_blank" rel="noopener">Agendar no WhatsApp</a>
   </div>
   <button class="nav-menu-btn" aria-label="Menu">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B2D4F" stroke-width="2">
@@ -362,23 +472,23 @@
 <section class="ciencia" id="ciencia">
   <div class="container">
     <div class="section-label">Base científica</div>
-    <h2 class="section-title">O que a ciência mostra sobre TCC</h2>
-    <p class="section-sub">A Terapia Cognitivo-Comportamental é a intervenção psicológica mais estudada do mundo para transtornos de ansiedade.</p>
+    <h2 class="section-title">O que a literatura científica mostra sobre a TCC</h2>
+    <p class="section-sub">A Terapia Cognitivo-Comportamental é uma das abordagens psicológicas mais investigadas na literatura internacional para transtornos de ansiedade e estresse.</p>
     <div class="ciencia-grid">
       <div class="ciencia-item">
         <div class="ciencia-num">+1.000</div>
-        <div class="ciencia-desc">estudos clínicos controlados validam a eficácia da TCC para ansiedade</div>
-        <div class="ciencia-fonte">APA Division 12 · Treatments That Work</div>
+        <div class="ciencia-desc">ensaios clínicos publicados investigam protocolos de TCC em diferentes quadros de ansiedade</div>
+        <div class="ciencia-fonte">APA Division 12 · Society of Clinical Psychology</div>
       </div>
       <div class="ciencia-item">
         <div class="ciencia-num">1ª linha</div>
-        <div class="ciencia-desc">de tratamento para ansiedade, burnout e estresse pela OMS e APA</div>
-        <div class="ciencia-fonte">WHO Mental Health Action Plan</div>
+        <div class="ciencia-desc">de recomendação em diretrizes clínicas internacionais para manejo psicoterapêutico da ansiedade</div>
+        <div class="ciencia-fonte">WHO · NICE Clinical Guidelines</div>
       </div>
       <div class="ciencia-item">
         <div class="ciencia-num">Online</div>
-        <div class="ciencia-desc">com mesma eficácia comprovada do presencial para a maioria dos quadros</div>
-        <div class="ciencia-fonte">Lancet Psychiatry · 2023</div>
+        <div class="ciencia-desc">estudos indicam que a psicoterapia por videochamada pode apresentar resultados comparáveis ao formato presencial</div>
+        <div class="ciencia-fonte">Lancet Psychiatry · Res. CFP 09/2024</div>
       </div>
     </div>
   </div>
@@ -388,26 +498,31 @@
   <div class="container">
     <div class="section-label">Quem sou</div>
     <h2 class="section-title">Max Régis de Oliveira</h2>
-    <p class="section-sub">Psicólogo • CRP 16/8817 • Pós-graduado em TCC.</p>
+    <p class="section-sub">Psicólogo Clínico • CRP 16/8817 • Colatina-ES e Online.</p>
     <div class="sobre-grid">
       <div class="sobre-foto-box">
-        <img src="assets/foto-verde-sentado2.jpg" alt="Max Régis Psicólogo"
-             style="width:180px;height:180px;object-fit:cover;object-position:top;border-radius:50%;border:3px solid rgba(58,175,169,.4);margin-bottom:16px;">
-        <h3>Max Régis</h3>
+        <img src="assets/foto-blazer-cadeira.jpg" alt="Max Régis de Oliveira — Psicólogo CRP 16/8817" class="sobre-foto-editorial">
+        <h3>Max Régis de Oliveira</h3>
         <p>Psicólogo Clínico</p>
-        <span class="sobre-crp">CRP 16/8817</span>
+        <span class="sobre-crp">CRP 16/8817 · ES</span>
       </div>
       <div class="sobre-texto">
-        <p>Atendo pessoas que convivem com ansiedade, estresse e esgotamento, com a abordagem Cognitivo-Comportamental (TCC) — uma das terapias com maior suporte científico no mundo para esses quadros.</p>
-        <p>Meu trabalho une protocolo técnico e escuta real. Aqui você não vai ouvir frases genéricas: vamos entender o que está acontecendo com você e combinar juntos os objetivos do acompanhamento.</p>
-        <p>Atendimento presencial somente em Colatina-ES e online para todo o Brasil.</p>
-        <p><a href="/sobre/" style="color:var(--teal);font-weight:600;">Mais sobre mim e minha formação →</a></p>
+        <p>Atendo adultos que convivem com ansiedade, estresse e esgotamento, utilizando a Terapia Cognitivo-Comportamental (TCC) integrada aos conhecimentos das Neurociências Cognitivas.</p>
+        <div class="sobre-credenciais">
+          <div>• Psicólogo com inscrição ativa no CRP 16/8817 (Espírito Santo)</div>
+          <div>• Pós-graduado em Terapia Cognitivo-Comportamental (TCC)</div>
+          <div>• Pós-graduado em Neurociências Cognitivas e Processos Psicológicos</div>
+          <div>• Atuação em Avaliação Neuropsicológica, Biofeedback e Neuromodulação Não Invasiva</div>
+        </div>
+        <p>Meu trabalho une rigor técnico e escuta acolhedora. Nas sessões, examinamos juntos a relação entre pensamentos, reações do corpo e comportamentos cotidianos, definindo objetivos claros para o seu acompanhamento.</p>
+        <p>Atendimento presencial em <strong>Colatina-ES (Clínica Cardioped)</strong> e <strong>online por videochamada</strong> para todo o Brasil.</p>
+        <p><a href="/sobre/" style="color:var(--teal);font-weight:600;">Conhecer minha trajetória e formação completa →</a></p>
         <div class="sobre-tags">
-          <span class="tag">Ansiedade</span>
-          <span class="tag">Burnout</span>
-          <span class="tag">Psicoterapia TCC</span>
-          <span class="tag">Neuropsicologia</span>
-          <span class="tag">Atendimento Online</span>
+          <span class="tag">Terapia Cognitivo-Comportamental</span>
+          <span class="tag">Ansiedade e Estresse</span>
+          <span class="tag">Neurociências Cognitivas</span>
+          <span class="tag">Avaliação Neuropsicológica</span>
+          <span class="tag">Colatina-ES &amp; Online</span>
         </div>
       </div>
     </div>
@@ -416,28 +531,38 @@
 
 <section id="servicos">
   <div class="container">
-    <div class="section-label">Atendimentos</div>
-    <h2 class="section-title">Como posso te ajudar</h2>
-    <p class="section-sub">Cada atendimento é construído a partir do que você está vivendo — sem fórmulas prontas, com ciência e presença real.</p>
+    <div class="section-label">Áreas de Atuação</div>
+    <h2 class="section-title">Modalidades de Atendimento</h2>
+    <p class="section-sub">Cada acompanhamento é planejado individualmente, com fundamentação científica, ética e sigilo profissional.</p>
     <div class="servicos-grid">
       <div class="card-servico fade-in delay-1">
-        <div class="card-icone">🧠</div>
-        <h3>Psicoterapia (TCC)</h3>
-        <p>Atendo pessoas que convivem com ansiedade generalizada, síndrome do pânico, fobia social, burnout e estresse crônico. A TCC é uma abordagem estruturada, com objetivos combinados em conjunto.</p>
+        <div class="card-icone" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-6 6c0 2.2 1.2 4.1 3 5.2V17a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.8c1.8-1.1 3-3 3-5.2a6 6 0 0 0-6-6z"/><path d="M9 21h6"/><path d="M10 17h4"/></svg>
+        </div>
+        <h3>Psicoterapia Individual (TCC)</h3>
+        <p>Acompanhamento psicológico voltado ao manejo da ansiedade, preocupação excessiva, esgotamento profissional, pânico e regulação emocional. A TCC é uma abordagem estruturada, com objetivos combinados em conjunto.</p>
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="/psicologo-colatina/" style="color:var(--teal);font-weight:600;font-size:.86rem;">Presencial em Colatina →</a>
+          <a href="/terapia-online/" style="color:var(--teal);font-weight:600;font-size:.86rem;">Atendimento Online →</a>
+        </div>
         <span class="card-tag">Presencial em Colatina · Online para todo o Brasil</span>
       </div>
       <div class="card-servico fade-in delay-2">
-        <div class="card-icone">📋</div>
+        <div class="card-icone" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l3 3v15H6V3h3z"/><path d="M9 11h6"/><path d="M9 15h6"/><path d="M9 7h3"/></svg>
+        </div>
         <h3>Avaliação Neuropsicológica</h3>
-        <p>Avaliação de funções como atenção, memória, funções executivas e linguagem, conforme indicação.</p>
+        <p>Investigação clínica detalhada de funções cognitivas como atenção, memória, funções executivas e linguagem, por meio de entrevistas e instrumentos padronizados, conforme indicação individual.</p>
         <span class="card-tag">Atenção · Memória · Funções Executivas · Linguagem</span>
       </div>
       <div class="card-servico fade-in delay-3">
-        <div class="card-icone">⚡</div>
-        <h3>Neuromodulação</h3>
-        <p>Serviço independente da psicoterapia, com página própria. Veja a descrição dos recursos e como funciona a avaliação de indicação.</p>
-        <a href="/neuromodulacao/" style="display:inline-block;margin-top:10px;color:var(--teal);font-weight:600;font-size:.88rem;">Saiba mais →</a>
-        <span class="card-tag">tDCS · taVNS · Neurofeedback · Biofeedback</span>
+        <div class="card-icone" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg>
+        </div>
+        <h3>Biofeedback &amp; Neuromodulação</h3>
+        <p>Serviço independente da psicoterapia, com página informativa própria. Conheça os recursos de monitoramento fisiológico (VFC) e estimulação não invasiva e como funciona a avaliação de indicação.</p>
+        <a href="/neuromodulacao/" style="display:inline-block;margin-top:10px;color:var(--teal);font-weight:600;font-size:.88rem;">Conhecer os recursos →</a>
+        <span class="card-tag">tDCS · taVNS · Neurofeedback · Biofeedback VFC</span>
       </div>
     </div>
   </div>
@@ -551,77 +676,64 @@
     <p class="section-sub">Um pouco do consultório, do dia a dia e de conteúdo educativo sobre saúde mental.</p>
 
     <div class="conteudo-tabs">
-      <button class="conteudo-tab active" data-tab="videos">🎬 Instagram</button>
-      <button class="conteudo-tab" data-tab="youtube">▶️ YouTube</button>
-      <button class="conteudo-tab" data-tab="imprensa">📰 Imprensa</button>
-      <button class="conteudo-tab" data-tab="fotos">📷 Fotos</button>
+      <button class="conteudo-tab active" data-tab="fotos">Ensaio &amp; Consultório</button>
+      <button class="conteudo-tab" data-tab="imprensa">Imprensa &amp; Artigos</button>
+      <button class="conteudo-tab" data-tab="videos">Reels &amp; Vídeos</button>
     </div>
 
-    <div class="conteudo-painel active" id="painel-videos">
-      <div class="video-grid" id="video-grid">
-        <div class="video-card">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DHqlmfpOhji/" data-instgrm-version="14" style="width:100%;margin:0;"></blockquote>
-        </div>
-        <div class="video-card">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIBs8iPu7vz/" data-instgrm-version="14" style="width:100%;margin:0;"></blockquote>
-        </div>
-        <div class="video-card">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CzRMIE9uEWq/" data-instgrm-version="14" style="width:100%;margin:0;"></blockquote>
-        </div>
-        <div class="video-card">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CuRnLr-gEt2/" data-instgrm-version="14" style="width:100%;margin:0;"></blockquote>
-        </div>
-        <div class="video-card">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Cve7LvxAMcQ/" data-instgrm-version="14" style="width:100%;margin:0;"></blockquote>
-        </div>
-      </div>
-      <div class="conteudo-vazio" id="videos-vazio">
-        Em breve, reels e vídeos por aqui. Enquanto isso, confira no Instagram.
-      </div>
-    </div>
-
-    <div class="conteudo-painel" id="painel-youtube">
-      <div class="video-grid">
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/tUhK7o64dpU" style="aspect-ratio:16/9;" title="Vídeo YouTube" allowfullscreen></iframe>
-        </div>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/PaYZ04KNQv4" style="aspect-ratio:9/16;" title="YouTube Shorts" allowfullscreen></iframe>
-        </div>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/vN6HlI6QePk?start=426" style="aspect-ratio:16/9;" title="Vídeo YouTube" allowfullscreen></iframe>
-        </div>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/D4uIZPfELlk" style="aspect-ratio:16/9;" title="Vídeo YouTube" allowfullscreen></iframe>
-        </div>
+    <div class="conteudo-painel active" id="painel-fotos">
+      <div class="galeria-grid">
+        <div class="galeria-item"><img src="assets/foto-blazer-cadeira.jpg" alt="Max Régis de Oliveira — Psicólogo em Colatina" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-verde-sentado2.jpg" alt="Max Régis de Oliveira — Psicólogo CRP 16/8817" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-blazer-pe.jpg" alt="Max Régis de Oliveira — Psicoterapia TCC" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-consultorio.jpg" alt="Consultório Presencial em Colatina-ES" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-12a.jpg" alt="Max Régis de Oliveira" loading="lazy"></div>
+        <div class="galeria-item"><img src="assets/foto-12b.jpg" alt="Max Régis de Oliveira" loading="lazy"></div>
       </div>
     </div>
 
     <div class="conteudo-painel" id="painel-imprensa">
       <div class="imprensa-lista">
         <a href="https://www.esfala.com.br/2025/07/18/psicologo-de-colatina-max-regis-alerta-depressao-afeta-homens-mulheres-e-ate-criancas-e-muitas-vezes-passa-despercebida/" target="_blank" rel="noopener" class="imprensa-item">
-          <div class="imprensa-fonte">esfala.com.br</div>
+          <div class="imprensa-fonte">Portal ES Fala · Entrevista</div>
           <div class="imprensa-titulo">Psicólogo de Colatina, Max Régis, alerta: depressão afeta homens, mulheres e até crianças e muitas vezes passa despercebida</div>
           <div class="imprensa-link">Ler matéria completa →</div>
+        </a>
+        <a href="/blog/ansiedade-3-sistemas/" class="imprensa-item">
+          <div class="imprensa-fonte">Blog · Psicoeducação em TCC</div>
+          <div class="imprensa-titulo">Os 3 sistemas da ansiedade: como pensamentos, corpo e comportamentos interagem no dia a dia</div>
+          <div class="imprensa-link">Ler artigo no blog →</div>
+        </a>
+        <a href="/blog/ansiedade-quando-procurar-ajuda/" class="imprensa-item">
+          <div class="imprensa-fonte">Blog · Saúde Mental</div>
+          <div class="imprensa-titulo">Ansiedade: sinais cotidianos e quando procurar avaliação psicológica</div>
+          <div class="imprensa-link">Ler artigo no blog →</div>
         </a>
       </div>
     </div>
 
-    <div class="conteudo-painel" id="painel-fotos">
-      <div class="galeria-grid">
-        <div class="galeria-item"><img src="assets/foto-blazer-cadeira.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
-        <div class="galeria-item"><img src="assets/foto-verde-sentado2.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
-        <div class="galeria-item"><img src="assets/foto-blazer-pe.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
-        <div class="galeria-item"><img src="assets/foto-blazer-pe2.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
-        <div class="galeria-item"><img src="assets/foto-consultorio.jpg" alt="Consultório" loading="lazy"></div>
-        <div class="galeria-item"><img src="assets/foto-escritorio-selfie.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
-        <div class="galeria-item"><img src="assets/foto-12a.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
-        <div class="galeria-item"><img src="assets/foto-12b.jpg" alt="Max Régis Psicólogo" loading="lazy"></div>
+    <div class="conteudo-painel" id="painel-videos">
+      <div class="imprensa-lista">
+        <a href="https://www.instagram.com/p/DHqlmfpOhji/" target="_blank" rel="noopener" class="imprensa-item">
+          <div class="imprensa-fonte">Instagram @max.regis · Reel Educativo</div>
+          <div class="imprensa-titulo">Ansiedade e rotina: por que o alarme interno continua ligado mesmo quando você tenta descansar</div>
+          <div class="imprensa-link">Assistir no Instagram ↗</div>
+        </a>
+        <a href="https://www.instagram.com/p/DIBs8iPu7vz/" target="_blank" rel="noopener" class="imprensa-item">
+          <div class="imprensa-fonte">Instagram @max.regis · Carrossel TCC</div>
+          <div class="imprensa-titulo">Como a Terapia Cognitivo-Comportamental trabalha pensamentos automáticos e regulação emocional</div>
+          <div class="imprensa-link">Ver publicação no Instagram ↗</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=tUhK7o64dpU" target="_blank" rel="noopener" class="imprensa-item">
+          <div class="imprensa-fonte">YouTube · Vídeo Educativo</div>
+          <div class="imprensa-titulo">Saúde mental, estresse e manejo cognitivo-comportamental</div>
+          <div class="imprensa-link">Assistir no YouTube ↗</div>
+        </a>
       </div>
     </div>
 
     <div style="text-align:center">
-      <a href="https://www.instagram.com/max.regis/" target="_blank" class="btn-instagram">📸 Ver mais no Instagram @max.regis</a>
+      <a href="https://www.instagram.com/max.regis/" target="_blank" rel="noopener" class="btn-instagram">Acompanhar conteúdos no Instagram @max.regis</a>
     </div>
   </div>
 </section>
@@ -708,81 +820,72 @@
     <p class="section-sub">Sem compromisso. Você conta o que está vivendo e a gente vê juntos como posso ajudar.</p>
     <div class="contato-grid">
       <div class="contato-info">
-        <h3>Como me encontrar</h3>
+        <h3>Canais de Atendimento</h3>
         <div class="info-item">
-          <div class="info-icon">📍</div>
+          <div class="info-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div>
-            <strong>Presencial — somente em Colatina-ES (Cardioped)</strong>
-            <span>Rua Ovídio Vitali, 68, Fazenda Vitali, Colatina-ES<br>CEP 29707-035</span>
+            <strong>Presencial em Colatina-ES — Clínica Cardioped</strong>
+            <span>Rua Ovídio Vitali, 68, Fazenda Vitali, Colatina-ES · CEP 29700-280</span>
           </div>
         </div>
         <div class="info-item">
-          <div class="info-icon">💻</div>
+          <div class="info-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
           <div>
             <strong>Online — Todo o Brasil</strong>
-            <span>Videochamada com plataforma segura e sigilosa</span>
+            <span>Videochamada em ambiente seguro e sigiloso (Res. CFP 09/2024)</span>
           </div>
         </div>
         <div class="info-item">
-          <div class="info-icon">📱</div>
+          <div class="info-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
           <div>
-            <strong>WhatsApp</strong>
-            <span><a href="https://wa.me/5527992463839" target="_blank" rel="noopener">(27) 99246-3839</a></span>
+            <strong>WhatsApp &amp; Telefone Clínica</strong>
+            <span>WhatsApp: <a href="https://wa.me/5527992463839" target="_blank" rel="noopener">(27) 99246-3839</a> · Recepção Cardioped: <a href="tel:+552737170172">(27) 3717-0172</a></span>
           </div>
         </div>
         <div class="info-item">
-          <div class="info-icon">☎️</div>
+          <div class="info-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
           <div>
-            <strong>Telefone — presencial (Cardioped)</strong>
-            <span><a href="tel:+552737170172">(27) 3717-0172</a></span>
+            <strong>Horários de Atendimento</strong>
+            <span>Segunda, Quinta e Sexta: 08h às 20h · Terça: 18h às 20h</span>
           </div>
         </div>
-        <div class="info-item">
-          <div class="info-icon">🕐</div>
-          <div>
-            <strong>Horário</strong>
-            <span>Seg, Qui e Sex: 08h–20h · Ter: 18h–20h</span>
-          </div>
-        </div>
-        <a href="https://wa.me/5527992463839?text=Olá%2C+vi+o+seu+site+e+gostaria+de+agendar+uma+consulta." class="btn-wpp">💬 Agendar pelo WhatsApp</a>
+        <a href="https://wa.me/5527992463839?text=Ol%C3%A1%2C%20Max%21%20Vim%20pelo%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20atendimento." class="btn-wpp">Agendar conversa pelo WhatsApp</a>
         <div class="mapa-wrapper">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.9743824050244!2d-40.632063!3d-19.539427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb6f07c5e8e8e8e8%3A0x0!2sRua+Ov%C3%ADdio+Vitali%2C+68+-+Colatina%2C+ES!5e0!3m2!1spt-BR!2sbr!4v1" title="Mapa — Rua Ovídio Vitali, 68, Fazenda Vitali, Colatina-ES" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
       <div class="form-contato">
-        <h3>Me conta o que você está vivendo</h3>
+        <h3>Solicitar informações de agendamento</h3>
+        <p style="font-size:.84rem;color:var(--muted);margin:-14px 0 18px;line-height:1.5">Preencha seus dados básicos de contato. Para proteger sua privacidade (LGPD), não é necessário descrever sintomas clínicos neste formulário.</p>
         <form id="form-contato" name="contato" netlify data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contato">
           <p style="display:none"><input name="bot-field"></p>
           <div class="form-row">
             <div class="form-campo">
-              <label>Nome *</label>
+              <label for="fc-nome">Nome *</label>
               <input type="text" id="fc-nome" required placeholder="Seu nome">
             </div>
             <div class="form-campo">
-              <label>WhatsApp *</label>
+              <label for="fc-wpp">WhatsApp *</label>
               <input type="tel" id="fc-wpp" required placeholder="(27) 99999-9999">
             </div>
           </div>
           <div class="form-campo">
-            <label>O que você está enfrentando?</label>
+            <label for="fc-assunto">Modalidade de interesse</label>
             <select id="fc-assunto">
-              <option value="">Selecione</option>
-              <option>Ansiedade e preocupação constante</option>
-              <option>Esgotamento / burnout profissional</option>
-              <option>Ansiedade universitária / acadêmica</option>
-              <option>Síndrome do pânico ou fobia</option>
-              <option>Dificuldades de atenção e memória</option>
-              <option>Avaliação neuropsicológica</option>
-              <option>Neuromodulação / biofeedback</option>
-              <option>Outra questão</option>
+              <option value="">Selecione a modalidade</option>
+              <option>Psicoterapia Presencial em Colatina (Clínica Cardioped)</option>
+              <option>Psicoterapia Online por Videochamada</option>
+              <option>Avaliação Neuropsicológica (Presencial em Colatina)</option>
+              <option>Biofeedback / Neuromodulação (Presencial em Colatina)</option>
+              <option>Informações gerais sobre funcionamento e horários</option>
             </select>
           </div>
           <div class="form-campo">
-            <label>Mensagem (opcional)</label>
-            <textarea id="fc-msg" placeholder="Conte um pouco mais sobre o que está vivendo..."></textarea>
+            <label for="fc-msg">Melhor período ou observação de horário (opcional)</label>
+            <textarea id="fc-msg" placeholder="Ex.: Prefiro horários no final da tarde ou manhã..."></textarea>
           </div>
-          <button type="submit" class="btn-form">Enviar pelo WhatsApp →</button>
+          <button type="submit" class="btn-form">Continuar no WhatsApp →</button>
         </form>
       </div>
     </div>
@@ -938,7 +1041,7 @@
     document.getElementById('videos-vazio').style.display = 'none';
   }
 
-  /* ── Formulário contato → WhatsApp ── */
+  /* ── Formulário contato → WhatsApp (LGPD Zero-PII clínico) ── */
   document.getElementById('form-contato').addEventListener('submit', function(e) {
     e.preventDefault();
     var nome    = document.getElementById('fc-nome').value.trim();
@@ -946,13 +1049,12 @@
     var assunto = document.getElementById('fc-assunto').value;
     var msg     = document.getElementById('fc-msg').value.trim();
     if (!nome || !wpp) { alert('Por favor, preencha nome e WhatsApp.'); return; }
-    var texto = 'Olá! Vi seu site e gostaria de agendar uma consulta.\n';
+    var texto = 'Olá, Max! Vim pelo site e gostaria de informações sobre atendimento.\n';
     texto += 'Nome: ' + nome + '\n';
-    if (assunto) texto += 'Assunto: ' + assunto + '\n';
-    if (msg)     texto += 'Mensagem: ' + msg;
+    if (assunto) texto += 'Modalidade: ' + assunto + '\n';
+    if (msg)     texto += 'Horário de preferência: ' + msg;
     window.open('https://wa.me/5527992463839?text=' + encodeURIComponent(texto), '_blank');
   });
 </script>
-<script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
