@@ -1,0 +1,6 @@
+/pei/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
+/.netlify/functions/pei-*
+  X-Robots-Tag: noindex

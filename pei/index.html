@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questionário do relatório — Núcleo da Primeira Infância</title>
+<style>
+:root{--fundo:#f6f7f9;--cartao:#fff;--texto:#1b1f24;--suave:#5b6670;--linha:#d9dee3;--cor:#1f6f5c;--cor2:#e6f2ee;--erro:#b3261e}
+@media (prefers-color-scheme:dark){:root{--fundo:#14181c;--cartao:#1d2227;--texto:#e8ecef;--suave:#9aa6b0;--linha:#333b43;--cor:#4fb89d;--cor2:#1f2f2b;--erro:#ff8a80}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:1.25rem;margin:8px 0 4px}
+h2{font-size:1.1rem;margin:0 0 10px;color:var(--cor)}
+p.sub{color:var(--suave);margin:0 0 12px;font-size:.92rem}
+section{background:var(--cartao);border:1px solid var(--linha);border-radius:12px;padding:14px;margin:12px 0}
+.q{margin:14px 0}
+.q>label.t,.q>.t{display:block;font-weight:600;margin-bottom:6px}
+.opc{display:block;padding:9px 10px;border:1px solid var(--linha);border-radius:10px;margin:5px 0;cursor:pointer}
+.opc:has(input:checked){background:var(--cor2);border-color:var(--cor)}
+.opc input{margin-right:8px;transform:scale(1.15)}
+input[type=text],input[type=date],textarea,select{width:100%;padding:10px;border:1px solid var(--linha);border-radius:10px;background:var(--cartao);color:var(--texto);font:inherit}
+textarea{min-height:84px;resize:vertical}
+.aviso{background:var(--cor2);border:1px solid var(--cor);border-radius:10px;padding:10px;font-size:.92rem}
+.erro{color:var(--erro);font-size:.9rem;margin-top:4px}
+button{font:inherit;padding:12px 16px;border-radius:10px;border:1px solid var(--cor);background:var(--cor);color:#fff;cursor:pointer;margin:4px 6px 4px 0}
+button.sec{background:transparent;color:var(--cor)}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--fundo);border:1px solid var(--linha);border-radius:10px;padding:10px;font-size:.82rem;max-height:320px;overflow:auto}
+.prog{position:sticky;top:0;background:var(--fundo);padding:6px 0;font-size:.85rem;color:var(--suave);z-index:2}
+.oculto{display:none}
+</style>
+</head>
+<body>
+<main>
+<h1>Questionário do relatório de evolução</h1>
+<p class="sub">APAE de Colatina — Núcleo da Primeira Infância. Suas respostas viram o texto do relatório de evolução da criança no PEI, no mesmo formato dos relatórios anteriores. Leva de 5 a 8 minutos. Funciona sem internet e sem cadastro.</p>
+<div class="aviso"><b>Privacidade:</b> identifique a criança <b>escolhendo-a na lista</b>. Nas respostas escritas, use só o primeiro nome da criança e não cite familiares. Marque "Não observado" quando você não tiver como afirmar: nada será inventado no relatório.</div>
+<div class="prog" id="prog">0 respostas</div>
+<form id="f" autocomplete="off"></form>
+<section id="fim">
+  <h2>Enviar</h2>
+  <p class="sub">Toque em "Enviar" e escolha o WhatsApp (ou copie o texto e cole na conversa). Mande para quem lhe passou este link.</p>
+  <div id="erros" class="erro"></div>
+  <button type="button" id="bEnviar">Enviar respostas</button>
+  <button type="button" class="sec" id="bCopiar">Copiar texto</button>
+  <button type="button" class="sec" id="bBaixar">Baixar arquivo</button>
+  <button type="button" class="sec" id="bVer">Ver o que será enviado</button>
+  <pre id="previa" class="oculto"></pre>
+</section>
+</main>
+<script>window.PEI_SITE=true;</script>
+<script>
+"use strict";
+var CRIANCAS = /*CRIANCAS*/[]/*FIM*/;
+var NAO = "Não observado";
+var PROFS = ["Fonoaudiologia (com arteterapia)", "Terapia Ocupacional", "Psicopedagogia", "Arteterapia", "Outra área"];
+var GR = ["Muito boa", "Boa", "Oscila ao longo das sessões", "Com dificuldade", NAO];
+var FREQ = ["Nunca", "Poucas vezes", "Em algumas sessões", "Com frequência", "Em quase todas as sessões", NAO];
+
+var SECOES = [
+ {id:"ident", titulo:"1. Identificação", para:"*", q:[
+  {id:"pront", t:"Criança", tipo:"crianca", obrig:1},
+  {id:"prof_nome", t:"Seu nome completo", tipo:"linha", obrig:1},
+  {id:"prof_area", t:"Sua área", tipo:"um", op:PROFS, obrig:1},
+  {id:"prof_registro", t:"Registro profissional (ex.: CRFa, CREFITO, CRP)", tipo:"linha", ph:"deixe em branco se não tiver registro"},
+  {id:"sem_registro", t:"Não tenho registro profissional", tipo:"multi", op:["Marque se for o caso"]},
+  {id:"data_relato", t:"Data do relatório", tipo:"data"},
+  {id:"tempo", t:"Há quanto tempo acompanha a criança no grupo?", tipo:"um", op:["Menos de 1 mês","1 a 3 meses","3 a 6 meses","Mais de 6 meses"]},
+  {id:"presenca", t:"Presença da criança nas sessões", tipo:"um", op:["Muito frequente","Frequente","Irregular","Poucas sessões para avaliar"]}
+ ]},
+ {id:"fono", titulo:"2. Linguagem e comunicação", para:["Fonoaudiologia (com arteterapia)","Arteterapia","Outra área"], q:[
+  {id:"fn_faixa", t:"Faixa de linguagem em que o desempenho se mostrou (avaliação de linguagem)", tipo:"um", op:["Até 1 ano","1 a 2 anos","2 a 3 anos","3 a 4 anos","4 a 5 anos","5 a 6 anos",NAO]},
+  {id:"fn_acertos", t:"Quantos acertos nos itens dessa faixa (se tiver o número)?", tipo:"linha", ph:"ex.: 12"},
+  {id:"fn_recep", t:"Compreensão (linguagem receptiva)", tipo:"um", op:["Atende a comandos simples com apoio de gestos","Atende a comandos simples sem gestos","Entende ordens com duas etapas","Entende instruções complexas","Compreensão ainda muito limitada",NAO]},
+  {id:"fn_expr", t:"Expressão (linguagem expressiva)", tipo:"um", op:["Sons e vocalizações","Palavras isoladas","Frases de 2 a 3 palavras","Frases completas","Discurso organizado, com narrativa",NAO]},
+  {id:"fn_inteli", t:"A fala é compreendida por pessoas que não convivem com a criança?", tipo:"um", op:["Sempre","Na maioria das vezes","Poucas vezes","Quase nunca",NAO]},
+  {id:"fn_rep", t:"Repetições, ecolalia ou travas na fala", tipo:"um", op:FREQ},
+  {id:"fn_vocab", t:"Vocabulário e nomeação", tipo:"multi", op:["Nomeia objetos do cotidiano","Nomeia imagens e animais","Nomeia cores","Usa verbos","Amplia vocabulário nas sessões","Vocabulário ainda restrito"]},
+  {id:"fn_gestos", t:"Comunicação não verbal", tipo:"multi", op:["Aponta para pedir","Aponta para mostrar","Usa gestos convencionais (tchau, não, sim)","Contato visual ao se comunicar","Atenção compartilhada presente","Atenção compartilhada ainda em construção"]},
+  {id:"fn_imit", t:"Imitação", tipo:"multi", op:["Imita gestos","Imita sons e onomatopeias","Imita ações com objetos","Imita palavras","Imitação ainda em construção"]},
+  {id:"fn_prag", t:"Uso social da linguagem", tipo:"multi", op:["Inicia interação com o outro","Responde quando chamado","Mantém a vez na conversa","Pede ajuda","Faz pedidos com palavras","Comenta o que está fazendo"]},
+  {id:"fn_ativ", t:"Atividades realizadas nas sessões", tipo:"multi", op:["Pareamento de imagens e objetos","Discriminação de cores","Massinha e moldes","Lego e encaixes","Trem e carrinhos","Animais e dinossauros","Montagem simbólica (ex.: pizza)","Pintura","Musicalização e espelho","Imitação de gestos e sons","Letras e nome com velcro ou caixa sensorial","Exploração sensorial e relaxamento"]},
+  {id:"fn_livre", t:"Quer acrescentar algo sobre linguagem e comunicação?", tipo:"texto"}
+ ]},
+ {id:"to", titulo:"2. Autonomia, sensorial e motricidade", para:["Terapia Ocupacional","Outra área"], q:[
+  {id:"to_inicio", t:"Como a criança chegou ao grupo", tipo:"multi", op:["Comportamento muito agitado","Dificuldade de autorregulação","Resistência ao compartilhar brinquedos","Choro ou desorganização na separação","Chegou bem organizada","Sem dificuldades marcantes ao chegar"]},
+  {id:"to_evol", t:"Como está hoje em relação ao início", tipo:"multi", op:["Maior organização comportamental","Melhor tolerância à interação","Compartilha com mais facilidade","Participa de brincadeiras de forma funcional e direcionada","Autorregula-se com mediação","Ainda precisa de muito apoio para se organizar"]},
+  {id:"to_sens", t:"Processamento sensorial", tipo:"multi", op:["Busca estímulos (movimento, toque, pressão)","Evita texturas ou sons","Reage a ruídos","Seletividade a texturas de alimentos","Explora materiais sensoriais com prazer","Sem alterações sensoriais evidentes"]},
+  {id:"to_fina", t:"Motricidade fina", tipo:"multi", op:["Pinça fina","Encaixa peças","Empilha blocos","Rabisca","Corta com tesoura","Desenha formas","Manipula massinha","Ainda em construção"]},
+  {id:"to_grossa", t:"Motricidade ampla, equilíbrio e planejamento motor", tipo:"multi", op:["Corre com segurança","Sobe e desce escadas","Pula com os dois pés","Chuta e arremessa bola","Boa coordenação","Desajeitado ou com quedas frequentes","Dificuldade em planejar movimentos novos"]},
+  {id:"to_desf", t:"Desfralde", tipo:"um", op:["Ainda não iniciou","Em início de processo","Avisa e usa o banheiro com ajuda","Usa o banheiro com autonomia de dia","Controle também à noite",NAO]},
+  {id:"to_alim", t:"Alimentação", tipo:"multi", op:["Come sozinho com colher","Usa garfo","Bebe em copo","Aceita variedade de alimentos","Seletividade alimentar","Precisa de ajuda para comer"]},
+  {id:"to_veste", t:"Vestuário e higiene", tipo:"multi", op:["Tira roupas sozinho","Veste peças simples","Calça sapatos com ajuda","Lava as mãos com supervisão","Escova os dentes com ajuda","Depende totalmente do adulto"]},
+  {id:"to_autonomia", t:"Aquisição de autonomia nas atividades diárias", tipo:"um", op:["Evolução significativa","Evolução gradual","Sem mudanças","Oscilante",NAO]},
+  {id:"to_livre", t:"Quer acrescentar algo sobre autonomia, sensorial ou motricidade?", tipo:"texto"}
+ ]},
+ {id:"psico", titulo:"2. Aprendizagem e cognição", para:["Psicopedagogia","Outra área"], q:[
+  {id:"ps_ritmo", t:"Ritmo de aprendizagem em relação à faixa etária", tipo:"um", op:["Bem acima do esperado","Acima do esperado","Dentro do esperado","Abaixo do esperado","Muito abaixo do esperado",NAO]},
+  {id:"ps_instr", t:"Compreensão de instruções", tipo:"um", op:["Entende instruções complexas com rapidez","Entende instruções de 2 etapas","Entende instruções simples","Precisa de modelo ou apoio visual",NAO]},
+  {id:"ps_cogn", t:"Habilidades cognitivas observadas", tipo:"multi", op:["Raciocínio lógico","Memória de curto prazo","Memória de longo prazo","Sequenciação","Classificação e categorização","Pareamento","Resolução de problemas","Criatividade e estratégias próprias","Abstração","Antecipa soluções"]},
+  {id:"ps_pre", t:"Conhecimentos pré-acadêmicos", tipo:"multi", op:["Cores","Formas","Quantidades e contagem","Números","Reconhece o próprio nome","Letras","Vogais","Escreve ou copia letras","Ainda não demonstrou"]},
+  {id:"ps_aten", t:"Atenção e concentração", tipo:"um", op:["Sustentada, inclusive em tarefas longas","Boa em tarefas de seu interesse","Dispersa em tarefas repetitivas","Curta, precisa de redirecionamento","Muito curta",NAO]},
+  {id:"ps_frust", t:"Reação ao erro e à frustração", tipo:"um", op:["Tolera bem","Tolera com mediação","Mostra ansiedade ou resistência","Desiste ou se recusa","Sensível à crítica",NAO]},
+  {id:"ps_grupo", t:"Papel no grupo", tipo:"multi", op:["Lidera de forma assertiva","Centraliza decisões","Aceita o papel dos colegas após mediação","Coopera","Compartilha","Dificuldade em esperar o tempo dos colegas","Observa e participa pouco"]},
+  {id:"ps_evol", t:"Evolução da cooperação e do compartilhamento", tipo:"um", op:["Evolução significativa","Evolução gradual","Sem mudanças","Oscilante",NAO]},
+  {id:"ps_socio", t:"Competências socioemocionais que mais precisam de apoio", tipo:"multi", op:["Escuta","Empatia","Manejo da frustração","Trabalho em equipe","Espera","Flexibilidade","Autorregulação"]},
+  {id:"ps_livre", t:"Quer acrescentar algo sobre aprendizagem e cognição?", tipo:"texto"}
+ ]},
+ {id:"comp", titulo:"3. Participação, comportamento e brincar (todas as áreas)", para:"*", q:[
+  {id:"c_part", t:"Participação nas atividades de grupo", tipo:"um", op:GR},
+  {id:"c_pares", t:"Interação com os colegas", tipo:"multi", op:["Busca os colegas","Interage quando mediado","Brinca ao lado, sem interagir","Evita contato","Imita os colegas","Mostra interesse pelas atividades compartilhadas"]},
+  {id:"c_comp", t:"Compartilha materiais e brinquedos", tipo:"um", op:["Sem dificuldade","Com mediação","Com resistência","Não compartilha",NAO]},
+  {id:"c_turnos", t:"Aguarda a vez e alterna turnos", tipo:"um", op:["Sem dificuldade","Com mediação","Com dificuldade",NAO]},
+  {id:"c_agit", t:"Agitação psicomotora", tipo:"um", op:FREQ},
+  {id:"c_impul", t:"Impulsividade", tipo:"um", op:FREQ},
+  {id:"c_limites", t:"Respeito a limites e regras", tipo:"um", op:["Respeita","Respeita com lembretes","Dificuldade em manter limites","Não aceita limites",NAO]},
+  {id:"c_redir", t:"Necessidade de redirecionamento para continuar a atividade", tipo:"um", op:FREQ},
+  {id:"c_conf", t:"Conflito com colegas (empurrar, tomar objeto, etc.)", tipo:"um", op:["Nenhum registro","Episódio pontual","Alguns episódios","Recorrente",NAO]},
+  {id:"c_conf_txt", t:"Se houve conflito, como foi manejado e como a criança reagiu depois? (sem citar nomes)", tipo:"texto"},
+  {id:"c_regul", t:"O que ajuda a criança a se organizar", tipo:"multi", op:["Mediação do adulto","Antecipação da rotina","Apoio visual","Música","Atividade sensorial","Pausa","Redirecionamento por outra atividade","Reforço positivo"]},
+  {id:"c_brincar", t:"Brincar", tipo:"multi", op:["Brinca com função (usa o brinquedo como é)","Brincar simbólico (faz de conta)","Brinca com sequência de ações","Exploração sensorial dos objetos","Alinha ou empilha objetos","Brincar repetitivo","Interesse restrito"]},
+  {id:"c_int", t:"Interesses e preferências observados", tipo:"multi", op:["Música e canto","Massinha","Lego e encaixes","Carrinhos e trens","Animais","Dinossauros","Pintura e desenho","Bola","Livros e histórias","Jogos de montar","Água e areia","Telas ou músicas de vídeos"]},
+  {id:"c_int_txt", t:"Outros interesses ou brincadeiras favoritas", tipo:"linha"}
+ ]},
+ {id:"fim", titulo:"4. Evolução e conduta (todas as áreas)", para:"*", q:[
+  {id:"e_resp", t:"Responsividade às propostas terapêuticas", tipo:"um", op:GR},
+  {id:"e_geral", t:"Evolução geral no acompanhamento", tipo:"um", op:["Evolução significativa","Evolução gradual","Estável","Oscilante","Pouco tempo para avaliar"]},
+  {id:"e_areas", t:"Em quais aspectos a evolução é mais visível", tipo:"multi", op:["Autorregulação","Interação social","Participação nas atividades","Linguagem e comunicação","Autonomia","Atenção","Brincar","Comportamento"]},
+  {id:"e_rec", t:"Recomendações de continuidade (marque as que se aplicam)", tipo:"multi", op:["Continuidade do acompanhamento na minha área","Acompanhamento interdisciplinar","Ênfase em linguagem receptiva e expressiva","Ênfase em atenção compartilhada","Ênfase em habilidades pragmáticas","Ênfase em autorregulação e controle inibitório","Ênfase em flexibilidade comportamental","Ênfase em autonomia nas atividades diárias","Ênfase em brincar funcional e simbólico","Ênfase em motricidade","Ênfase em socioemocional e trabalho em equipe"]},
+  {id:"e_fam", t:"Orientação prática que a família pode aplicar em casa (1 ou 2 exemplos simples)", tipo:"texto"},
+  {id:"e_outros", t:"Algo que outros profissionais ou a escola/creche precisam saber?", tipo:"texto"},
+  {id:"e_livre", t:"Observação final (opcional)", tipo:"texto"}
+ ]}
+];
+
+var R = {};
+var CH = "pei_questionario_v1";
+try { R = JSON.parse(localStorage.getItem(CH) || "{}"); } catch (e) { R = {}; }
+function salvar() { try { localStorage.setItem(CH, JSON.stringify(R)); } catch (e) {} }
+function visivel(s) { if (s.para === "*") return true; var a = R.prof_area; return !!a && s.para.indexOf(a) >= 0; }
+
+function el(tag, attrs, html) { var e = document.createElement(tag); for (var k in (attrs || {})) e.setAttribute(k, attrs[k]); if (html != null) e.innerHTML = html; return e; }
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+
+function desenhar() {
+  var f = document.getElementById("f"); f.innerHTML = "";
+  SECOES.forEach(function (s) {
+    if (!visivel(s)) return;
+    var sec = el("section"); sec.appendChild(el("h2", {}, esc(s.titulo)));
+    s.q.forEach(function (q) {
+      var d = el("div", {"class": "q"});
+      d.appendChild(el("div", {"class": "t"}, esc(q.t) + (q.obrig ? " *" : "")));
+      var v = R[q.id];
+      if (q.tipo === "crianca") {
+        if (CRIANCAS.length) {
+          var se = el("select"); se.appendChild(el("option", {value: ""}, "Escolha a criança"));
+          CRIANCAS.forEach(function (c) { var op = el("option", {value: c[0]}, esc(c[1]) + " (nº " + c[0] + ")"); if (v === c[0]) op.selected = true; se.appendChild(op); });
+          se.onchange = function () { R.pront = se.value; salvar(); contar(); };
+          d.appendChild(se);
+        } else {
+          var ip = el("input", {type: "text", value: v || "", placeholder: "nº do prontuário (4 dígitos)", inputmode: "numeric", maxlength: "4"});
+          ip.oninput = function () { R.pront = ip.value.trim(); salvar(); contar(); };
+          d.appendChild(ip);
+        }
+      } else if (q.tipo === "linha") {
+        var i = el("input", {type: "text", value: v || "", placeholder: q.ph || ""});
+        if (q.id === "pront") { i.setAttribute("inputmode", "numeric"); i.setAttribute("maxlength", "4"); }
+        i.oninput = function () { R[q.id] = i.value.trim(); salvar(); contar(); };
+        d.appendChild(i);
+      } else if (q.tipo === "data") {
+        var di = el("input", {type: "date", value: v || ""});
+        di.onchange = function () { R[q.id] = di.value; salvar(); contar(); };
+        d.appendChild(di);
+      } else if (q.tipo === "texto") {
+        var t = el("textarea", {}, ""); t.value = v || "";
+        t.oninput = function () { R[q.id] = t.value.trim(); salvar(); contar(); };
+        d.appendChild(t);
+      } else {
+        var radio = q.tipo === "um";
+        q.op.forEach(function (o) {
+          var lb = el("label", {"class": "opc"});
+          var inp = el("input", {type: radio ? "radio" : "checkbox", name: q.id});
+          if (radio) inp.checked = (v === o); else inp.checked = Array.isArray(v) && v.indexOf(o) >= 0;
+          inp.onchange = function () {
+            if (radio) { R[q.id] = o; if (q.id === "prof_area") desenhar(); }
+            else { var a = Array.isArray(R[q.id]) ? R[q.id] : []; var k = a.indexOf(o); if (inp.checked && k < 0) a.push(o); if (!inp.checked && k >= 0) a.splice(k, 1); R[q.id] = a; }
+            salvar(); contar();
+          };
+          lb.appendChild(inp); lb.appendChild(document.createTextNode(o)); d.appendChild(lb);
+        });
+      }
+      sec.appendChild(d);
+    });
+    f.appendChild(sec);
+  });
+  contar();
+}
+function contar() {
+  var n = 0; for (var k in R) { var v = R[k]; if ((Array.isArray(v) && v.length) || (!Array.isArray(v) && v)) n++; }
+  document.getElementById("prog").textContent = n + " resposta(s) preenchida(s)";
+}
+function faltas() {
+  var m = [];
+  if (!/^\d{4}$/.test(R.pront || "")) m.push("Escolha a criança.");
+  if (!R.prof_nome || R.prof_nome.split(" ").length < 2) m.push("Informe seu nome completo.");
+  if (!R.prof_area) m.push("Escolha a sua área.");
+  return m;
+}
+function montar() {
+  var rot = ""; CRIANCAS.forEach(function (c) { if (c[0] === R.pront) rot = c[1] + " — "; });
+  var L = ["QUESTIONÁRIO DO RELATÓRIO — Núcleo da Primeira Infância (APAE de Colatina)", "Criança: " + rot + "nº " + (R.pront || ""), ""];
+  var dados = {};
+  SECOES.forEach(function (s) {
+    if (!visivel(s)) return;
+    var bloco = [];
+    s.q.forEach(function (q) {
+      var v = R[q.id]; var vazio = Array.isArray(v) ? !v.length : !v;
+      if (vazio) return;
+      var txt = Array.isArray(v) ? v.join("; ") : v;
+      bloco.push("- " + q.t + ": " + txt); dados[q.id] = v;
+    });
+    if (bloco.length) { L.push("[" + s.titulo + "]"); L = L.concat(bloco); L.push(""); }
+  });
+  L.push("#DADOS# " + JSON.stringify({v: 1, quando: new Date().toISOString(), r: dados}));
+  return L.join("\n");
+}
+/* Feedback sempre visivel na propria pagina (alert() some em navegador embutido de WhatsApp/Instagram). */
+function aviso(msg, ruim) {
+  var e = document.getElementById("erros"); e.style.color = ruim ? "" : "var(--cor)"; e.style.fontWeight = "600"; e.innerHTML = msg;
+  try { e.scrollIntoView({block: "center"}); } catch (x) {}
+}
+function mostrar(t) { var p = document.getElementById("previa"); p.textContent = t; p.classList.remove("oculto"); }
+function checar() {
+  var m = faltas();
+  if (m.length) aviso("Falta preencher:<br>" + m.map(esc).join("<br>") + "<br>(suba na página, na seção 1. Identificação)", true);
+  return !m.length;
+}
+function copiarTexto(t, ok, falha) {
+  function legado() {
+    try {
+      var ta = document.createElement("textarea"); ta.value = t; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+      document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, t.length);
+      var r = document.execCommand("copy"); document.body.removeChild(ta); return r;
+    } catch (x) { return false; }
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(ok, function () { if (legado()) ok(); else falha(); });
+  } else if (legado()) ok(); else falha();
+}
+document.getElementById("bVer").onclick = function () {
+  var p = document.getElementById("previa"); p.textContent = montar(); p.classList.toggle("oculto");
+};
+document.getElementById("bCopiar").onclick = function () {
+  if (!checar()) return; var t = montar();
+  copiarTexto(t,
+    function () { aviso("✔ Texto copiado. Abra a conversa do WhatsApp e cole.", false); },
+    function () { mostrar(t); aviso("Não consegui copiar sozinho. O texto está logo abaixo: toque nele, selecione tudo e copie.", true); });
+};
+document.getElementById("bBaixar").onclick = function () {
+  if (!checar()) return; var t = montar();
+  try {
+    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([t], {type: "text/plain;charset=utf-8"}));
+    a.download = "relatorio_" + R.pront + "_" + (R.prof_area || "area").split(" ")[0].toLowerCase() + ".txt"; document.body.appendChild(a); a.click(); a.remove();
+    aviso("Arquivo gerado (veja em Downloads). Se não aparecer, use \"Copiar texto\"; o texto também está logo abaixo.", false);
+  } catch (x) { aviso("Este navegador não baixa arquivo. Use \"Copiar texto\".", true); }
+  mostrar(t);
+};
+/* Envio direto ao servidor do consultorio (so quando a pagina foi aberta pelo link com chave: window.PEI_ENVIO). */
+function enviarServidor(t) {
+  var b = document.getElementById("bEnviar"); b.disabled = true; aviso("Enviando...", false);
+  var fim = function () { b.disabled = false; };
+  fetch(window.PEI_ENVIO, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({texto: t})})
+    .then(function (r) { return r.json().catch(function () { return {ok: false, erro: "Resposta inesperada do servidor."}; }); })
+    .then(function (j) {
+      if (j && j.ok) aviso("✔ Recebido. Obrigada! (protocolo " + esc(j.protocolo) + "). Não precisa enviar de outra forma.", false);
+      else { mostrar(t); aviso("Não foi enviado: " + esc((j && j.erro) || "erro desconhecido") + "<br>Use \"Copiar texto\" e mande no WhatsApp.", true); }
+      fim();
+    })
+    .catch(function () { mostrar(t); aviso("Sem conexão com o servidor. Use \"Copiar texto\" e mande no WhatsApp; o texto está logo abaixo.", true); fim(); });
+}
+document.getElementById("bEnviar").onclick = function () {
+  if (!checar()) return; var t = montar();
+  if (window.PEI_ENVIO) { enviarServidor(t); return; }
+  if (navigator.share) { navigator.share({title: "Questionário do relatório " + R.pront, text: t}).catch(function () { mostrar(t); aviso("Compartilhar foi cancelado ou não funcionou. Use \"Copiar texto\".", true); }); }
+  else { document.getElementById("bCopiar").click(); }
+};
+
+/* ===== Modo site (maxregis.com.br/pei/#k=chave): a pagina abre ja autorizada pela chave do link; o texto e CIFRADO aqui, no navegador,
+   com a chave publica de Max (RSA-OAEP + AES-GCM). O servidor so guarda texto cifrado; so o PC de Max decifra. ===== */
+var SITE = {token: "", chave: ""};
+function b64(buf) { var s = "", a = new Uint8Array(buf); for (var i = 0; i < a.length; i++) s += String.fromCharCode(a[i]); return btoa(s); }
+function pemParaBuf(pem) { var b = atob(pem.replace(/-----[^-]+-----/g, "").replace(/\s+/g, "")); var u = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u.buffer; }
+function cifrar(texto) {
+  var s = window.crypto && window.crypto.subtle; if (!s) return Promise.reject(new Error("sem_cripto"));
+  var iv = window.crypto.getRandomValues(new Uint8Array(12)), enc = new TextEncoder().encode(texto), aes;
+  return s.generateKey({name: "AES-GCM", length: 256}, true, ["encrypt"]).then(function (k) { aes = k; return s.encrypt({name: "AES-GCM", iv: iv}, k, enc); })
+    .then(function (d) {
+      return s.importKey("spki", pemParaBuf(SITE.chave), {name: "RSA-OAEP", hash: "SHA-256"}, false, ["encrypt"]).then(function (pub) {
+        return s.exportKey("raw", aes).then(function (raw) { return s.encrypt({name: "RSA-OAEP"}, pub, raw); });
+      }).then(function (kw) { return {v: 1, k: b64(kw), iv: b64(iv), d: b64(d)}; });
+    });
+}
+function enviarSite(t) {
+  var b = document.getElementById("bEnviar"); b.disabled = true; aviso("Enviando...", false);
+  var fim = function () { b.disabled = false; };
+  var falha = function (m) { mostrar(t); aviso("Não foi enviado: " + esc(m) + "<br>Use \"Copiar texto\" e mande no WhatsApp; o texto está logo abaixo.", true); fim(); };
+  cifrar(t).then(function (pacote) {
+    return fetch("/.netlify/functions/pei-enviar", {method: "POST", headers: {"Content-Type": "application/json", "x-pei-token": SITE.token}, body: JSON.stringify({c: pacote})});
+  }).then(function (r) { return r.json().catch(function () { return {ok: false, erro: "Resposta inesperada do servidor."}; }); })
+    .then(function (j) {
+      if (j && j.ok) { aviso("✔ Recebido. Obrigada! (protocolo " + esc(j.protocolo) + "). Não precisa enviar de outra forma.", false); fim(); }
+      else falha((j && j.erro) || "erro desconhecido");
+    }).catch(function (e) { falha(e && e.message === "sem_cripto" ? "este navegador não permite o envio seguro (abra no Chrome)" : "sem conexão com o servidor"); });
+}
+function iniciarSite() {
+  var m = /[#&]k=([A-Za-z0-9._-]+)/.exec(location.hash || ""), tk = m ? m[1] : "";
+  try { if (tk) sessionStorage.setItem("pei_k", tk); else tk = sessionStorage.getItem("pei_k") || ""; } catch (e) {}
+  var bloquear = function (msg) { document.getElementById("f").innerHTML = ""; var d = el("div", {"class": "aviso"}, msg); document.getElementById("f").appendChild(d); document.getElementById("fim").classList.add("oculto"); };
+  if (!tk) { bloquear("Este link está incompleto. Peça o link do questionário novamente a quem enviou."); return; }
+  fetch("/.netlify/functions/pei-config", {headers: {"x-pei-token": tk}})
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (j) { SITE.token = tk; SITE.chave = j.chave; CRIANCAS = j.criancas || []; desenhar(); })
+    .catch(function (s) { bloquear(s === 401 ? "Este link expirou ou não é válido. Peça um novo link a quem enviou." : "Não foi possível abrir o questionário agora. Tente novamente em alguns minutos."); });
+}
+if (window.PEI_SITE) {
+  document.getElementById("bEnviar").onclick = function () { if (!checar()) return; enviarSite(montar()); };
+  iniciarSite();
+} else desenhar();
+</script>
+</body>
+</html>

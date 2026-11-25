@@ -1,0 +1,8 @@
+{
+  "name": "maxregis-site",
+  "private": true,
+  "description": "Site estatico; dependencias so das funcoes do Netlify",
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0"
+  }
+}
