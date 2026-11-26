@@ -2,6 +2,19 @@
   functions = "netlify/functions"
   publish = "."
 
+# Redirecionador de medição agregada sem cookies para WhatsApp
+[[redirects]]
+  from = "/go/whatsapp"
+  to = "/.netlify/functions/go-whatsapp"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/go/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
 # Páginas de uso clínico/paciente: não indexar
 [[headers]]
   for = "/cadastro/*"

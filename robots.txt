@@ -1,7 +1,16 @@
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /cadastro/
+Disallow: /anamnese/
+Disallow: /anamnese-v2/
+Disallow: /rastreios/
+Disallow: /go/
+
 User-agent: *
 Disallow: /cadastro/
 Disallow: /anamnese/
 Disallow: /anamnese-v2/
 Disallow: /rastreios/
+Disallow: /go/
 
 Sitemap: https://maxregis.com.br/sitemap.xml
